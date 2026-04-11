@@ -169,3 +169,5 @@ function composeBody(msg: ProgramMessage): string {
   }
   return msg.body;
 }
+
+export { composeBody };

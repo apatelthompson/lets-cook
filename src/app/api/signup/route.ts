@@ -1,9 +1,41 @@
 import { NextResponse } from "next/server";
-import { createSubscriber, findSubscriberByPhone } from "@/lib/airtable";
+import {
+  createSubscriber,
+  fetchMessage,
+  findSubscriberByPhone,
+  logSend,
+} from "@/lib/airtable";
 import { toE164 } from "@/lib/phone";
+import { composeBody } from "@/lib/schedule";
+import { sendMessage } from "@/lib/sendblue";
 import { partsInTimezone, timezoneFromHeaders } from "@/lib/timezone";
 
 export const runtime = "nodejs";
+
+/**
+ * Day 0 is the welcome message sent immediately at signup time. Edit the
+ * content in the Messages table in Airtable (Day = 0). If no row exists we
+ * fall back to this string so the signup flow still works end-to-end.
+ */
+const FALLBACK_WELCOME = `You're in. Your first real message arrives tomorrow at 10am. Reply STOP any time to unsubscribe.`;
+
+async function sendWelcome(phone: string): Promise<void> {
+  try {
+    const welcome = await fetchMessage(0);
+    const body = welcome ? composeBody(welcome) : FALLBACK_WELCOME;
+    const mediaUrl = welcome?.imageUrl;
+    const send = await sendMessage({ to: phone, body, mediaUrl });
+    await logSend({
+      phone,
+      day: 0,
+      status: send.ok ? "sent" : "failed",
+      error: send.error,
+    });
+  } catch (err) {
+    // A failing welcome must not fail the signup — just log it.
+    console.error("[signup] welcome send failed", err);
+  }
+}
 
 interface SignupBody {
   phone?: string;
@@ -57,6 +89,8 @@ export async function POST(req: Request) {
       timezone,
       signupLocalDate,
     });
+
+    await sendWelcome(phone);
 
     return NextResponse.json({ ok: true });
   } catch (err) {

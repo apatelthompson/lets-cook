@@ -57,6 +57,11 @@ export async function sendMessage(input: SendMessageInput): Promise<SendMessageR
     config.twilio.accountSid,
   )}/Messages.json`;
 
+  // Diagnostic log — delete once the Twilio integration is verified in prod.
+  // If this shows up in Vercel logs, we know the Twilio adapter is the one
+  // running. If it doesn't appear, a stale build is still being served.
+  console.log("[twilio] sending via", url, "from", config.twilio.fromNumber);
+
   const auth = Buffer.from(
     `${config.twilio.accountSid}:${config.twilio.authToken}`,
   ).toString("base64");

@@ -1,0 +1,55 @@
+name: cron — hourly drip tick
+
+# Hits the deployed /api/cron endpoint every hour. Each tick, the app looks
+# for subscribers whose local hour == 10 and sends them their next message.
+#
+# Why GitHub Actions instead of Vercel Cron: Vercel's Hobby (free) plan only
+# allows cron jobs to run once per day, but this program needs hourly ticks
+# to support per-recipient timezones (e.g. 10am EST fires at a different
+# UTC hour than 10am PST). GitHub Actions scheduled workflows are free,
+# unlimited, and handle this cleanly.
+#
+# Required repo secrets (Settings -> Secrets and variables -> Actions):
+#   VERCEL_APP_URL  – e.g. https://lets-cook-xyz.vercel.app (no trailing slash)
+#   CRON_SECRET     – must match the same env var in Vercel
+on:
+  schedule:
+    # minute=0, every hour
+    - cron: "0 * * * *"
+  # Allow manual triggering from the Actions UI for debugging
+  workflow_dispatch:
+
+concurrency:
+  group: cron
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Hit /api/cron
+        env:
+          VERCEL_APP_URL: ${{ secrets.VERCEL_APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          set -e
+          if [ -z "$VERCEL_APP_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "::error::Missing VERCEL_APP_URL or CRON_SECRET repo secret"
+            exit 1
+          fi
+
+          http_code=$(curl -sS -o /tmp/body.json -w "%{http_code}" \
+            --max-time 120 \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$VERCEL_APP_URL/api/cron")
+
+          echo "HTTP $http_code"
+          echo "Response:"
+          cat /tmp/body.json || true
+          echo
+
+          if [ "$http_code" != "200" ]; then
+            echo "::error::/api/cron returned HTTP $http_code"
+            exit 1
+          fi

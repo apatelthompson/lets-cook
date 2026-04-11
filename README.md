@@ -16,9 +16,9 @@ and The Nudge use).
                │  └── Subscribers  (phone, tz, signup date, progress)
                │  └── SendLog      (idempotency + audit trail)
                │
-  Vercel Cron ─┘   hourly → /api/cron
-                   For each active subscriber whose local hour == 10
-                   and local date == signup + N, send message N via Sendblue.
+  GitHub     ─┘   hourly → /api/cron
+  Actions         For each active subscriber whose local hour == 10
+                  and local date == signup + N, send message N via Sendblue.
 
   Sendblue → iMessage → 📱
   Inbound STOP → /api/webhook/sendblue → mark unsubscribed in Airtable
@@ -110,9 +110,27 @@ your local clock is at the `DELIVERY_HOUR` (default 10).
 1. Push this repo to GitHub.
 2. Import it in Vercel.
 3. Add environment variables from `.env.example` in the Vercel project settings.
-4. Deploy. `vercel.json` already wires up `/api/cron` to run `0 * * * *`.
-5. Vercel Cron automatically sends `Authorization: Bearer $CRON_SECRET`, so
-   set `CRON_SECRET` to the same value you use locally (or a new random one).
+4. Deploy.
+
+### Scheduler
+
+The `/api/cron` endpoint is hit **hourly from GitHub Actions**, not from
+Vercel Cron. Vercel's Hobby (free) plan only allows cron jobs to run once
+per day, but this program needs an hourly tick to support per-recipient
+timezones (10am PST and 10am EST happen at different UTC hours).
+
+The workflow lives at `.github/workflows/cron.yml`. It runs `curl` against
+your deployed `/api/cron` endpoint with the `CRON_SECRET` as a bearer token.
+Add these two repo secrets at `Settings -> Secrets and variables -> Actions`:
+
+| Secret            | Value                                        |
+| ----------------- | -------------------------------------------- |
+| `VERCEL_APP_URL`  | e.g. `https://lets-cook-xyz.vercel.app`      |
+| `CRON_SECRET`     | same value you set in Vercel                 |
+
+You can manually trigger a tick at any time from the **Actions** tab in
+GitHub (pick "cron — hourly drip tick" → "Run workflow"), which is useful
+for debugging without waiting for the next scheduled run.
 
 ## Sendblue setup
 

@@ -53,7 +53,32 @@ export default function Page() {
   }
 
   return (
-    <main>
+    <>
+      <div className="decoration polaroid polaroid-1" aria-hidden="true">
+        <div className="polaroid-photo photo-mars" />
+        <div className="polaroid-caption">Mars &apos;69</div>
+      </div>
+      <div className="decoration polaroid polaroid-2" aria-hidden="true">
+        <div className="polaroid-photo photo-desert" />
+        <div className="polaroid-caption">Joshua Tree</div>
+      </div>
+      <div className="decoration polaroid polaroid-3" aria-hidden="true">
+        <div className="polaroid-photo photo-galaxy" />
+        <div className="polaroid-caption">Apollo</div>
+      </div>
+      <div className="patch patch-est" aria-hidden="true">
+        <span>Est<br />2026</span>
+      </div>
+      <div className="patch patch-vibes" aria-hidden="true">
+        <span>Good<br />Vibes<br />Only</span>
+      </div>
+      <div className="patch patch-aloha" aria-hidden="true">
+        <span>Aloha<br />Kakou</span>
+      </div>
+      <div className="sparkle sparkle-1" aria-hidden="true">✦</div>
+      <div className="sparkle sparkle-2" aria-hidden="true">✦</div>
+      <div className="sparkle sparkle-3" aria-hidden="true">✦</div>
+      <main>
       <h1>28 Days of AI</h1>
       <p className="lede">
         A breezy little text program about artificial intelligence. One
@@ -103,6 +128,7 @@ export default function Page() {
           <div className="message err">{state.message}</div>
         )}
       </form>
-    </main>
+      </main>
+    </>
   );
 }

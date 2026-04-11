@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=DM+Sans:wght@400;500;600;700&family=Permanent+Marker&display=swap');
 
 * {
   box-sizing: border-box;
@@ -10,62 +10,16 @@ body {
   padding: 0;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Helvetica Neue",
     sans-serif;
-  background: linear-gradient(
-    135deg,
-    #FFE9D6 0%,
-    #FFC59B 25%,
-    #FF8B9C 55%,
-    #D85A95 85%,
-    #8E3D88 100%
-  );
+  background-color: #FFF6E5;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 200, 150, 0.35) 0%, transparent 35%),
+    radial-gradient(circle at 88% 82%, rgba(255, 150, 180, 0.30) 0%, transparent 40%),
+    radial-gradient(circle at 75% 12%, rgba(255, 230, 120, 0.25) 0%, transparent 30%);
   background-attachment: fixed;
-  color: #1C3A5E;
+  color: #2A1B3D;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-/* Big sunset disc, top-right */
-body::before {
-  content: '';
-  position: fixed;
-  top: -260px;
-  right: -260px;
-  width: 680px;
-  height: 680px;
-  background: radial-gradient(
-    circle,
-    #FFE066 0%,
-    #FFB347 35%,
-    #FF7A4D 60%,
-    transparent 72%
-  );
-  border-radius: 50%;
-  opacity: 0.7;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(2px);
-}
-
-/* Pool-blue lagoon, bottom-left */
-body::after {
-  content: '';
-  position: fixed;
-  bottom: -300px;
-  left: -300px;
-  width: 620px;
-  height: 620px;
-  background: radial-gradient(
-    circle,
-    #5EE8D8 0%,
-    #2BB6C0 45%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(2px);
 }
 
 main {
@@ -73,7 +27,7 @@ main {
   margin: 0 auto;
   padding: 72px 24px 60px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* === Headline === */
@@ -127,7 +81,7 @@ form {
   position: relative;
 }
 
-/* Decorative tag on the card */
+/* Hibiscus tag on the card */
 form::before {
   content: '🌺';
   position: absolute;
@@ -233,19 +187,17 @@ button:disabled {
   border-radius: 16px;
   font-size: 14px;
   font-weight: 600;
-  border: 2.5px solid;
+  border: 2.5px solid #2A1B3D;
 }
 
 .message.ok {
   background: #D6F5E3;
   color: #1C5C36;
-  border-color: #2A1B3D;
 }
 
 .message.err {
   background: #FFE0E0;
   color: #8B1F1F;
-  border-color: #2A1B3D;
 }
 
 /* === Consent checkbox === */
@@ -284,6 +236,215 @@ button:disabled {
   border-bottom-color: #C71585;
 }
 
+/* ============================================ */
+/* === SCRAPBOOK DECORATIONS ================== */
+/* ============================================ */
+
+.decoration {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* === Polaroids === */
+.polaroid {
+  background: #FFFBF2;
+  padding: 14px 14px 44px;
+  border: 2px solid #2A1B3D;
+  box-shadow:
+    0 12px 28px rgba(60, 20, 80, 0.28),
+    0 4px 0 #2A1B3D;
+}
+
+.polaroid-photo {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.polaroid-caption {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 18px;
+  color: #2A1B3D;
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* "MARS" photo — red planet on dark space + scattered stars */
+.photo-mars {
+  background:
+    radial-gradient(circle at 50% 55%, #FF6B35 0%, #D63027 28%, #6E1414 38%, transparent 39%),
+    radial-gradient(ellipse at 18% 22%, #FFFBF2 0%, transparent 1.5%),
+    radial-gradient(ellipse at 78% 18%, #FFFBF2 0%, transparent 1.2%),
+    radial-gradient(ellipse at 32% 85%, #FFFBF2 0%, transparent 1%),
+    radial-gradient(ellipse at 88% 65%, #FFE066 0%, transparent 1.5%),
+    radial-gradient(ellipse at 12% 60%, #FFFBF2 0%, transparent 1%),
+    radial-gradient(ellipse at 65% 92%, #FFFBF2 0%, transparent 1%),
+    radial-gradient(ellipse at 50% 8%, #FFFBF2 0%, transparent 0.8%),
+    linear-gradient(180deg, #1a1633 0%, #0d0a1f 100%);
+}
+
+/* "DESERT" photo — Joshua Tree style sunset gradient */
+.photo-desert {
+  background: linear-gradient(
+    180deg,
+    #FFE066 0%,
+    #FFB347 20%,
+    #FF7A4D 38%,
+    #FF3D7F 55%,
+    #C71585 70%,
+    #2A1B3D 92%
+  );
+  position: relative;
+}
+
+.photo-desert::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background:
+    radial-gradient(ellipse at 30% 100%, #2A1B3D 25%, transparent 26%),
+    radial-gradient(ellipse at 70% 100%, #2A1B3D 18%, transparent 19%),
+    radial-gradient(ellipse at 50% 100%, #2A1B3D 15%, transparent 16%);
+}
+
+/* "GALAXY" photo — purple nebula with stars */
+.photo-galaxy {
+  background:
+    radial-gradient(ellipse at 35% 45%, rgba(255, 100, 200, 0.6) 0%, transparent 30%),
+    radial-gradient(ellipse at 65% 60%, rgba(100, 150, 255, 0.5) 0%, transparent 35%),
+    radial-gradient(ellipse at 20% 25%, #FFFBF2 0%, transparent 1.2%),
+    radial-gradient(ellipse at 75% 22%, #FFFBF2 0%, transparent 1%),
+    radial-gradient(ellipse at 40% 75%, #FFFBF2 0%, transparent 1.4%),
+    radial-gradient(ellipse at 85% 80%, #FFE066 0%, transparent 1.2%),
+    radial-gradient(ellipse at 55% 35%, #FFFBF2 0%, transparent 0.9%),
+    radial-gradient(ellipse at 12% 88%, #FFFBF2 0%, transparent 1%),
+    linear-gradient(135deg, #1a0f33 0%, #2d1a4d 50%, #0d0a1f 100%);
+}
+
+/* === Polaroid positions on desktop === */
+.polaroid-1 {
+  top: 80px;
+  left: 60px;
+  transform: rotate(-7deg);
+}
+
+.polaroid-2 {
+  top: 120px;
+  right: 80px;
+  transform: rotate(6deg);
+}
+
+.polaroid-3 {
+  bottom: 80px;
+  left: 90px;
+  transform: rotate(4deg);
+}
+
+/* === Enamel pin patches === */
+.patch {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1.05;
+  color: #2A1B3D;
+  border: 3px solid #2A1B3D;
+  box-shadow:
+    0 8px 20px rgba(60, 20, 80, 0.35),
+    inset 0 0 0 5px #FFFBF2,
+    inset 0 0 0 7px #2A1B3D;
+}
+
+.patch span {
+  display: block;
+  padding: 0 6px;
+}
+
+.patch-est {
+  background: radial-gradient(circle at 35% 35%, #FFE680 0%, #FFC93C 60%, #E8A91A 100%);
+  bottom: 100px;
+  right: 70px;
+  transform: rotate(12deg);
+}
+
+.patch-vibes {
+  background: radial-gradient(circle at 35% 35%, #FF7A9E 0%, #FF3D7F 55%, #C71585 100%);
+  color: #FFFBF2;
+  top: 60px;
+  right: 280px;
+  transform: rotate(-14deg);
+  box-shadow:
+    0 8px 20px rgba(60, 20, 80, 0.35),
+    inset 0 0 0 5px #FFFBF2,
+    inset 0 0 0 7px #2A1B3D;
+}
+
+.patch-aloha {
+  background: radial-gradient(circle at 35% 35%, #7EE8DC 0%, #2BB6C0 55%, #0E7C8C 100%);
+  color: #FFFBF2;
+  bottom: 220px;
+  left: 80px;
+  transform: rotate(-8deg);
+  width: 95px;
+  height: 95px;
+  font-size: 13px;
+}
+
+/* === Sparkle stars scattered around === */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  font-family: serif;
+  color: #FF3D7F;
+  font-weight: 900;
+  font-size: 28px;
+  text-shadow: 0 2px 0 #2A1B3D;
+}
+
+.sparkle-1 {
+  top: 240px;
+  left: 280px;
+  transform: rotate(15deg);
+  color: #FFC93C;
+}
+
+.sparkle-2 {
+  bottom: 180px;
+  right: 220px;
+  transform: rotate(-20deg);
+  color: #FF3D7F;
+  font-size: 24px;
+}
+
+.sparkle-3 {
+  top: 380px;
+  right: 60px;
+  color: #2BB6C0;
+  font-size: 22px;
+  transform: rotate(8deg);
+}
+
 /* === Legal pages === */
 .legal-page {
   max-width: 740px;
@@ -296,6 +457,8 @@ button:disabled {
   border: 3px solid #2A1B3D;
   margin-top: 48px;
   margin-bottom: 64px;
+  position: relative;
+  z-index: 2;
 }
 
 .legal-page h1 {
@@ -355,7 +518,15 @@ button:disabled {
   font-weight: 600;
 }
 
-/* === Mobile === */
+/* === Hide decorations on smaller screens === */
+@media (max-width: 1100px) {
+  .decoration,
+  .patch,
+  .sparkle {
+    display: none;
+  }
+}
+
 @media (max-width: 540px) {
   main {
     padding: 48px 18px;

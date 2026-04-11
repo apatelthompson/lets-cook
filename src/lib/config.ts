@@ -6,11 +6,11 @@ export const config = {
     subscribersTable: process.env.AIRTABLE_SUBSCRIBERS_TABLE ?? "Subscribers",
     sendLogTable: process.env.AIRTABLE_SENDLOG_TABLE ?? "SendLog",
   },
-  sendblue: {
-    apiKey: process.env.SENDBLUE_API_KEY ?? "",
-    apiSecret: process.env.SENDBLUE_API_SECRET ?? "",
-    fromNumber: process.env.SENDBLUE_FROM_NUMBER ?? "",
-    mock: process.env.SENDBLUE_MOCK === "1" || !process.env.SENDBLUE_API_KEY,
+  twilio: {
+    accountSid: process.env.TWILIO_ACCOUNT_SID ?? "",
+    authToken: process.env.TWILIO_AUTH_TOKEN ?? "",
+    fromNumber: process.env.TWILIO_FROM_NUMBER ?? "",
+    mock: process.env.TWILIO_MOCK === "1" || !process.env.TWILIO_ACCOUNT_SID,
   },
   cronSecret: process.env.CRON_SECRET ?? "",
   defaultTimezone: process.env.DEFAULT_TIMEZONE ?? "America/Los_Angeles",

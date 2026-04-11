@@ -8,7 +8,7 @@ import {
   type ProgramMessage,
   type Subscriber,
 } from "./airtable";
-import { sendMessage } from "./sendblue";
+import { sendMessage } from "./twilio";
 import { localDayDiff, partsInTimezone } from "./timezone";
 
 export interface RunResult {

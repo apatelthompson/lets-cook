@@ -7,7 +7,7 @@ import {
 } from "@/lib/airtable";
 import { toE164 } from "@/lib/phone";
 import { composeBody } from "@/lib/schedule";
-import { sendMessage } from "@/lib/sendblue";
+import { sendMessage } from "@/lib/twilio";
 import { partsInTimezone, timezoneFromHeaders } from "@/lib/timezone";
 
 export const runtime = "nodejs";

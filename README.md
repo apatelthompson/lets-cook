@@ -1,9 +1,8 @@
-# Let's Cook — 28 day iMessage program
+# Let's Cook — 28 day SMS program
 
-A small Next.js app that signs people up on a website and delivers one iMessage
+A small Next.js app that signs people up on a website and delivers one SMS
 per day for 28 days at 10am local time. Messages are authored in Airtable and
-sent via [Sendblue](https://sendblue.co) (the same iMessage relay Poke, Ollie,
-and The Nudge use).
+sent via [Twilio](https://www.twilio.com).
 
 ## How it works
 
@@ -18,10 +17,10 @@ and The Nudge use).
                │
   GitHub     ─┘   hourly → /api/cron
   Actions         For each active subscriber whose local hour == 10
-                  and local date == signup + N, send message N via Sendblue.
+                  and local date == signup + N, send message N via Twilio.
 
-  Sendblue → iMessage → 📱
-  Inbound STOP → /api/webhook/sendblue → mark unsubscribed in Airtable
+  Twilio → SMS/MMS → 📱
+  Inbound STOP → /api/webhook/twilio → mark unsubscribed in Airtable
 ```
 
 - **Delivery hour is per-recipient local time.** Timezone is auto-detected at
@@ -31,8 +30,8 @@ and The Nudge use).
   This gives you one delivery opportunity per subscriber per day — idempotent
   thanks to the `LastSentDay` field and the `SendLog` table.
 - **Day 1 arrives the morning after signup**, not the same day.
-- **Mock mode** lets you run end-to-end locally with no Sendblue account —
-  just set `SENDBLUE_MOCK=1` and outgoing messages are logged to the console.
+- **Mock mode** lets you run end-to-end locally with no Twilio account —
+  just set `TWILIO_MOCK=1` and outgoing messages are logged to the console.
 
 ## Airtable setup
 
@@ -100,7 +99,7 @@ curl -H "Authorization: Bearer $(grep CRON_SECRET .env.local | cut -d= -f2)" \
      http://localhost:3000/api/cron
 ```
 
-With `SENDBLUE_MOCK=1`, outgoing messages are logged to the terminal running
+With `TWILIO_MOCK=1`, outgoing messages are logged to the terminal running
 `npm run dev` — no real messages are sent. To test a send right now, set your
 subscriber's `SignupLocalDate` to yesterday in their timezone and make sure
 your local clock is at the `DELIVERY_HOUR` (default 10).
@@ -132,34 +131,45 @@ You can manually trigger a tick at any time from the **Actions** tab in
 GitHub (pick "cron — hourly drip tick" → "Run workflow"), which is useful
 for debugging without waiting for the next scheduled run.
 
-## Sendblue setup
+## Twilio setup
 
-1. Sign up at <https://sendblue.co> and grab your API key + secret.
-2. Set `SENDBLUE_API_KEY`, `SENDBLUE_API_SECRET`, and `SENDBLUE_MOCK=0` in
-   Vercel.
-3. In the Sendblue dashboard, point the inbound webhook at
-   `https://<your-domain>/api/webhook/sendblue` so STOP replies flow through
-   to Airtable.
+1. Sign up at <https://www.twilio.com>. The trial account comes with $15 in
+   credit, which is plenty for smoke testing.
+2. Buy a phone number ($1/month). During trial you can only send to verified
+   numbers (add your own phone to "Verified Caller IDs" in the console).
+3. Copy your **Account SID** and **Auth Token** from the console home page.
+4. Set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`, and
+   `TWILIO_MOCK=0` in Vercel.
+5. In the Twilio console, go to **Phone Numbers -> Manage -> Active numbers**,
+   click your number, and under **Messaging -> A message comes in**, set the
+   webhook to:
+   ```
+   https://<your-domain>/api/webhook/twilio
+   ```
+   Method: `HTTP POST`. This is how STOP replies flow back to Airtable.
+6. For production (any real recipient volume), complete A2P 10DLC brand
+   and campaign registration in the Twilio console. Takes 1-2 weeks to
+   approve but is required for reliable US carrier delivery.
 
 ## Compliance notes
 
 - The STOP handler matches `STOP / UNSUBSCRIBE / CANCEL / END / QUIT / STOPALL`
   (standard CTIA keywords) and flips the subscriber's Status to
-  `unsubscribed`.
+  `unsubscribed`. Twilio's own carrier layer also auto-sends a standard
+  unsubscribe confirmation, so we return an empty TwiML response.
 - The signup form includes opt-in language. Keep it — US carriers require
-  it for compliant SMS programs, and Sendblue follows the same rules for
-  iMessage.
-- Sendblue operates in a gray zone vs. Apple's TOS. It's been stable for
-  years and is what similar products use, but be aware of the risk.
+  it for compliant A2P SMS programs.
+- The webhook verifies `X-Twilio-Signature` before acting on any inbound
+  request, so spoofed STOP requests can't unsubscribe arbitrary numbers.
 
 ## Files worth knowing
 
 - `src/app/page.tsx` — signup form
 - `src/app/api/signup/route.ts` — signup handler, phone validation + tz capture
 - `src/app/api/cron/route.ts` — hourly cron entrypoint
-- `src/app/api/webhook/sendblue/route.ts` — inbound STOP handler
+- `src/app/api/webhook/twilio/route.ts` — inbound STOP handler + signature verification
 - `src/lib/schedule.ts` — the "who's due right now" logic
-- `src/lib/sendblue.ts` — send adapter (with mock mode)
+- `src/lib/twilio.ts` — send adapter (with mock mode)
 - `src/lib/airtable.ts` — all Airtable reads/writes
 - `src/lib/timezone.ts` — IANA tz math
-- `vercel.json` — cron schedule
+- `.github/workflows/cron.yml` — hourly GitHub Actions cron

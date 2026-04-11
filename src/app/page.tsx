@@ -56,8 +56,9 @@ export default function Page() {
     <main>
       <h1>28 Days of AI</h1>
       <p className="lede">
-        A 28-day SMS program teaching you about artificial intelligence. One
-        message each morning at 10am. No app, no login.
+        A breezy little text program about artificial intelligence. One
+        message a day, straight to your phone at 10am sharp. No app, no
+        login, no fuss.
       </p>
       <form onSubmit={onSubmit}>
         <label>

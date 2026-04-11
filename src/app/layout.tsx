@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Let's Cook — 28 day program",
-  description: "One message a day for 28 days, delivered to iMessage at 10am.",
+  title: "28 Days of AI",
+  description:
+    "A 28-day SMS program teaching you about artificial intelligence. One message each morning at 10am.",
 };
 
 export default function RootLayout({

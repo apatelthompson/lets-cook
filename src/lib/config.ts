@@ -9,6 +9,7 @@ export const config = {
   sendblue: {
     apiKey: process.env.SENDBLUE_API_KEY ?? "",
     apiSecret: process.env.SENDBLUE_API_SECRET ?? "",
+    fromNumber: process.env.SENDBLUE_FROM_NUMBER ?? "",
     mock: process.env.SENDBLUE_MOCK === "1" || !process.env.SENDBLUE_API_KEY,
   },
   cronSecret: process.env.CRON_SECRET ?? "",

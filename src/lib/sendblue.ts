@@ -42,6 +42,9 @@ export async function sendMessage(input: SendMessageInput): Promise<SendMessageR
       body: JSON.stringify({
         number: input.to,
         content: input.body,
+        ...(config.sendblue.fromNumber
+          ? { from_number: config.sendblue.fromNumber }
+          : {}),
         ...(input.mediaUrl ? { media_url: input.mediaUrl } : {}),
       }),
     });

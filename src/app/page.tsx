@@ -8,45 +8,6 @@ type State =
   | { kind: "ok"; message: string }
   | { kind: "err"; message: string };
 
-// Single feathered palm frond — used 10 times with rotation
-const FROND_PATH =
-  "M 0,0 L -3,-8 -2,-11 -5,-18 -3,-22 -7,-30 -4,-34 -9,-42 -5,-46 -11,-54 -6,-58 -12,-66 -6,-70 -12,-78 -6,-82 -11,-90 -5,-94 -9,-102 -4,-106 -7,-114 -3,-118 -4,-125 0,-132 L 4,-125 3,-118 7,-114 4,-106 9,-102 5,-94 11,-90 6,-82 12,-78 6,-70 12,-66 6,-58 11,-54 5,-46 9,-42 4,-34 7,-30 3,-22 5,-18 2,-11 3,-8 Z";
-
-function PalmTree({ className }: { className: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 380 760"
-      preserveAspectRatio="xMidYMax meet"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        <path id="frond" d={FROND_PATH} />
-      </defs>
-      <g fill="#0A051C">
-        {/* Curved tapered trunk */}
-        <path d="M 168,760 Q 174,640 180,520 Q 186,400 192,300 Q 196,220 200,170 L 216,170 Q 213,220 210,300 Q 205,400 200,520 Q 195,640 188,760 Z" />
-        {/* Crown center nub */}
-        <circle cx="208" cy="168" r="6" />
-        {/* 10 fronds radiating from crown */}
-        <g transform="translate(208 168)">
-          <use href="#frond" transform="rotate(-150) scale(0.88)" />
-          <use href="#frond" transform="rotate(-115) scale(0.96)" />
-          <use href="#frond" transform="rotate(-75) scale(1.1)" />
-          <use href="#frond" transform="rotate(-42) scale(1.02)" />
-          <use href="#frond" transform="rotate(-12) scale(0.94)" />
-          <use href="#frond" transform="rotate(14) scale(0.98)" />
-          <use href="#frond" transform="rotate(42) scale(1.05)" />
-          <use href="#frond" transform="rotate(78) scale(1.12)" />
-          <use href="#frond" transform="rotate(115) scale(0.94)" />
-          <use href="#frond" transform="rotate(150) scale(0.88)" />
-        </g>
-      </g>
-    </svg>
-  );
-}
-
 export default function Page() {
   const [state, setState] = useState<State>({ kind: "idle" });
   const [agreed, setAgreed] = useState(false);
@@ -92,64 +53,112 @@ export default function Page() {
   }
 
   return (
-    <>
-      {/* === SCENE === */}
-      <div className="stars" aria-hidden="true" />
-      <div className="stars-bright" aria-hidden="true" />
-      <div className="moon" aria-hidden="true" />
+    <div className="layout">
+      {/* === LEFT: iPhone with iMessage === */}
+      <div className="hero-side">
+        <div className="iphone">
+          {/* Dynamic Island */}
+          <div className="iphone-island" />
 
-      {/* Distant haze of mountains */}
-      <svg
-        className="mountains mountains-far"
-        viewBox="0 0 1440 280"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0,280 L0,150 Q90,130 170,145 Q250,160 330,125 Q410,90 490,115 Q570,140 650,110 Q730,80 810,105 Q890,130 970,100 Q1050,70 1130,95 Q1210,120 1290,90 Q1370,60 1440,80 L1440,280 Z"
-          fill="#9B6BB5"
-        />
-      </svg>
+          {/* Status bar */}
+          <div className="iphone-status-bar">
+            <span className="status-time">9:41</span>
+            <div className="status-icons">
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="white" aria-hidden="true">
+                <rect x="0" y="5" width="3" height="7" rx="0.5" opacity="0.4" />
+                <rect x="4.5" y="3.5" width="3" height="8.5" rx="0.5" opacity="0.6" />
+                <rect x="9" y="1.5" width="3" height="10.5" rx="0.5" opacity="0.8" />
+                <rect x="13.5" y="0" width="3" height="12" rx="0.5" />
+              </svg>
+              <svg width="15" height="12" viewBox="0 0 15 12" fill="white" aria-hidden="true">
+                <path d="M7.5 3.6C9.4 3.6 11.1 4.3 12.4 5.5L13.8 4.1C12.1 2.5 9.9 1.5 7.5 1.5S2.9 2.5 1.2 4.1L2.6 5.5C3.9 4.3 5.6 3.6 7.5 3.6Z" opacity="0.8" />
+                <path d="M7.5 6.6C8.8 6.6 10 7.1 10.9 7.9L12.3 6.5C11 5.3 9.3 4.6 7.5 4.6S4 5.3 2.7 6.5L4.1 7.9C5 7.1 6.2 6.6 7.5 6.6Z" />
+                <path d="M7.5 9.5C8.2 9.5 8.8 9.8 9.3 10.2L7.5 12L5.7 10.2C6.2 9.8 6.8 9.5 7.5 9.5Z" />
+              </svg>
+              <svg width="25" height="12" viewBox="0 0 25 12" fill="white" aria-hidden="true">
+                <rect x="0" y="1" width="21" height="10" rx="2" stroke="white" strokeWidth="1" fill="none" opacity="0.4" />
+                <rect x="1.5" y="2.5" width="14" height="7" rx="1" fill="white" />
+                <rect x="22" y="4" width="2" height="4" rx="0.5" opacity="0.5" />
+              </svg>
+            </div>
+          </div>
 
-      {/* Mid mountain ridge */}
-      <svg
-        className="mountains mountains-mid"
-        viewBox="0 0 1440 280"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0,280 L0,180 Q70,165 140,175 Q210,185 280,150 Q350,115 420,140 Q490,165 560,135 Q630,105 700,130 Q770,155 840,125 Q910,95 980,120 Q1050,145 1120,115 Q1190,85 1260,110 Q1330,135 1440,110 L1440,280 Z"
-          fill="#5A2D70"
-        />
-      </svg>
+          {/* iMessage nav bar */}
+          <div className="imessage-nav">
+            <div className="imessage-back">
+              <svg width="10" height="16" viewBox="0 0 10 16" fill="none" stroke="#007AFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M8.5 1.5L2 8L8.5 14.5" />
+              </svg>
+            </div>
+            <div className="imessage-contact">
+              <div className="imessage-avatar">🌴</div>
+              <div className="imessage-contact-name">28 Days of AI</div>
+            </div>
+          </div>
 
-      {/* Closer ridge with rocky outline */}
-      <svg
-        className="mountains mountains-near"
-        viewBox="0 0 1440 200"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0,200 L0,140 Q60,125 120,135 Q180,145 240,120 Q300,95 360,115 Q420,135 480,110 Q540,85 600,108 Q660,130 720,105 Q780,80 840,100 Q900,120 960,95 Q1020,70 1080,92 Q1140,115 1200,90 Q1260,65 1320,88 Q1380,110 1440,95 L1440,200 Z"
-          fill="#2E1444"
-        />
-      </svg>
+          {/* Messages */}
+          <div className="imessage-body">
+            {/* Timestamp */}
+            <div className="imessage-timestamp">Today 10:00 AM</div>
 
-      {/* Single palm tree */}
-      <PalmTree className="palm" />
+            {/* Incoming: Day 1 */}
+            <div className="imessage-row incoming">
+              <div className="imessage-bubble incoming">
+                <strong>Day 1 of 28: What is an LLM?</strong>
+                <br /><br />
+                Think of it as autocomplete on steroids. It reads your prompt
+                and predicts the best next word, one word at a time, billions
+                of times per second.
+                <br /><br />
+                The wild part? Nobody programmed the answers — it learned
+                patterns from reading the internet.
+                <span className="bubble-emoji">🧬</span>
+              </div>
+            </div>
 
+            {/* Outgoing reply */}
+            <div className="imessage-row outgoing">
+              <div className="imessage-bubble outgoing">
+                Wait this is actually fascinating 🤯
+              </div>
+            </div>
+
+            {/* Delivered receipt */}
+            <div className="imessage-delivered">Delivered</div>
+
+            {/* Typing indicator */}
+            <div className="imessage-row incoming">
+              <div className="imessage-typing">
+                <span /><span /><span />
+              </div>
+            </div>
+          </div>
+
+          {/* iMessage input bar */}
+          <div className="imessage-input-bar">
+            <div className="imessage-plus">+</div>
+            <div className="imessage-input-field">iMessage</div>
+            <div className="imessage-send">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <circle cx="10" cy="10" r="10" fill="#007AFF" />
+                <path d="M10 14V7M10 7L7 10M10 7L13 10" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Home indicator */}
+          <div className="iphone-home-indicator" />
+        </div>
+      </div>
+
+      {/* === RIGHT: Headline + Form === */}
       <main>
         <h1>28 Days of AI</h1>
         <p className="lede">
-          A breezy little text program about artificial intelligence. One
-          message a day, straight to your phone at 10am sharp. No app, no
-          login, no fuss.
+          Sign up to receive 28 daily SMS lessons about AI. One text a day at
+          10am, for 28 days. Bite-sized, practical, zero fluff.
         </p>
+
         <form onSubmit={onSubmit}>
           <label>
             Name (optional)
@@ -174,8 +183,9 @@ export default function Page() {
               required
             />
             <span>
-              I agree to receive 28 daily SMS messages from thisbeautifulchaos.org
-              and accept the <a href="/terms">Terms of Service</a> and{" "}
+              I agree to receive 28 SMS messages (one per day for 28 days) from
+              28 Days of AI and accept the{" "}
+              <a href="/terms">Terms of Service</a> and{" "}
               <a href="/privacy">Privacy Policy</a>. Reply STOP to unsubscribe,
               HELP for help. Message &amp; data rates may apply.
             </span>
@@ -194,6 +204,6 @@ export default function Page() {
           )}
         </form>
       </main>
-    </>
+    </div>
   );
 }

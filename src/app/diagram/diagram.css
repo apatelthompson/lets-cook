@@ -130,77 +130,64 @@
   padding-top: 4px;
 }
 
-/* Axis labels */
-.axis-label {
+/* Axis name badges (teal highlight) */
+.axis-name {
   position: absolute;
-  font-size: 13px;
+  background: #6EE7D6;
+  padding: 3px 10px 4px;
+  font-weight: 600;
+  font-size: 14px;
   color: #1A1A1A;
-}
-
-.axis-y {
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 120px;
-}
-
-.axis-y .axis-name {
-  position: absolute;
-  top: 40px;
-  left: 24px;
-  background: #6EE7D6;
-  padding: 3px 10px 4px;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.axis-y .axis-end {
-  position: absolute;
-  left: 90px;
-  font-size: 13px;
-  color: #3A4F9B;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.axis-y .axis-end-top { top: 58px; }
-.axis-y .axis-end-bottom { bottom: 82px; }
-
-.axis-x {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 96px;
-}
-
-.axis-x .axis-name {
-  position: absolute;
-  left: 24px;
-  top: 6px;
-  background: #6EE7D6;
-  padding: 3px 10px 4px;
-  font-weight: 600;
-  font-size: 14px;
   white-space: nowrap;
 }
-.axis-x .axis-name em {
+.axis-name-y {
+  top: 40px;
+  left: 24px;
+}
+.axis-name-x {
+  left: 24px;
+  bottom: 36px;
+}
+.axis-name-x em {
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  color: #1A1A1A;
   display: block;
   margin-top: 2px;
 }
 
-.axis-x .axis-end {
+/* low / high end markers — sit right next to the axis lines */
+.axis-end {
   position: absolute;
-  top: 14px;
   font-size: 13px;
   color: #3A4F9B;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.axis-x .axis-end-left { left: 150px; }
-.axis-x .axis-end-right { right: 24px; }
+
+/* Vertical axis line is at left: 50% (spans top: 72px → bottom: 96px) */
+.axis-end-top {
+  top: 58px;
+  left: 50%;
+  margin-left: 8px;
+}
+.axis-end-bottom {
+  bottom: 82px;
+  left: 50%;
+  margin-left: 8px;
+}
+
+/* Horizontal axis line is at top: 50% (spans left: 120px → right: 72px) */
+.axis-end-left {
+  top: 50%;
+  left: 124px;
+  margin-top: 6px;
+}
+.axis-end-right {
+  top: 50%;
+  right: 24px;
+  margin-top: 6px;
+}
 
 /* === Steps === */
 .steps {
@@ -285,26 +272,9 @@
     border-top: 1px solid #E5DCCB;
   }
   .quad-tl { border-top: none; }
-  .axis-y,
-  .axis-x {
+  .axis-name,
+  .axis-end {
     position: static;
-    width: auto;
-    height: auto;
-    display: block;
-    margin-bottom: 16px;
+    display: none;
   }
-  .axis-y .axis-name,
-  .axis-x .axis-name {
-    position: static;
-    display: inline-block;
-    margin-right: 8px;
-  }
-  .axis-y .axis-end,
-  .axis-x .axis-end {
-    position: static;
-    display: inline;
-    margin-right: 10px;
-  }
-  .axis-y .axis-end::before { content: 'meaning: '; color: #6B6257; text-decoration: none; }
-  .axis-x .axis-end::before { content: ''; }
 }

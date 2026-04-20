@@ -19,19 +19,14 @@ export default function DiagramPage() {
 
       <section className="matrix-wrap" aria-label="Meaning by Expertise matrix">
         <div className="matrix">
-          <span className="axis-label axis-y">
-            <span className="axis-name">meaning</span>
-            <span className="axis-end axis-end-top">high</span>
-            <span className="axis-end axis-end-bottom">low</span>
+          <span className="axis-name axis-name-y">meaning</span>
+          <span className="axis-name axis-name-x">
+            expertise <em>(context / capability)</em>
           </span>
-
-          <span className="axis-label axis-x">
-            <span className="axis-name">
-              expertise <em>(context / capability)</em>
-            </span>
-            <span className="axis-end axis-end-left">low</span>
-            <span className="axis-end axis-end-right">high</span>
-          </span>
+          <span className="axis-end axis-end-top">high</span>
+          <span className="axis-end axis-end-bottom">low</span>
+          <span className="axis-end axis-end-left">low</span>
+          <span className="axis-end axis-end-right">high</span>
 
           <article className="quad quad-tl">
             <span className="tag">coach</span>

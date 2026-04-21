@@ -100,7 +100,7 @@ export default function PrivacyPage() {
       </p>
 
       <p className="back">
-        <a href="/">&larr; Back to signup</a>
+        <a href="/signup">&larr; Back to signup</a>
       </p>
     </main>
   );

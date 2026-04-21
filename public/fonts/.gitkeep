@@ -1,0 +1,15 @@
+# Drop font files in this folder. Filenames must match exactly:
+#
+#   Recoleta-Regular.otf
+#   Recoleta-Medium.otf
+#   Recoleta-SemiBold.otf
+#   Recoleta-Bold.otf
+#   Recoleta-Black.otf
+#   AirbnbCerealBook.ttf
+#   AirbnbCerealMedium.ttf
+#   AirbnbCerealBold.ttf
+#   AirbnbCerealExtraBold.ttf
+#
+# They are served at /fonts/<filename> and referenced via @font-face in
+# src/app/mission-matrix.css. Until they exist, the page falls back to
+# Fraunces (for Recoleta) and Inter/system sans (for Cereal).

@@ -1,209 +1,400 @@
-"use client";
+import "./mission-matrix.css";
 
-import { useState, type FormEvent } from "react";
+export const metadata = {
+  title: "The Mission Matrix — Unlocking organizational ambition",
+  description:
+    "How audacious leaders can leverage four AI roles — Bodyguard, Coach, Intern, Partner — to achieve their organization's ambitious goals.",
+};
 
-type State =
-  | { kind: "idle" }
-  | { kind: "submitting" }
-  | { kind: "ok"; message: string }
-  | { kind: "err"; message: string };
+type Quadrant = {
+  klass: "q-coach" | "q-bodyguard" | "q-intern" | "q-partner";
+  num: string;
+  role: string;
+  name: string;
+  tagline: string;
+  question: string;
+  examples: string[];
+};
+
+const QUADRANTS: Quadrant[] = [
+  {
+    klass: "q-coach",
+    num: "Quadrant II",
+    role: "Enable doing the previously impossible",
+    name: "Coach",
+    tagline: "Challenge and push",
+    question: "“What could I not do before but have always wanted to?”",
+    examples: [
+      "Building your own prototype",
+      "Public speaking practice",
+      "New strategic capabilities",
+    ],
+  },
+  {
+    klass: "q-bodyguard",
+    num: "Quadrant I",
+    role: "Filter noise + create a forcefield",
+    name: "Bodyguard",
+    tagline: "Protect and make space",
+    question:
+      "“What is deeply meaningful and I find purpose in being present and in the friction?”",
+    examples: ["Client debriefs", "Weekly team lunches", "High-stakes decisions"],
+  },
+  {
+    klass: "q-intern",
+    num: "Quadrant III",
+    role: "Automate with transparency",
+    name: "Intern",
+    tagline: "Delegate and do",
+    question:
+      "“What routine work could I fully hand off if I trusted the output?”",
+    examples: [
+      "Performance review drafts",
+      "Sprint retro summaries",
+      "Meeting notes",
+    ],
+  },
+  {
+    klass: "q-partner",
+    num: "Quadrant IV",
+    role: "Assist and learn",
+    name: "Partner",
+    tagline: "Lighten the load",
+    question:
+      "“What do I have deep expertise in, but not meaning — and would be happy to teach and hand off?”",
+    examples: ["Weekly metrics pulls", "Research synthesis", "Draft generation"],
+  },
+];
+
+type Dynamic = {
+  icon: string;
+  title: string;
+  body: string;
+  from: { label: string; klass: string };
+  to: { label: string; klass: string };
+};
+
+const DYNAMICS: Dynamic[] = [
+  {
+    icon: "\u{1F5FA}\u{FE0F}",
+    title: "Map well enough to hand off",
+    body: "When a workflow is well-understood, it can move from Partner to Intern — fully automated with transparency. Meeting summary notes are a classic example.",
+    from: { label: "Partner (IV)", klass: "pill-partner" },
+    to: { label: "Intern (III)", klass: "pill-intern" },
+  },
+  {
+    icon: "\u{1F4A1}",
+    title: "Discover meaning in the detail",
+    body: "Working with AI to lighten a task can reveal where deep context connects to deep meaning — pulling that work back into your most protected space. Performance reviews → real coaching.",
+    from: { label: "Partner (IV)", klass: "pill-partner" },
+    to: { label: "Bodyguard (I)", klass: "pill-bodyguard" },
+  },
+  {
+    icon: "\u{1F680}",
+    title: "Own what you’ve mastered",
+    body: "As AI coaches you into new capabilities, you can fully take ownership and bring that skill into your most meaningful work. Writing a speech goes from Coach to Bodyguard.",
+    from: { label: "Coach (II)", klass: "pill-coach" },
+    to: { label: "Bodyguard (I)", klass: "pill-bodyguard" },
+  },
+  {
+    icon: "⚙️",
+    title: "Automate as expertise matures",
+    body: "New capabilities you develop with a Coach eventually become routine enough to automate. Writing tests and debugging code is a common example for technical leaders.",
+    from: { label: "Coach (II)", klass: "pill-coach" },
+    to: { label: "Intern (III)", klass: "pill-intern" },
+  },
+];
+
+const STEPS = [
+  {
+    title: "Values mapping",
+    body: "Take your organization’s values and translate them into the AI context — what should AI never do, and where should it always defer to humans?",
+  },
+  {
+    title: "Expertise mapping",
+    body: "Understand where your organization’s deep expertise and competitive advantage truly lie. These areas belong in Bodyguard territory.",
+  },
+  {
+    title: "Work mapping",
+    body: "Map key workflows against the quadrants. Test steps 1 and 2. Results may vary by individual — work toward an org-level view.",
+  },
+  {
+    title: "Tool selection",
+    body: "For each quadrant, identify the right AI tools to invest in. Don’t use one tool for everything — match tools to roles intentionally.",
+  },
+  {
+    title: "Rituals & boundaries",
+    body: "Design the processes, norms, and guardrails that will enable your organization to operate sustainably within the framework.",
+  },
+];
+
+const QUESTIONS = [
+  {
+    icon: "⚖️",
+    body: "Who owns decisions — and what does accountability look like when AI is involved?",
+  },
+  {
+    icon: "\u{1F4B0}",
+    body: "How are costs managed? What’s the budget model for AI tools across quadrants?",
+  },
+  {
+    icon: "\u{1F3AF}",
+    body: "What does good look like? Are your goals clearly defined before AI enters the picture?",
+  },
+];
+
+function ArrowIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path
+        d="M3 8h10M8 3l5 5-5 5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function Page() {
-  const [state, setState] = useState<State>({ kind: "idle" });
-  const [agreed, setAgreed] = useState(false);
-
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!agreed) {
-      setState({
-        kind: "err",
-        message: "Please agree to the terms before signing up.",
-      });
-      return;
-    }
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    setState({ kind: "submitting" });
-    try {
-      const res = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          phone: fd.get("phone"),
-          name: fd.get("name"),
-        }),
-      });
-      const data = (await res.json()) as { ok: boolean; error?: string };
-      if (!res.ok || !data.ok) {
-        setState({
-          kind: "err",
-          message: data.error ?? "Something went wrong. Try again.",
-        });
-        return;
-      }
-      form.reset();
-      setAgreed(false);
-      setState({
-        kind: "ok",
-        message: "You're in. Your first message arrives tomorrow at 10am.",
-      });
-    } catch {
-      setState({ kind: "err", message: "Network error. Try again." });
-    }
-  }
-
   return (
-    <div className="layout">
-      {/* === LEFT: iPhone with iMessage === */}
-      <div className="hero-side">
-        <div className="iphone">
-          {/* Dynamic Island */}
-          <div className="iphone-island" />
+    <div className="mm">
+      <nav className="mm-nav">
+        <div className="mm-logo" aria-hidden />
+        <a
+          href="https://hbr.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mm-nav-link"
+        >
+          Read the HBR article →
+        </a>
+      </nav>
 
-          {/* Status bar */}
-          <div className="iphone-status-bar">
-            <span className="status-time">9:41</span>
-            <div className="status-icons">
-              <svg width="16" height="12" viewBox="0 0 16 12" fill="white" aria-hidden="true">
-                <rect x="0" y="5" width="3" height="7" rx="0.5" opacity="0.4" />
-                <rect x="4.5" y="3.5" width="3" height="8.5" rx="0.5" opacity="0.6" />
-                <rect x="9" y="1.5" width="3" height="10.5" rx="0.5" opacity="0.8" />
-                <rect x="13.5" y="0" width="3" height="12" rx="0.5" />
-              </svg>
-              <svg width="15" height="12" viewBox="0 0 15 12" fill="white" aria-hidden="true">
-                <path d="M7.5 3.6C9.4 3.6 11.1 4.3 12.4 5.5L13.8 4.1C12.1 2.5 9.9 1.5 7.5 1.5S2.9 2.5 1.2 4.1L2.6 5.5C3.9 4.3 5.6 3.6 7.5 3.6Z" opacity="0.8" />
-                <path d="M7.5 6.6C8.8 6.6 10 7.1 10.9 7.9L12.3 6.5C11 5.3 9.3 4.6 7.5 4.6S4 5.3 2.7 6.5L4.1 7.9C5 7.1 6.2 6.6 7.5 6.6Z" />
-                <path d="M7.5 9.5C8.2 9.5 8.8 9.8 9.3 10.2L7.5 12L5.7 10.2C6.2 9.8 6.8 9.5 7.5 9.5Z" />
-              </svg>
-              <svg width="25" height="12" viewBox="0 0 25 12" fill="white" aria-hidden="true">
-                <rect x="0" y="1" width="21" height="10" rx="2" stroke="white" strokeWidth="1" fill="none" opacity="0.4" />
-                <rect x="1.5" y="2.5" width="14" height="7" rx="1" fill="white" />
-                <rect x="22" y="4" width="2" height="4" rx="0.5" opacity="0.5" />
-              </svg>
-            </div>
-          </div>
-
-          {/* iMessage nav bar */}
-          <div className="imessage-nav">
-            <div className="imessage-back">
-              <svg width="10" height="16" viewBox="0 0 10 16" fill="none" stroke="#007AFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M8.5 1.5L2 8L8.5 14.5" />
-              </svg>
-            </div>
-            <div className="imessage-contact">
-              <div className="imessage-avatar">🌴</div>
-              <div className="imessage-contact-name">28 Days of AI</div>
-            </div>
-          </div>
-
-          {/* Messages */}
-          <div className="imessage-body">
-            {/* Timestamp */}
-            <div className="imessage-timestamp">Today 10:00 AM</div>
-
-            {/* Incoming: Day 1 */}
-            <div className="imessage-row incoming">
-              <div className="imessage-bubble incoming">
-                <strong>Day 1 of 28: What is an LLM?</strong>
-                <br /><br />
-                Think of it as autocomplete on steroids. It reads your prompt
-                and predicts the best next word, one word at a time, billions
-                of times per second.
-                <br /><br />
-                The wild part? Nobody programmed the answers — it learned
-                patterns from reading the internet.
-                <span className="bubble-emoji">🧬</span>
-              </div>
-            </div>
-
-            {/* Outgoing reply */}
-            <div className="imessage-row outgoing">
-              <div className="imessage-bubble outgoing">
-                Wait this is actually fascinating 🤯
-              </div>
-            </div>
-
-            {/* Delivered receipt */}
-            <div className="imessage-delivered">Delivered</div>
-
-            {/* Typing indicator */}
-            <div className="imessage-row incoming">
-              <div className="imessage-typing">
-                <span /><span /><span />
-              </div>
-            </div>
-          </div>
-
-          {/* iMessage input bar */}
-          <div className="imessage-input-bar">
-            <div className="imessage-plus">+</div>
-            <div className="imessage-input-field">iMessage</div>
-            <div className="imessage-send">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <circle cx="10" cy="10" r="10" fill="#007AFF" />
-                <path d="M10 14V7M10 7L7 10M10 7L13 10" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Home indicator */}
-          <div className="iphone-home-indicator" />
+      <section className="mm-hero">
+        <div>
+          <p className="mm-eyebrow">Unlocking organizational ambition</p>
+          <h1>
+            The Mission
+            <br />
+            <em>Matrix</em>
+          </h1>
+          <p className="mm-hero-desc">
+            How audacious leaders can leverage four different AI roles to
+            achieve their organization&rsquo;s ambitious goals. Stop asking{" "}
+            <em>&ldquo;How should we use AI?&rdquo;</em> &mdash; start asking{" "}
+            <em>&ldquo;What can we finally become?&rdquo;</em>
+          </p>
+          <a href="#matrix" className="mm-btn-primary">
+            Explore the framework
+            <ArrowIcon />
+          </a>
+          <p className="mm-hero-sub">
+            Work in progress &middot; Shifting the conversation from how to why
+          </p>
         </div>
-      </div>
 
-      {/* === RIGHT: Headline + Form === */}
-      <main>
-        <h1>28 Days of AI</h1>
-        <p className="lede">
-          Sign up to receive 28 daily SMS lessons about AI. One text a day at
-          10am, for 28 days. Bite-sized, practical, zero fluff.
+        <div>
+          <div className="mm-mini-matrix">
+            <div className="mm-mini-q mm-mini-coach">
+              <div className="mm-mini-num">II</div>
+              <div className="mm-mini-name">Coach</div>
+              <div className="mm-mini-role">Challenge and push</div>
+            </div>
+            <div className="mm-mini-q mm-mini-bodyguard">
+              <div className="mm-mini-num">I</div>
+              <div className="mm-mini-name">Bodyguard</div>
+              <div className="mm-mini-role">Protect and make space</div>
+            </div>
+            <div className="mm-mini-q mm-mini-intern">
+              <div className="mm-mini-num">III</div>
+              <div className="mm-mini-name">Intern</div>
+              <div className="mm-mini-role">Delegate and do</div>
+            </div>
+            <div className="mm-mini-q mm-mini-partner">
+              <div className="mm-mini-num">IV</div>
+              <div className="mm-mini-name">Partner</div>
+              <div className="mm-mini-role">Lighten the load</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr className="mm-divider" />
+
+      <section className="mm-matrix-section" id="matrix">
+        <div className="mm-section-header">
+          <p className="mm-eyebrow">The Framework</p>
+          <h2>Four roles. One clear map.</h2>
+          <p>
+            Place your organization&rsquo;s work across two axes &mdash; the{" "}
+            <strong>depth of meaning</strong> required in the work, and the{" "}
+            <strong>depth of expertise</strong> you bring to it.
+          </p>
+        </div>
+
+        <div className="mm-axis-row">
+          <div className="mm-axis-label">&larr; Low meaning</div>
+          <div className="mm-axis-center">Depth of Meaning</div>
+          <div className="mm-axis-label">High meaning &rarr;</div>
+        </div>
+
+        <div className="mm-matrix-layout">
+          <div className="mm-side-axis">
+            <div className="mm-axis-label mm-axis-vertical">
+              High expertise &uarr;
+            </div>
+            <div className="mm-axis-center mm-axis-vertical">
+              Depth of Expertise
+            </div>
+            <div className="mm-axis-label mm-axis-vertical">
+              &darr; Low expertise
+            </div>
+          </div>
+          <div>
+            <div className="mm-big-matrix">
+              {QUADRANTS.map((q) => (
+                <article key={q.klass} className={`mm-big-q ${q.klass}`}>
+                  <div className="mm-q-header">
+                    <span className="mm-q-num">{q.num}</span>
+                    <span className="mm-q-ai-role">{q.role}</span>
+                  </div>
+                  <h3>{q.name}</h3>
+                  <p className="mm-q-tagline">{q.tagline}</p>
+                  <p className="mm-q-question">{q.question}</p>
+                  <div className="mm-q-examples">
+                    {q.examples.map((ex) => (
+                      <span key={ex} className="mm-q-chip">
+                        {ex}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr className="mm-divider" />
+
+      <section className="mm-dynamics-section">
+        <div className="mm-dynamics-inner">
+          <div className="mm-section-header">
+            <p className="mm-eyebrow">Dynamic movement</p>
+            <h2>Work moves. So should your map.</h2>
+            <p>
+              The Mission Matrix isn&rsquo;t static. As your expertise grows
+              and AI learns your context, work naturally migrates &mdash;
+              often unlocking entirely new ambitions.
+            </p>
+          </div>
+
+          <div className="mm-dynamics-grid">
+            {DYNAMICS.map((d) => (
+              <div key={d.title} className="mm-dynamic-card">
+                <div className="mm-dynamic-arrow" aria-hidden>
+                  {d.icon}
+                </div>
+                <h4>{d.title}</h4>
+                <p>{d.body}</p>
+                <div className="mm-dynamic-from-to">
+                  <span className={`mm-pill-from ${d.from.klass}`}>
+                    {d.from.label}
+                  </span>
+                  <span className="mm-pill-arrow">&rarr;</span>
+                  <span className={`mm-pill-to ${d.to.klass}`}>
+                    {d.to.label}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mm-impl-section">
+        <div className="mm-section-header">
+          <p className="mm-eyebrow">How to implement it</p>
+          <h2>
+            Five steps to putting the
+            <br />
+            matrix to work
+          </h2>
+        </div>
+
+        <div className="mm-steps">
+          {STEPS.map((s, i) => (
+            <div key={s.title} className="mm-step">
+              <div className="mm-step-num">{i + 1}</div>
+              <h4>{s.title}</h4>
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mm-questions-section">
+        <div className="mm-questions-inner">
+          <p className="mm-eyebrow">Before you begin</p>
+          <h2>
+            Three questions every
+            <br />
+            leader must answer
+          </h2>
+          <div className="mm-questions-grid">
+            {QUESTIONS.map((q) => (
+              <div key={q.body} className="mm-question-card">
+                <div className="mm-q-icon" aria-hidden>
+                  {q.icon}
+                </div>
+                <p>{q.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mm-cta-section">
+        <p className="mm-eyebrow">Ready to map your organization?</p>
+        <h2>
+          Read the full research
+          <br />
+          in <em>Harvard Business Review</em>
+        </h2>
+        <p>
+          The Mission Matrix is grounded in research on invisible work and
+          organizational ambition. Reach out to explore how it applies to
+          your org.
         </p>
-
-        <form onSubmit={onSubmit}>
-          <label>
-            Name (optional)
-            <input name="name" type="text" autoComplete="given-name" />
-          </label>
-          <label>
-            Phone number
-            <input
-              name="phone"
-              type="tel"
-              required
-              placeholder="(415) 555-1234"
-              autoComplete="tel"
-              inputMode="tel"
-            />
-          </label>
-          <label className="consent">
-            <input
-              type="checkbox"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              required
-            />
-            <span>
-              I agree to receive 28 SMS messages (one per day for 28 days) from
-              28 Days of AI and accept the{" "}
-              <a href="/terms">Terms of Service</a> and{" "}
-              <a href="/privacy">Privacy Policy</a>. Reply STOP to unsubscribe,
-              HELP for help. Message &amp; data rates may apply.
-            </span>
-          </label>
-          <button
-            type="submit"
-            disabled={state.kind === "submitting" || !agreed}
+        <div className="mm-cta-buttons">
+          <a
+            href="mailto:avni@thisbeautifulchaos.org"
+            className="mm-btn-primary"
           >
-            {state.kind === "submitting" ? "Signing you up..." : "Start the 28 days"}
-          </button>
-          {state.kind === "ok" && (
-            <div className="message ok">{state.message}</div>
-          )}
-          {state.kind === "err" && (
-            <div className="message err">{state.message}</div>
-          )}
-        </form>
-      </main>
+            Go deeper with your org
+            <ArrowIcon />
+          </a>
+          <a
+            href="https://hbr.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mm-btn-secondary"
+          >
+            Read the HBR article &rarr;
+          </a>
+        </div>
+      </section>
+
+      <footer className="mm-footer">
+        <p>
+          &copy; 2026 This Beautiful Chaos &middot;{" "}
+          <a href="mailto:avni@thisbeautifulchaos.org">
+            avni@thisbeautifulchaos.org
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Mission Matrix</title>
+  <style>
+    @font-face { font-family: 'Recoleta'; src: url('fonts/Recoleta-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Recoleta'; src: url('fonts/Recoleta-Medium.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Recoleta'; src: url('fonts/Recoleta-SemiBold.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'Recoleta'; src: url('fonts/Recoleta-Bold.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Recoleta'; src: url('fonts/Recoleta-Black.otf') format('opentype'); font-weight: 900; }
+    @font-face { font-family: 'Airbnb Cereal App'; src: url('fonts/AirbnbCerealBook.ttf') format('truetype'); font-weight: 400; }
+    @font-face { font-family: 'Airbnb Cereal App'; src: url('fonts/AirbnbCerealMedium.ttf') format('truetype'); font-weight: 500; }
+    @font-face { font-family: 'Airbnb Cereal App'; src: url('fonts/AirbnbCerealBold.ttf') format('truetype'); font-weight: 700; }
+    @font-face { font-family: 'Airbnb Cereal App'; src: url('fonts/AirbnbCerealExtraBold.ttf') format('truetype'); font-weight: 800; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pebble-50:  #FCFAF5;
+      --pebble-100: #F6F3EC;
+      --pebble-200: #F4ECE0;
+      --pebble-300: #E5DDD3;
+      --pebble-400: #D1CAC0;
+      --pebble-500: #99948D;
+      --pebble-600: #665B54;
+      --forest:     #435E35;
+      --forest-dark:#101B0B;
+      --moss:       #699963;
+      --moss-light: #D9EBD8;
+      --coral:      #EE7B6E;
+      --coral-light:#FADCD7;
+      --peach:      #FAA55A;
+      --peach-light:#FFE3CC;
+      --sun:        #EBC959;
+      --sun-light:  #F7EECB;
+      --ocean:      #467CA3;
+      --ocean-light:#D7EBF5;
+      --lavender:   #9E8BC7;
+      --lav-light:  #E9E4F7;
+      --text-dark:  #464D4B;
+      --text-mid:   #665B54;
+      --text-light: #99948D;
+      --gradient:   linear-gradient(135deg, #FAA55A 0%, #FF699D 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Airbnb Cereal App', sans-serif;
+      background: var(--pebble-100);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--pebble-50);
+      border-bottom: 1px solid var(--pebble-300);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+    }
+    .logo-mark {
+      display: block; width: 96px; height: 26px;
+      background: var(--gradient);
+      -webkit-mask: url('assets/milo-logo.svg') center/contain no-repeat;
+      mask: url('assets/milo-logo.svg') center/contain no-repeat;
+      visibility: hidden;
+    }
+    .nav-link {
+      font-size: 14px; font-weight: 700;
+      color: var(--forest); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 20px; border-radius: 100px;
+      border: 1.5px solid var(--moss);
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-link:hover { background: var(--moss); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1160px; margin: 0 auto;
+      padding: 96px 48px 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+    }
+    .eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--moss); margin-bottom: 18px;
+    }
+    h1 {
+      font-family: 'Recoleta', serif;
+      font-size: clamp(40px, 4.5vw, 60px);
+      font-weight: 700; line-height: 1.1;
+      color: var(--forest-dark); margin-bottom: 24px;
+    }
+    h1 em { font-style: italic; color: var(--forest); }
+    .hero-desc {
+      font-size: 18px; line-height: 1.75;
+      color: var(--text-mid); margin-bottom: 36px;
+      font-weight: 400;
+    }
+    .hero-sub {
+      font-size: 14px; color: var(--text-light);
+      font-style: italic; margin-top: 12px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--forest); color: #fff;
+      font-family: 'Airbnb Cereal App', sans-serif;
+      font-size: 16px; font-weight: 700;
+      padding: 16px 32px; border-radius: 100px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.18s, transform 0.14s;
+      box-shadow: 0 2px 16px rgba(67,94,53,0.22);
+    }
+    .btn-primary:hover { background: var(--forest-dark); transform: translateY(-2px); }
+
+    /* hero mini matrix */
+    .mini-matrix {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; border-radius: 24px; overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.11);
+    }
+    .mini-q {
+      padding: 26px 22px; min-height: 150px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .mini-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; opacity: 0.5; margin-bottom: 2px;
+    }
+    .mini-name {
+      font-family: 'Recoleta', serif;
+      font-size: 22px; font-weight: 700; line-height: 1.2;
+    }
+    .mini-role { font-size: 12px; line-height: 1.5; opacity: 0.65; margin-top: 4px; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 1160px; margin: 0 auto;
+      border: none; border-top: 1px solid var(--pebble-300);
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      text-align: center; margin-bottom: 60px;
+    }
+    .section-header h2 {
+      font-family: 'Recoleta', serif;
+      font-size: clamp(30px, 3.5vw, 44px);
+      font-weight: 700; line-height: 1.2;
+      color: var(--forest-dark); margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 17px; color: var(--text-mid); line-height: 1.75;
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ── MATRIX SECTION ── */
+    .matrix-section {
+      max-width: 1160px; margin: 0 auto;
+      padding: 96px 48px;
+    }
+
+    /* axis labels */
+    .axis-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 12px; margin-bottom: 12px;
+    }
+    .axis-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+      text-transform: uppercase; color: var(--text-light);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .axis-center { font-size: 12px; color: var(--pebble-400); }
+
+    .matrix-layout {
+      display: grid; grid-template-columns: 28px 1fr; gap: 12px;
+      align-items: stretch;
+    }
+    .side-axis {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: space-between;
+      padding: 4px 0;
+      min-height: 100%;
+    }
+    .side-axis .axis-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+    .side-axis .axis-center {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+    .big-matrix {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+
+    .big-q {
+      border-radius: 22px; padding: 36px 36px 32px;
+      display: flex; flex-direction: column; gap: 14px;
+      min-height: 280px; cursor: default;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .big-q:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.10); }
+
+    .q-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px;
+    }
+    .q-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; opacity: 0.45;
+    }
+    .q-ai-role {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+      padding: 4px 12px; border-radius: 100px;
+      background: rgba(0,0,0,0.09); opacity: 0.8;
+      white-space: nowrap;
+    }
+    .big-q h3 {
+      font-family: 'Recoleta', serif;
+      font-size: 30px; font-weight: 700; line-height: 1.15;
+    }
+    .q-tagline {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.3px;
+      text-transform: uppercase; opacity: 0.55;
+    }
+    .q-question {
+      font-size: 15px; line-height: 1.7; opacity: 0.82;
+      font-style: italic; border-left: 2px solid rgba(0,0,0,0.12);
+      padding-left: 14px; margin: 4px 0;
+    }
+    .q-examples {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;
+    }
+    .q-chip {
+      font-size: 12px; font-weight: 700;
+      padding: 5px 12px; border-radius: 100px;
+      background: rgba(0,0,0,0.08);
+    }
+
+    /* quadrant colors */
+    .q-bodyguard  { background: #D9EBD8; color: #1E3D1A; }
+    .q-coach      { background: #D7EBF5; color: #1A3A52; }
+    .q-partner    { background: #E9E4F7; color: #2E1F5E; }
+    .q-intern     { background: #FFE3CC; color: #6B3A10; }
+
+    /* ── DYNAMICS SECTION ── */
+    .dynamics-section {
+      background: var(--pebble-50);
+      padding: 96px 48px;
+    }
+    .dynamics-inner { max-width: 1160px; margin: 0 auto; }
+
+    .dynamics-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 20px; margin-top: 56px;
+    }
+    .dynamic-card {
+      background: #fff;
+      border: 1px solid var(--pebble-300);
+      border-radius: 20px; padding: 32px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .dynamic-arrow {
+      font-size: 22px; margin-bottom: 4px;
+    }
+    .dynamic-card h4 {
+      font-family: 'Recoleta', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--forest-dark); line-height: 1.3;
+    }
+    .dynamic-card p {
+      font-size: 15px; line-height: 1.7; color: var(--text-mid);
+    }
+    .dynamic-from-to {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 4px;
+    }
+    .pill-from, .pill-to {
+      font-size: 12px; font-weight: 700;
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .pill-from, .pill-to { font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
+    .pill-bodyguard { background: #D9EBD8; color: #1E3D1A; }
+    .pill-coach     { background: #D7EBF5; color: #1A3A52; }
+    .pill-partner   { background: #E9E4F7; color: #2E1F5E; }
+    .pill-intern    { background: #FFE3CC; color: #6B3A10; }
+    .pill-arrow { color: var(--text-light); font-size: 14px; }
+
+    /* ── IMPLEMENTATION ── */
+    .impl-section {
+      max-width: 1160px; margin: 0 auto;
+      padding: 96px 48px;
+    }
+    .steps {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 16px; margin-top: 56px;
+    }
+    .step {
+      background: #fff;
+      border: 1px solid var(--pebble-300);
+      border-radius: 20px; padding: 28px 24px;
+    }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--forest); color: #fff;
+      font-weight: 700; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .step h4 {
+      font-family: 'Recoleta', serif;
+      font-size: 17px; font-weight: 700;
+      color: var(--forest-dark); margin-bottom: 8px; line-height: 1.3;
+    }
+    .step p { font-size: 13px; line-height: 1.65; color: var(--text-mid); }
+
+    /* ── KEY QUESTIONS ── */
+    .questions-section {
+      background: var(--forest-dark);
+      padding: 96px 48px;
+    }
+    .questions-inner { max-width: 1160px; margin: 0 auto; }
+    .questions-section .eyebrow { color: var(--moss); }
+    .questions-section h2 {
+      font-family: 'Recoleta', serif;
+      font-size: clamp(30px, 3.5vw, 44px);
+      font-weight: 700; color: #fff;
+      margin-bottom: 48px; line-height: 1.2;
+    }
+    .questions-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .question-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px; padding: 32px;
+    }
+    .question-card .q-icon {
+      font-size: 28px; margin-bottom: 16px;
+    }
+    .question-card p {
+      font-size: 17px; font-weight: 500;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.6;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      max-width: 1160px; margin: 0 auto;
+      padding: 96px 48px; text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Recoleta', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--forest-dark); margin-bottom: 20px;
+    }
+    .cta-section p {
+      font-size: 18px; color: var(--text-mid);
+      line-height: 1.75; max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; color: var(--forest);
+      font-family: 'Airbnb Cereal App', sans-serif;
+      font-size: 16px; font-weight: 700;
+      padding: 14px 28px; border-radius: 100px;
+      border: 1.5px solid var(--moss);
+      text-decoration: none; margin-left: 12px;
+      transition: background 0.18s;
+    }
+    .btn-secondary:hover { background: var(--moss-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--forest-dark); color: rgba(255,255,255,0.45);
+      text-align: center; padding: 32px 48px; font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    footer a { color: rgba(255,255,255,0.65); text-decoration: none; }
+    footer a:hover { color: #fff; }
+    .footer-logo { display: none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .hero { grid-template-columns: 1fr; padding: 60px 24px 48px; gap: 40px; }
+      .matrix-section, .impl-section, .cta-section { padding: 64px 24px; }
+      .dynamics-section, .questions-section { padding: 64px 24px; }
+      .big-matrix, .steps, .dynamics-grid, .questions-grid { grid-template-columns: 1fr; }
+      .matrix-layout { grid-template-columns: 1fr; }
+      .side-axis { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div></div>
+  <a href="https://hbr.org" target="_blank" rel="noopener" class="nav-link">
+    Read the HBR article →
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <p class="eyebrow">Unlocking organizational ambition</p>
+    <h1>The Mission<br><em>Matrix</em></h1>
+    <p class="hero-desc">
+      How audacious leaders can leverage four different AI roles to achieve their organization's ambitious goals. Stop asking <em>"How should we use AI?"</em> — start asking <em>"What can we finally become?"</em>
+    </p>
+    <a href="#matrix" class="btn-primary">
+      Explore the framework
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p class="hero-sub">Work in progress · Shifting the conversation from how to why</p>
+  </div>
+
+  <div>
+    <div class="mini-matrix">
+      <div class="mini-q" style="background:#D7EBF5; color:#1A3A52;">
+        <div class="mini-num">II</div>
+        <div class="mini-name">Coach</div>
+        <div class="mini-role">Challenge and push</div>
+      </div>
+      <div class="mini-q" style="background:#D9EBD8; color:#1E3D1A;">
+        <div class="mini-num">I</div>
+        <div class="mini-name">Bodyguard</div>
+        <div class="mini-role">Protect and make space</div>
+      </div>
+      <div class="mini-q" style="background:#FFE3CC; color:#6B3A10;">
+        <div class="mini-num">III</div>
+        <div class="mini-name">Intern</div>
+        <div class="mini-role">Delegate and do</div>
+      </div>
+      <div class="mini-q" style="background:#E9E4F7; color:#2E1F5E;">
+        <div class="mini-num">IV</div>
+        <div class="mini-name">Partner</div>
+        <div class="mini-role">Lighten the load</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- THE MATRIX -->
+<section class="matrix-section" id="matrix">
+  <div class="section-header">
+    <p class="eyebrow">The Framework</p>
+    <h2>Four roles. One clear map.</h2>
+    <p>
+      Place your organization's work across two axes — the <strong>depth of meaning</strong> required in the work, and the <strong>depth of expertise</strong> you bring to it.
+    </p>
+  </div>
+
+  <!-- top axis -->
+  <div class="axis-row">
+    <div class="axis-label">← Low meaning</div>
+    <div class="axis-center">Depth of Meaning</div>
+    <div class="axis-label">High meaning →</div>
+  </div>
+
+  <div class="matrix-layout">
+    <div class="side-axis">
+      <div class="axis-label" style="writing-mode:vertical-rl;transform:rotate(180deg)">High expertise ↑</div>
+      <div class="axis-center" style="writing-mode:vertical-rl;transform:rotate(180deg)">Depth of Expertise</div>
+      <div class="axis-label" style="writing-mode:vertical-rl;transform:rotate(180deg)">↓ Low expertise</div>
+    </div>
+    <div>
+      <div class="big-matrix">
+
+        <!-- COACH (top-left: lower meaning, established expertise) -->
+        <div class="big-q q-coach">
+          <div class="q-header">
+            <span class="q-num">Quadrant II</span>
+            <span class="q-ai-role">Enable doing the previously impossible</span>
+          </div>
+          <h3>Coach</h3>
+          <p class="q-tagline">Challenge and push</p>
+          <p class="q-question">"What could I not do before but have always wanted to?"</p>
+          <div class="q-examples">
+            <span class="q-chip">Building your own prototype</span>
+            <span class="q-chip">Public speaking practice</span>
+            <span class="q-chip">New strategic capabilities</span>
+          </div>
+        </div>
+
+        <!-- BODYGUARD (top-right: high meaning, established expertise) -->
+        <div class="big-q q-bodyguard">
+          <div class="q-header">
+            <span class="q-num">Quadrant I</span>
+            <span class="q-ai-role">Filter noise + create a forcefield</span>
+          </div>
+          <h3>Bodyguard</h3>
+          <p class="q-tagline">Protect and make space</p>
+          <p class="q-question">"What is deeply meaningful and I find purpose in being present and in the friction?"</p>
+          <div class="q-examples">
+            <span class="q-chip">Client debriefs</span>
+            <span class="q-chip">Weekly team lunches</span>
+            <span class="q-chip">High-stakes decisions</span>
+          </div>
+        </div>
+
+        <!-- INTERN (bottom-left: lower meaning, emerging capability) -->
+        <div class="big-q q-intern">
+          <div class="q-header">
+            <span class="q-num">Quadrant III</span>
+            <span class="q-ai-role">Automate with transparency</span>
+          </div>
+          <h3>Intern</h3>
+          <p class="q-tagline">Delegate and do</p>
+          <p class="q-question">"What routine work could I fully hand off if I trusted the output?"</p>
+          <div class="q-examples">
+            <span class="q-chip">Performance review drafts</span>
+            <span class="q-chip">Sprint retro summaries</span>
+            <span class="q-chip">Meeting notes</span>
+          </div>
+        </div>
+
+        <!-- PARTNER (bottom-right: high meaning, emerging capability) -->
+        <div class="big-q q-partner">
+          <div class="q-header">
+            <span class="q-num">Quadrant IV</span>
+            <span class="q-ai-role">Assist and learn</span>
+          </div>
+          <h3>Partner</h3>
+          <p class="q-tagline">Lighten the load</p>
+          <p class="q-question">"What do I have deep expertise in, but not meaning — and would be happy to teach and hand off?"</p>
+          <div class="q-examples">
+            <span class="q-chip">Weekly metrics pulls</span>
+            <span class="q-chip">Research synthesis</span>
+            <span class="q-chip">Draft generation</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- HOW WORK MOVES -->
+<section class="dynamics-section">
+  <div class="dynamics-inner">
+    <div class="section-header">
+      <p class="eyebrow">Dynamic movement</p>
+      <h2>Work moves. So should your map.</h2>
+      <p>
+        The Mission Matrix isn't static. As your expertise grows and AI learns your context, work naturally migrates — often unlocking entirely new ambitions.
+      </p>
+    </div>
+
+    <div class="dynamics-grid">
+      <div class="dynamic-card">
+        <div class="dynamic-arrow">🗺️</div>
+        <h4>Map well enough to hand off</h4>
+        <p>When a workflow is well-understood, it can move from Partner to Intern — fully automated with transparency. Meeting summary notes are a classic example.</p>
+        <div class="dynamic-from-to">
+          <span class="pill-from pill-partner">Partner (IV)</span>
+          <span class="pill-arrow">→</span>
+          <span class="pill-to pill-intern">Intern (III)</span>
+        </div>
+      </div>
+
+      <div class="dynamic-card">
+        <div class="dynamic-arrow">💡</div>
+        <h4>Discover meaning in the detail</h4>
+        <p>Working with AI to lighten a task can reveal where deep context connects to deep meaning — pulling that work back into your most protected space. Performance reviews → real coaching.</p>
+        <div class="dynamic-from-to">
+          <span class="pill-from pill-partner">Partner (IV)</span>
+          <span class="pill-arrow">→</span>
+          <span class="pill-to pill-bodyguard">Bodyguard (I)</span>
+        </div>
+      </div>
+
+      <div class="dynamic-card">
+        <div class="dynamic-arrow">🚀</div>
+        <h4>Own what you've mastered</h4>
+        <p>As AI coaches you into new capabilities, you can fully take ownership and bring that skill into your most meaningful work. Writing a speech goes from Coach to Bodyguard.</p>
+        <div class="dynamic-from-to">
+          <span class="pill-from pill-coach">Coach (II)</span>
+          <span class="pill-arrow">→</span>
+          <span class="pill-to pill-bodyguard">Bodyguard (I)</span>
+        </div>
+      </div>
+
+      <div class="dynamic-card">
+        <div class="dynamic-arrow">⚙️</div>
+        <h4>Automate as expertise matures</h4>
+        <p>New capabilities you develop with a Coach eventually become routine enough to automate. Writing tests and debugging code is a common example for technical leaders.</p>
+        <div class="dynamic-from-to">
+          <span class="pill-from pill-coach">Coach (II)</span>
+          <span class="pill-arrow">→</span>
+          <span class="pill-to pill-intern">Intern (III)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPLEMENTATION -->
+<section class="impl-section">
+  <div class="section-header">
+    <p class="eyebrow">How to implement it</p>
+    <h2>Five steps to putting the<br>matrix to work</h2>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Values mapping</h4>
+      <p>Take your organization's values and translate them into the AI context — what should AI never do, and where should it always defer to humans?</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Expertise mapping</h4>
+      <p>Understand where your organization's deep expertise and competitive advantage truly lie. These areas belong in Bodyguard territory.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Work mapping</h4>
+      <p>Map key workflows against the quadrants. Test steps 1 and 2. Results may vary by individual — work toward an org-level view.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Tool selection</h4>
+      <p>For each quadrant, identify the right AI tools to invest in. Don't use one tool for everything — match tools to roles intentionally.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <h4>Rituals &amp; boundaries</h4>
+      <p>Design the processes, norms, and guardrails that will enable your organization to operate sustainably within the framework.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KEY QUESTIONS -->
+<section class="questions-section">
+  <div class="questions-inner">
+    <p class="eyebrow">Before you begin</p>
+    <h2>Three questions every<br>leader must answer</h2>
+    <div class="questions-grid">
+      <div class="question-card">
+        <div class="q-icon">⚖️</div>
+        <p>Who owns decisions — and what does accountability look like when AI is involved?</p>
+      </div>
+      <div class="question-card">
+        <div class="q-icon">💰</div>
+        <p>How are costs managed? What's the budget model for AI tools across quadrants?</p>
+      </div>
+      <div class="question-card">
+        <div class="q-icon">🎯</div>
+        <p>What does good look like? Are your goals clearly defined before AI enters the picture?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="eyebrow">Ready to map your organization?</p>
+  <h2>Read the full research<br>in <em style="font-family:'Recoleta',serif; font-style:italic;">Harvard Business Review</em></h2>
+  <p>The Mission Matrix is grounded in research on invisible work and organizational ambition. Reach out to explore how it applies to your org.</p>
+  <div>
+    <a href="mailto:avni@thisbeautifulchaos.org" class="btn-primary">
+      Go deeper with your org
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="https://hbr.org" target="_blank" rel="noopener" class="btn-secondary">
+      Read the HBR article →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo" aria-label="Milo"></div>
+  <p>© 2024 This Beautiful Chaos · <a href="mailto:avni@thisbeautifulchaos.org">avni@thisbeautifulchaos.org</a></p>
+</footer>
+
+</body>
+</html>

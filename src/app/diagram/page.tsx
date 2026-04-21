@@ -20,8 +20,9 @@ export default function DiagramPage() {
       <section className="matrix-wrap" aria-label="Meaning by Expertise matrix">
         <div className="matrix">
           <span className="axis-name axis-name-y">meaning</span>
-          <span className="axis-name axis-name-x">
-            expertise <em>(context / capability)</em>
+          <span className="axis-name-x-wrap">
+            <span className="axis-name">expertise</span>
+            <span className="axis-subtitle">(context / capability)</span>
           </span>
           <span className="axis-end axis-end-top">high</span>
           <span className="axis-end axis-end-bottom">low</span>

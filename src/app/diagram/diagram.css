@@ -50,10 +50,10 @@
   background: #FFFFFF;
   border: 1px solid #1A1A1A;
   aspect-ratio: 1.35 / 1;
-  padding: 72px 72px 96px 120px;
+  padding: 84px 96px;
 }
 
-/* Dividing axis lines */
+/* Dividing axis lines — at 50%/50% because padding is now symmetric */
 .matrix::before,
 .matrix::after {
   content: '';
@@ -62,16 +62,16 @@
 }
 .matrix::before {
   /* horizontal */
-  left: 120px;
-  right: 72px;
+  left: 96px;
+  right: 96px;
   top: 50%;
   height: 1.5px;
   transform: translateY(-0.75px);
 }
 .matrix::after {
   /* vertical */
-  top: 72px;
-  bottom: 96px;
+  top: 84px;
+  bottom: 84px;
   left: 50%;
   width: 1.5px;
   transform: translateX(-0.75px);
@@ -140,23 +140,31 @@
   color: #1A1A1A;
   white-space: nowrap;
 }
+/* "meaning" — above the top of the vertical axis line, left of it */
 .axis-name-y {
-  top: 40px;
-  left: 24px;
-}
-.axis-name-x {
-  left: 24px;
-  bottom: 36px;
-}
-.axis-name-x em {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  display: block;
-  margin-top: 2px;
+  top: 48px;
+  left: 50%;
+  transform: translateX(calc(-100% - 10px));
 }
 
-/* low / high end markers — sit right next to the axis lines */
+/* "expertise" — to the LEFT of the horizontal axis line's left end, below-aligned */
+.axis-name-x-wrap {
+  position: absolute;
+  top: 50%;
+  left: 88px;
+  transform: translate(-100%, 2px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.axis-subtitle {
+  font-size: 11px;
+  color: #1A1A1A;
+  white-space: nowrap;
+}
+
+/* low / high end markers — flush to the axis lines */
 .axis-end {
   position: absolute;
   font-size: 13px;
@@ -165,27 +173,27 @@
   text-underline-offset: 3px;
 }
 
-/* Vertical axis line is at left: 50% (spans top: 72px → bottom: 96px) */
+/* Vertical axis line: top: 84px → bottom: 84px at left: 50% */
 .axis-end-top {
-  top: 58px;
+  top: 66px;
   left: 50%;
   margin-left: 8px;
 }
 .axis-end-bottom {
-  bottom: 82px;
+  bottom: 66px;
   left: 50%;
   margin-left: 8px;
 }
 
-/* Horizontal axis line is at top: 50% (spans left: 120px → right: 72px) */
+/* Horizontal axis line: left: 96px → right: 96px at top: 50% */
 .axis-end-left {
   top: 50%;
-  left: 124px;
+  left: 104px;
   margin-top: 6px;
 }
 .axis-end-right {
   top: 50%;
-  right: 24px;
+  right: 20px;
   margin-top: 6px;
 }
 

@@ -528,3 +528,201 @@
 @media (max-width: 600px) {
   .mm-steps-grid { grid-template-columns: 1fr; }
 }
+
+/* ─── Going Deeper section ─── */
+.mm-deeper-section {
+  background: #fff;
+  border-top: 1px solid #e5ddd3;
+  border-bottom: 1px solid #e5ddd3;
+}
+.mm-deeper-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+/* View switcher */
+.mm-view-switcher {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.mm-view-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid #e5ddd3;
+  border-radius: 100px;
+  background: transparent;
+  color: #99948d;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "AirbnbCereal", sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mm-view-btn:hover { border-color: #435e35; color: #435e35; }
+.mm-view-btn--active {
+  background: #435e35;
+  border-color: #435e35;
+  color: #fff;
+}
+
+/* ─── Grid view ─── */
+.mm-deeper-grid {
+  display: grid;
+  grid-template-columns: 160px repeat(4, 1fr);
+  gap: 1px;
+  background: #e5ddd3;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.mm-dg-corner {
+  background: #fcfaf5;
+  padding: 20px;
+}
+.mm-dg-col-head {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mm-dg-num {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.mm-dg-name {
+  font-family: "Recoleta", Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+.mm-dg-tag {
+  font-size: 11px;
+  opacity: 0.65;
+}
+.mm-dg-row-label {
+  background: #fcfaf5;
+  padding: 16px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #665b54;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mm-dg-row-icon { font-size: 14px; }
+.mm-dg-cell {
+  background: #fff;
+  padding: 16px;
+  font-size: 13px;
+  color: #665b54;
+  line-height: 1.5;
+}
+
+/* ─── Card view ─── */
+.mm-deeper-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.mm-dc-card {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.mm-dc-head {
+  padding: 24px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mm-dc-body {
+  background: rgba(255,255,255,0.55);
+  padding: 8px 0;
+}
+.mm-dc-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.mm-dc-row:last-child { border-bottom: none; }
+.mm-dc-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.55;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.mm-dc-value {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ─── Tab view ─── */
+.mm-tab-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.mm-tab-btn {
+  padding: 8px 16px;
+  border: 1.5px solid #e5ddd3;
+  border-radius: 100px;
+  background: transparent;
+  color: #665b54;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "AirbnbCereal", sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mm-tab-btn:hover { border-color: #435e35; color: #435e35; }
+.mm-tab-btn--active {
+  background: #435e35;
+  border-color: #435e35;
+  color: #fff;
+}
+.mm-tab-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.mm-tp-card {
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mm-tp-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mm-tp-value {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ─── Responsive additions ─── */
+@media (max-width: 900px) {
+  .mm-deeper-grid { grid-template-columns: 120px repeat(2, 1fr); }
+  .mm-deeper-cards { grid-template-columns: 1fr; }
+  .mm-tab-panel { grid-template-columns: 1fr; }
+  .mm-deeper-header { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .mm-deeper-grid { grid-template-columns: 100px repeat(2, 1fr); }
+}

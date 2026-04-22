@@ -1,9 +1,10 @@
 import "./mission-matrix.css";
+import QuadrantDetails from "./QuadrantDetails";
 
 export const metadata = {
   title: "The Mission Matrix — This Beautiful Chaos",
   description:
-    "How audacious leaders can leverage four different AI roles to achieve organizational ambitions.",
+    "How audacious leaders can leverage four different AI roles to achieve their organization's ambitious goals.",
 };
 
 const quadrants = [
@@ -12,9 +13,8 @@ const quadrants = [
     num: "II",
     role: "Coach",
     pill: "Enable doing the previously impossible",
-    tagline: "Make harder",
-    question:
-      "What could I not do before but have always wanted to?",
+    tagline: "Challenge & push",
+    question: "What could I not do before but have always wanted to?",
     chips: ["Building your own prototype", "Public speaking practice", "New strategic capabilities"],
   },
   {
@@ -22,9 +22,8 @@ const quadrants = [
     num: "I",
     role: "Bodyguard",
     pill: "Filter noise + create a forcefield",
-    tagline: "Protect & create space",
-    question:
-      "What is deeply meaningful and I find purpose in being present and in the friction?",
+    tagline: "Protect & make space",
+    question: "What is deeply meaningful and I find purpose in being present and in the friction?",
     chips: ["Client debriefs", "Weekly team lunches", "High-stakes decisions"],
   },
   {
@@ -32,9 +31,8 @@ const quadrants = [
     num: "III",
     role: "Intern",
     pill: "Automate with transparency",
-    tagline: "Hand off & remove",
-    question:
-      "What routine work could I fully hand off if I trusted the output?",
+    tagline: "Automate & remove",
+    question: "What routine work could I fully hand off if I trusted the output?",
     chips: ["Performance review drafts", "Sprint retro summaries", "Meeting notes"],
   },
   {
@@ -43,32 +41,8 @@ const quadrants = [
     role: "Partner",
     pill: "Assist and learn",
     tagline: "Lighten the load",
-    question:
-      "What do I have deep expertise in, but not meaning — and would be happy to teach and hand off?",
+    question: "What do I have deep expertise in, but not meaning — and would be happy to teach and hand off?",
     chips: ["Weekly metrics pulls", "Research synthesis", "Draft generation"],
-  },
-];
-
-const dynamics = [
-  {
-    title: "Map well enough to hand off",
-    from: { label: "Partner (IV)", bg: "#e9e4f7", fg: "#2e1f5e" },
-    to:   { label: "Intern (III)",  bg: "#ffe3cc", fg: "#6b3a10" },
-  },
-  {
-    title: "Discover meaning in the detail",
-    from: { label: "Partner (IV)",    bg: "#e9e4f7", fg: "#2e1f5e" },
-    to:   { label: "Bodyguard (I)",   bg: "#d9ebd8", fg: "#1e3d1a" },
-  },
-  {
-    title: "Own what you've mastered",
-    from: { label: "Coach (II)",      bg: "#d7ebf5", fg: "#1a3a52" },
-    to:   { label: "Bodyguard (I)",   bg: "#d9ebd8", fg: "#1e3d1a" },
-  },
-  {
-    title: "Automate as expertise matures",
-    from: { label: "Coach (II)",    bg: "#d7ebf5", fg: "#1a3a52" },
-    to:   { label: "Intern (III)",  bg: "#ffe3cc", fg: "#6b3a10" },
   },
 ];
 
@@ -76,27 +50,27 @@ const steps = [
   {
     n: 1,
     title: "Values mapping",
-    body: "Identify what activities carry meaning — personal or cultural values that must stay human.",
+    body: "Take your organization's values and translate them into the AI context — what should AI never do, and where should it always defer to humans?",
   },
   {
     n: 2,
     title: "Expertise mapping",
-    body: "Map your competitive advantage — what only you (or your team) can do well.",
+    body: "Understand where your organization's deep expertise and competitive advantage truly lie. These areas belong in Bodyguard territory.",
   },
   {
     n: 3,
     title: "Work mapping",
-    body: "Place each regular work item in a quadrant based on meaning and expertise levels.",
+    body: "Map key workflows against the quadrants. Test steps 1 and 2. Results may vary by individual — work toward an org-level view.",
   },
   {
     n: 4,
     title: "Tool selection",
-    body: "Choose AI tools appropriate to each quadrant's risk tolerance and output requirements.",
+    body: "For each quadrant, identify the right AI tools to invest in. Don't use one tool for everything — match tools to roles intentionally.",
   },
   {
     n: 5,
     title: "Rituals & boundaries",
-    body: "Codify decisions in team norms, wikis, and workflows so the map stays alive.",
+    body: "Design the processes, norms, and guardrails that will enable your organization to operate sustainably within the framework.",
   },
 ];
 
@@ -115,22 +89,15 @@ const questions = [
   },
 ];
 
-export default function DiagramPage() {
+export default function MissionMatrixPage() {
   return (
     <div className="mm-page">
-      {/* Nav */}
       <nav className="mm-nav">
-        <a
-          className="mm-nav-link"
-          href="https://hbr.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a className="mm-nav-link" href="https://hbr.org" target="_blank" rel="noopener noreferrer">
           Read the HBR article →
         </a>
       </nav>
 
-      {/* Hero */}
       <section className="mm-hero">
         <div>
           <span className="mm-eyebrow">Unlocking organizational ambition</span>
@@ -138,72 +105,59 @@ export default function DiagramPage() {
             The Mission <em>Matrix</em>
           </h1>
           <p className="mm-hero-body">
-            How audacious leaders can leverage four different AI roles — Bodyguard,
-            Coach, Intern, and Partner — to achieve their organizational ambitions
-            without losing what makes their work meaningful.
+            How audacious leaders can leverage four different AI roles to achieve
+            their organization&rsquo;s ambitious goals. Stop asking{" "}
+            <em>&ldquo;How should we use AI?&rdquo;</em> &mdash; start asking{" "}
+            <em>&ldquo;What can we finally become?&rdquo;</em>
           </p>
-          <a className="mm-cta-btn" href="#matrix">
-            Explore the framework →
-          </a>
-          <span className="mm-hero-sub">
-            Work in progress · Shifting the conversation from how to why
-          </span>
+          <a className="mm-cta-btn" href="#matrix">Explore the framework →</a>
+          <span className="mm-hero-sub">Work in progress · Shifting the conversation from how to why</span>
         </div>
-
-        {/* Mini 2×2 */}
         <div className="mm-mini-matrix" aria-hidden="true">
           <div className="mm-mini-card mm-coach">
             <span className="mm-mini-num">II</span>
             <span className="mm-mini-name">Coach</span>
-            <span className="mm-mini-tag">Enable the impossible</span>
+            <span className="mm-mini-tag">Challenge and push</span>
           </div>
           <div className="mm-mini-card mm-bodyguard">
             <span className="mm-mini-num">I</span>
             <span className="mm-mini-name">Bodyguard</span>
-            <span className="mm-mini-tag">Protect what matters</span>
+            <span className="mm-mini-tag">Protect and make space</span>
           </div>
           <div className="mm-mini-card mm-intern">
             <span className="mm-mini-num">III</span>
             <span className="mm-mini-name">Intern</span>
-            <span className="mm-mini-tag">Automate with trust</span>
+            <span className="mm-mini-tag">Delegate and remove</span>
           </div>
           <div className="mm-mini-card mm-partner">
             <span className="mm-mini-num">IV</span>
             <span className="mm-mini-name">Partner</span>
-            <span className="mm-mini-tag">Assist &amp; learn</span>
+            <span className="mm-mini-tag">Partner and lighten</span>
           </div>
         </div>
       </section>
 
-      {/* Full Matrix */}
       <section className="mm-matrix-section" id="matrix">
         <div className="mm-inner">
           <div className="mm-section-header">
             <span className="mm-eyebrow">The Framework</span>
             <h2 className="mm-h2">Four roles. One clear map.</h2>
             <p className="mm-section-body">
-              Place any work activity in the matrix based on how meaningful it is
-              to you and how much expertise it demands. The quadrant tells you which
-              AI role belongs there.
+              Plot any activity across two axes — the depth of meaning required in the work,
+              and the depth of expertise you bring to it. The quadrant tells you which AI role belongs there.
             </p>
           </div>
-
           <div className="mm-axes-wrap">
-            {/* X axis row */}
             <div className="mm-axis-x-row">
               <span className="mm-axis-end">← Low meaning</span>
               <span className="mm-axis-center-x">Depth of Meaning</span>
               <span className="mm-axis-end">High meaning →</span>
             </div>
-
-            {/* Y axis column */}
             <div className="mm-axis-y-col">
               <span className="mm-axis-end">High expertise ↑</span>
               <span className="mm-axis-center-y">Depth of Expertise</span>
               <span className="mm-axis-end">↓ Low expertise</span>
             </div>
-
-            {/* Matrix */}
             <div className="mm-matrix-grid-wrap">
               <div className="mm-matrix-grid">
                 {quadrants.map((q) => (
@@ -214,7 +168,7 @@ export default function DiagramPage() {
                     </div>
                     <h3 className="mm-quad-name">{q.role}</h3>
                     <p className="mm-quad-tagline">{q.tagline}</p>
-                    <p className="mm-quad-question">"{q.question}"</p>
+                    <p className="mm-quad-question">&ldquo;{q.question}&rdquo;</p>
                     <div className="mm-chips">
                       {q.chips.map((c) => (
                         <span key={c} className="mm-chip">{c}</span>
@@ -228,41 +182,8 @@ export default function DiagramPage() {
         </div>
       </section>
 
-      {/* Dynamics */}
-      <section className="mm-dynamics-section">
-        <div className="mm-inner">
-          <span className="mm-eyebrow">Dynamic movement</span>
-          <h2 className="mm-h2">Work moves. So should your map.</h2>
-          <p className="mm-section-body">
-            As mastery grows and meaning shifts, work migrates between quadrants.
-            The matrix is a living tool, not a one-time exercise.
-          </p>
-          <div className="mm-dynamics-grid">
-            {dynamics.map((d) => (
-              <div key={d.title} className="mm-dyn-card">
-                <h3>{d.title}</h3>
-                <div className="mm-dyn-flow">
-                  <span
-                    className="mm-dyn-pill"
-                    style={{ background: d.from.bg, color: d.from.fg }}
-                  >
-                    {d.from.label}
-                  </span>
-                  <span className="mm-dyn-arrow">→</span>
-                  <span
-                    className="mm-dyn-pill"
-                    style={{ background: d.to.bg, color: d.to.fg }}
-                  >
-                    {d.to.label}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <QuadrantDetails />
 
-      {/* Implementation */}
       <section className="mm-impl-section">
         <div className="mm-inner">
           <span className="mm-eyebrow">How to implement it</span>
@@ -279,7 +200,6 @@ export default function DiagramPage() {
         </div>
       </section>
 
-      {/* Key Questions */}
       <section className="mm-questions-section">
         <div className="mm-inner">
           <span className="mm-eyebrow">Before you begin</span>
@@ -295,35 +215,23 @@ export default function DiagramPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="mm-cta-section">
         <div className="mm-cta-inner">
           <span className="mm-eyebrow">Ready to map your organization?</span>
-          <h2 className="mm-h2">
-            Read the full research in{" "}
-            <em>Harvard Business Review</em>
-          </h2>
+          <h2 className="mm-h2">Read the full research in <em>Harvard Business Review</em></h2>
           <p className="mm-cta-body">
-            The Mission Matrix is grounded in research on invisible work and
-            organizational ambition. Reach out to explore how it applies to your org.
+            The Mission Matrix is grounded in research on invisible work and organizational ambition.
+            Reach out to explore how it applies to your org.
           </p>
           <div className="mm-cta-buttons">
-            <a className="mm-cta-btn" href="mailto:avni@thisbeautifulchaos.org">
-              Go deeper with your org →
-            </a>
-            <a
-              className="mm-cta-secondary"
-              href="https://hbr.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="mm-cta-btn" href="mailto:avni@thisbeautifulchaos.org">Go deeper with your org →</a>
+            <a className="mm-cta-secondary" href="https://hbr.org" target="_blank" rel="noopener noreferrer">
               Read the HBR article →
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="mm-footer">
         © 2024 This Beautiful Chaos · avni@thisbeautifulchaos.org
       </footer>

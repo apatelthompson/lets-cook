@@ -344,7 +344,7 @@ h1 {
   font-style: italic;
 }
 
-h1::before {
+.layout h1::before {
   content: 'AN SMS PROGRAM ✦ EST. 2026';
   display: block;
   font-family: 'DM Sans', sans-serif;

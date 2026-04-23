@@ -93,9 +93,13 @@ export default function MissionMatrixPage() {
   return (
     <div className="mm-page">
       <nav className="mm-nav">
-        <a className="mm-nav-link" href="https://hbr.org" target="_blank" rel="noopener noreferrer">
-          Read the HBR article →
-        </a>
+        <div className="mm-nav-links">
+          <a href="/sms" className="mm-nav-pill mm-nav-pill--sms">28 Days of AI →</a>
+          <a href="/ai-with-friends" className="mm-nav-pill mm-nav-pill--ai">AI with Friends →</a>
+          <a href="https://hbr.org" target="_blank" rel="noopener noreferrer" className="mm-nav-link">
+            Read the HBR article →
+          </a>
+        </div>
       </nav>
 
       <section className="mm-hero">

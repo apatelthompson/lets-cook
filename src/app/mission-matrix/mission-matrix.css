@@ -55,6 +55,11 @@
   justify-content: flex-end;
   padding: 0 48px;
 }
+.mm-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .mm-nav-link {
   display: inline-block;
   border: 1.5px solid #699963;
@@ -70,6 +75,29 @@
 .mm-nav-link:hover {
   background: #699963;
   color: #fff;
+}
+.mm-nav-pill {
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 100px;
+  transition: opacity 0.15s;
+  font-family: "AirbnbCereal", sans-serif;
+}
+.mm-nav-pill:hover { opacity: 0.8; }
+.mm-nav-pill--sms {
+  background: #ffe3cc;
+  color: #7a4a1e;
+  border: 1.5px solid rgba(250,165,90,0.4);
+}
+.mm-nav-pill--ai {
+  background: #d9ebd8;
+  color: #435e35;
+  border: 1.5px solid rgba(105,153,99,0.35);
 }
 
 /* ─── Inner container ─── */

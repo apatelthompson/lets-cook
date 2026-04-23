@@ -33,23 +33,54 @@ jobs:
           VERCEL_APP_URL: ${{ secrets.VERCEL_APP_URL }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
-          set -e
-          if [ -z "$VERCEL_APP_URL" ] || [ -z "$CRON_SECRET" ]; then
-            echo "::error::Missing VERCEL_APP_URL or CRON_SECRET repo secret"
+          if [ -z "$VERCEL_APP_URL" ]; then
+            echo "::error::VERCEL_APP_URL repo secret is not set"
+            exit 1
+          fi
+          if [ -z "$CRON_SECRET" ]; then
+            echo "::error::CRON_SECRET repo secret is not set"
             exit 1
           fi
 
-          http_code=$(curl -sS -o /tmp/body.json -w "%{http_code}" \
+          # Strip any accidental trailing slash so we don't end up with //api/cron
+          URL="${VERCEL_APP_URL%/}/api/cron"
+          echo "Requesting: $URL"
+
+          # Run curl without -e so a network failure still lets us print diagnostics.
+          # -w writes the HTTP status + a few timing/redirect fields on stdout so we
+          # can tell the difference between "DNS failed" and "server returned 500".
+          set +e
+          http_code=$(curl -sS -o /tmp/body.txt \
+            -w "%{http_code}" \
             --max-time 120 \
             -H "Authorization: Bearer $CRON_SECRET" \
-            "$VERCEL_APP_URL/api/cron")
+            "$URL" 2> /tmp/curl.err)
+          curl_exit=$?
+          set -e
 
-          echo "HTTP $http_code"
-          echo "Response:"
-          cat /tmp/body.json || true
+          echo "curl exit: $curl_exit"
+          echo "HTTP status: ${http_code:-<none>}"
+          if [ -s /tmp/curl.err ]; then
+            echo "curl stderr:"
+            sed 's/^/  /' /tmp/curl.err
+          fi
+          echo "Response body:"
+          if [ -s /tmp/body.txt ]; then
+            sed 's/^/  /' /tmp/body.txt
+          else
+            echo "  <empty>"
+          fi
           echo
 
+          if [ "$curl_exit" != "0" ]; then
+            echo "::error::curl failed (exit $curl_exit) — check VERCEL_APP_URL secret + that the deployment is reachable"
+            exit 1
+          fi
+          if [ "$http_code" = "401" ]; then
+            echo "::error::/api/cron returned 401 — CRON_SECRET in GitHub repo secrets doesn't match the one in Vercel env vars"
+            exit 1
+          fi
           if [ "$http_code" != "200" ]; then
-            echo "::error::/api/cron returned HTTP $http_code"
+            echo "::error::/api/cron returned HTTP $http_code — see response body above for details"
             exit 1
           fi

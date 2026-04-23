@@ -75,6 +75,33 @@
   background: var(--mm-gradient);
   visibility: hidden;
 }
+.mm-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mm-nav-pill {
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 100px;
+  transition: opacity 0.15s;
+}
+.mm-nav-pill:hover { opacity: 0.8; }
+.mm-nav-pill--sms {
+  background: var(--peach-light);
+  color: #7a4a1e;
+  border: 1.5px solid rgba(250,165,90,0.4);
+}
+.mm-nav-pill--ai {
+  background: var(--moss-light);
+  color: var(--forest);
+  border: 1.5px solid rgba(105,153,99,0.35);
+}
 .mm-nav-link {
   font-size: 14px;
   font-weight: 700;

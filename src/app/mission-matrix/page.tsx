@@ -100,7 +100,7 @@ export default function MissionMatrixPage() {
 
       <section className="mm-hero">
         <div>
-          <span className="mm-eyebrow">Unlocking organizational ambition</span>
+          <span className="mm-eyebrow">a framework for Aligned AI</span>
           <h1 className="mm-hero-h1">
             The Mission <em>Matrix</em>
           </h1>
@@ -108,31 +108,45 @@ export default function MissionMatrixPage() {
             How audacious leaders can leverage four different AI roles to achieve
             their organization&rsquo;s ambitious goals. Stop asking{" "}
             <em>&ldquo;How should we use AI?&rdquo;</em> &mdash; start asking{" "}
-            <em>&ldquo;What can we finally become?&rdquo;</em>
+            <em>&ldquo;What can we finally become?&rdquo;</em>{" "}
+            Shifting the conversation from how to why.
           </p>
           <a className="mm-cta-btn" href="#matrix">Explore the framework →</a>
-          <span className="mm-hero-sub">Work in progress · Shifting the conversation from how to why</span>
         </div>
-        <div className="mm-mini-matrix" aria-hidden="true">
-          <div className="mm-mini-card mm-coach">
-            <span className="mm-mini-num">II</span>
-            <span className="mm-mini-name">Coach</span>
-            <span className="mm-mini-tag">Challenge and push</span>
+        <div className="mm-mini-matrix-wrap">
+          <div className="mm-mini-axis-y">
+            <span className="mm-mini-axis-label">High meaning</span>
+            <span className="mm-mini-axis-label mm-mini-axis-center">Meaning</span>
+            <span className="mm-mini-axis-label">Low meaning</span>
           </div>
-          <div className="mm-mini-card mm-bodyguard">
-            <span className="mm-mini-num">I</span>
-            <span className="mm-mini-name">Bodyguard</span>
-            <span className="mm-mini-tag">Protect and make space</span>
-          </div>
-          <div className="mm-mini-card mm-intern">
-            <span className="mm-mini-num">III</span>
-            <span className="mm-mini-name">Intern</span>
-            <span className="mm-mini-tag">Delegate and remove</span>
-          </div>
-          <div className="mm-mini-card mm-partner">
-            <span className="mm-mini-num">IV</span>
-            <span className="mm-mini-name">Partner</span>
-            <span className="mm-mini-tag">Partner and lighten</span>
+          <div>
+            <div className="mm-mini-axis-x">
+              <span className="mm-mini-axis-label">Low expertise</span>
+              <span className="mm-mini-axis-label mm-mini-axis-center">Expertise</span>
+              <span className="mm-mini-axis-label">High expertise</span>
+            </div>
+            <div className="mm-mini-matrix">
+              {/* Top-left: high meaning, low expertise */}
+              <div className="mm-mini-card mm-partner">
+                <span className="mm-mini-name">Your growth edge</span>
+                <span className="mm-mini-tag">High meaning · Low expertise</span>
+              </div>
+              {/* Top-right: high meaning, high expertise */}
+              <div className="mm-mini-card mm-bodyguard">
+                <span className="mm-mini-name">Your core craft</span>
+                <span className="mm-mini-tag">High meaning · High expertise</span>
+              </div>
+              {/* Bottom-left: low meaning, low expertise */}
+              <div className="mm-mini-card mm-intern">
+                <span className="mm-mini-name">Routine tasks</span>
+                <span className="mm-mini-tag">Low meaning · Low expertise</span>
+              </div>
+              {/* Bottom-right: low meaning, high expertise */}
+              <div className="mm-mini-card mm-coach">
+                <span className="mm-mini-name">Skilled but draining</span>
+                <span className="mm-mini-tag">Low meaning · High expertise</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -140,7 +154,7 @@ export default function MissionMatrixPage() {
       <section className="mm-matrix-section" id="matrix">
         <div className="mm-inner">
           <div className="mm-section-header">
-            <span className="mm-eyebrow">The Framework</span>
+            <span className="mm-eyebrow">Unlocking organizational ambition</span>
             <h2 className="mm-h2">Four roles. One clear map.</h2>
             <p className="mm-section-body">
               Plot any activity across two axes — the depth of meaning required in the work,

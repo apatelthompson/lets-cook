@@ -162,14 +162,22 @@ export default function Page() {
     <div className="mm">
       <nav className="mm-nav">
         <div className="mm-logo" aria-hidden />
-        <a
-          href="https://hbr.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mm-nav-link"
-        >
-          Read the HBR article →
-        </a>
+        <div className="mm-nav-links">
+          <a href="/sms" className="mm-nav-pill mm-nav-pill--sms">
+            28 Days of AI →
+          </a>
+          <a href="/ai-with-friends" className="mm-nav-pill mm-nav-pill--ai">
+            AI with Friends →
+          </a>
+          <a
+            href="https://hbr.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mm-nav-link"
+          >
+            Read the HBR article →
+          </a>
+        </div>
       </nav>
 
       <section className="mm-hero">

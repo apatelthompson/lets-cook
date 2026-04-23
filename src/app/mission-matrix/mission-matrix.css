@@ -124,7 +124,8 @@
 .mm-hero-h1 {
   font-family: "Recoleta", Georgia, serif;
   font-weight: 700;
-  font-size: clamp(40px, 4.5vw, 60px);
+  font-size: clamp(36px, 3.8vw, 52px);
+  white-space: nowrap;
   line-height: 1.1;
   color: #101b0b;
   margin-bottom: 20px;
@@ -132,6 +133,14 @@
 .mm-hero-h1 em {
   font-style: italic;
   color: #435e35;
+}
+.mm-hero-sub-h {
+  font-family: "AirbnbCereal", -apple-system, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #665b54;
+  margin-bottom: 28px;
+  margin-top: -4px;
 }
 .mm-hero-body {
   font-size: 18px;
@@ -166,11 +175,45 @@
 }
 
 /* Mini matrix */
+.mm-mini-matrix-wrap {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+.mm-mini-axis-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 36px 0;
+}
+.mm-mini-axis-y .mm-mini-axis-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.mm-mini-axis-x {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  margin-bottom: 6px;
+}
+.mm-mini-axis-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #99948d;
+}
+.mm-mini-axis-center {
+  opacity: 0.5;
+}
 .mm-mini-matrix {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  border-radius: 24px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.11);
 }
@@ -190,11 +233,12 @@
 }
 .mm-mini-name {
   font-family: "Recoleta", Georgia, serif;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.2;
 }
 .mm-mini-tag {
-  font-size: 12px;
+  font-size: 11px;
   opacity: 0.65;
 }
 
@@ -206,8 +250,13 @@
 /* Axis layout */
 .mm-axes-wrap {
   display: grid;
-  grid-template-columns: 56px 1fr;
+  grid-template-columns: 72px 1fr;
   grid-template-rows: auto 1fr;
+}
+.mm-axis-y-col .mm-axis-end {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
 }
 .mm-axis-x-row {
   grid-column: 2 / 3;

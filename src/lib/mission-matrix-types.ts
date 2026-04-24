@@ -1,8 +1,8 @@
 export const PROFESSION_CATEGORIES = [
   "Operator / Exec",
-  "IC / Builder",
+  "Individual contributor",
   "Creative",
-  "Consultant",
+  "Consultant / Freelancer",
   "Founder",
   "Researcher",
   "Educator",
@@ -15,14 +15,22 @@ export type ProfessionCategory = (typeof PROFESSION_CATEGORIES)[number];
 
 export const COMPANY_SIZES = [
   "Solo",
-  "2–10",
-  "11–50",
-  "51–200",
-  "200+",
+  "2-10",
+  "11-50",
+  "51-200",
+  "200-1000",
+  "1001-10,000",
+  "10,000+",
 ] as const;
 export type CompanySize = (typeof COMPANY_SIZES)[number];
 
-export const YEARS_EXPERIENCE = ["<2", "2–5", "5–10", "10+"] as const;
+export const YEARS_EXPERIENCE = [
+  "<2",
+  "2-5",
+  "5-10",
+  "10-20",
+  "20+",
+] as const;
 export type YearsExperience = (typeof YEARS_EXPERIENCE)[number];
 
 export type Quadrant = "growth" | "craft" | "routine" | "drain";
@@ -81,7 +89,7 @@ export interface AssessmentState {
   reflection_2: string;
   reflection_3: string;
   // consent + delivery
-  first_name: string;
+  name: string;
   email: string;
   consent_research: boolean;
   consent_marketing: boolean;
@@ -116,7 +124,7 @@ export function emptyState(): AssessmentState {
     reflection_1: "",
     reflection_2: "",
     reflection_3: "",
-    first_name: "",
+    name: "",
     email: "",
     consent_research: false,
     consent_marketing: false,

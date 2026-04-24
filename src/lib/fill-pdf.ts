@@ -26,7 +26,7 @@ export async function fillAssessmentPdf(state: AssessmentState): Promise<Uint8Ar
   const form = doc.getForm();
 
   // cover fields
-  if (state.first_name) safeSet(form, "your_name", state.first_name);
+  if (state.name) safeSet(form, "your_name", state.name);
   const today = new Date().toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",

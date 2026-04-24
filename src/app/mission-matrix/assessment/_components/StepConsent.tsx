@@ -54,15 +54,15 @@ export default function StepConsent({ onBack, onDone }: Props) {
 
         <div className="mm-field-row">
           <div className="mm-field">
-            <label className="mm-field-label" htmlFor="first_name">
-              First name <span style={{ opacity: 0.55 }}>(optional)</span>
+            <label className="mm-field-label" htmlFor="name">
+              Full name <span style={{ opacity: 0.55 }}>(optional)</span>
             </label>
             <input
-              id="first_name"
+              id="name"
               className="mm-input"
               type="text"
-              value={state.first_name}
-              onChange={(e) => update({ first_name: e.target.value })}
+              value={state.name}
+              onChange={(e) => update({ name: e.target.value })}
             />
           </div>
           <div className="mm-field">

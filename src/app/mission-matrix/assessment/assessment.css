@@ -1,0 +1,426 @@
+/* Shares font faces with mission-matrix.css; imported alongside it. */
+
+.mm-assess {
+  font-family: "AirbnbCereal", -apple-system, sans-serif;
+  background: #f6f3ec;
+  color: #101b0b;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mm-assess * {
+  box-sizing: border-box;
+}
+
+/* ─── Top bar ─────────────────────────────────────────────── */
+.mm-assess-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fcfaf5;
+  border-bottom: 1px solid #e5ddd3;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.mm-assess-brand {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: #435e35;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.mm-assess-progress {
+  flex: 1;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.mm-assess-progress-dot {
+  flex: 1;
+  height: 4px;
+  background: #e5ddd3;
+  border-radius: 2px;
+  transition: background 0.25s ease;
+}
+.mm-assess-progress-dot.done {
+  background: #699963;
+}
+.mm-assess-progress-dot.active {
+  background: #435e35;
+}
+.mm-assess-step-label {
+  font-size: 13px;
+  color: #6b6558;
+  flex-shrink: 0;
+  min-width: 72px;
+  text-align: right;
+}
+
+/* ─── Main container ──────────────────────────────────────── */
+.mm-assess-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 120px;
+}
+.mm-assess-eyebrow {
+  font-family: "AirbnbCereal", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #435e35;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.mm-assess-title {
+  font-family: "Recoleta", Georgia, serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.1;
+  color: #435e35;
+  margin: 0 0 18px;
+}
+.mm-assess-sub {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #101b0b;
+  margin: 0 0 32px;
+  max-width: 560px;
+}
+
+/* ─── Form elements ──────────────────────────────────────── */
+.mm-field {
+  margin-bottom: 20px;
+}
+.mm-field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #101b0b;
+  margin-bottom: 6px;
+}
+.mm-field-hint {
+  font-size: 12px;
+  color: #6b6558;
+  margin-top: 4px;
+}
+.mm-input,
+.mm-select,
+.mm-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #101b0b;
+  background: #fcfaf5;
+  border: 1.5px solid #d9d2c3;
+  border-radius: 10px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.mm-input:focus,
+.mm-select:focus,
+.mm-textarea:focus {
+  outline: none;
+  border-color: #435e35;
+  background: #fff;
+}
+.mm-textarea {
+  min-height: 88px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.mm-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 520px) {
+  .mm-field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Brain dump list ────────────────────────────────────── */
+.mm-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.mm-item-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+}
+.mm-item-row-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b6558;
+  text-align: right;
+}
+.mm-item-row-remove {
+  background: none;
+  border: none;
+  color: #b8b0a0;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+.mm-item-row-remove:hover {
+  color: #6b6558;
+  background: #ece7da;
+}
+.mm-add-row {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #435e35;
+  background: none;
+  border: 1.5px dashed #b8b0a0;
+  border-radius: 10px;
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.mm-add-row:hover {
+  border-color: #435e35;
+  background: #fcfaf5;
+}
+.mm-add-row:disabled {
+  color: #b8b0a0;
+  cursor: not-allowed;
+}
+
+/* ─── Rate step ─────────────────────────────────────────── */
+.mm-rate-card {
+  background: #fcfaf5;
+  border: 1px solid #e5ddd3;
+  border-radius: 16px;
+  padding: 32px 28px;
+  margin-bottom: 20px;
+}
+.mm-rate-item-index {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b6558;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.mm-rate-item-text {
+  font-family: "Recoleta", Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 4px 0 24px;
+  line-height: 1.3;
+}
+.mm-rate-axis {
+  margin-top: 22px;
+}
+.mm-rate-axis-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #101b0b;
+  margin-bottom: 8px;
+}
+.mm-rate-axis-hint {
+  font-size: 12px;
+  color: #6b6558;
+  margin-bottom: 10px;
+}
+.mm-rate-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.mm-rate-btn {
+  padding: 14px 0;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: #101b0b;
+  background: #fcfaf5;
+  border: 1.5px solid #d9d2c3;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.mm-rate-btn:hover {
+  border-color: #435e35;
+  background: #fff;
+}
+.mm-rate-btn.selected {
+  background: #435e35;
+  color: #fcfaf5;
+  border-color: #435e35;
+}
+
+/* ─── Plot step ─────────────────────────────────────────── */
+.mm-plot-wrap {
+  background: #fcfaf5;
+  border: 1px solid #e5ddd3;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.mm-plot-axis-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b6558;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+.mm-plot-axis-top span:last-child { text-align: right; }
+.mm-plot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.mm-plot-cell {
+  padding: 18px;
+  border-radius: 10px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+}
+.mm-plot-cell-title {
+  font-family: "Recoleta", Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+.mm-plot-cell-sub {
+  font-size: 11px;
+  opacity: 0.75;
+  margin: 2px 0 12px;
+}
+.mm-plot-cell-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.mm-plot-cell-items li::before {
+  content: "· ";
+  opacity: 0.6;
+}
+.mm-plot-cell-empty {
+  font-size: 12px;
+  opacity: 0.55;
+  font-style: italic;
+}
+.mm-plot-legend {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5ddd3;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #6b6558;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ─── Consent ───────────────────────────────────────────── */
+.mm-consent-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  background: #fcfaf5;
+  border: 1px solid #e5ddd3;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+.mm-consent-row input {
+  margin-top: 3px;
+  accent-color: #435e35;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.mm-consent-text {
+  font-size: 14px;
+  line-height: 1.45;
+  color: #101b0b;
+}
+.mm-consent-text strong { font-weight: 600; }
+
+/* ─── Footer actions ───────────────────────────────────── */
+.mm-assess-actions {
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(246, 243, 236, 0), #f6f3ec 30%);
+  padding: 32px 24px 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.mm-btn {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 100px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.mm-btn-primary {
+  background: #435e35;
+  color: #fcfaf5;
+  border-color: #435e35;
+}
+.mm-btn-primary:hover { background: #2f4526; border-color: #2f4526; }
+.mm-btn-primary:disabled {
+  background: #b8b0a0;
+  border-color: #b8b0a0;
+  cursor: not-allowed;
+}
+.mm-btn-ghost {
+  background: transparent;
+  color: #435e35;
+  border-color: #b8b0a0;
+}
+.mm-btn-ghost:hover { border-color: #435e35; }
+
+/* ─── Done screen ──────────────────────────────────────── */
+.mm-done-card {
+  background: #fcfaf5;
+  border: 1px solid #e5ddd3;
+  border-radius: 16px;
+  padding: 36px 32px;
+  text-align: center;
+  margin-top: 24px;
+}
+.mm-done-emoji { font-size: 40px; }
+.mm-done-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* ─── Misc helpers ──────────────────────────────────────── */
+.mm-error {
+  color: #8a2f2f;
+  font-size: 13px;
+  margin-top: 8px;
+}

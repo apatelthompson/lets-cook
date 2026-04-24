@@ -492,6 +492,21 @@
   color: #665b54;
   line-height: 1.55;
 }
+.mm-step-cta {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fcfaf5;
+  background: #435e35;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.mm-step-cta:hover {
+  background: #2f4526;
+}
 
 /* ─── Key questions section ─── */
 .mm-questions-section {

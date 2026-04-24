@@ -92,16 +92,6 @@ const questions = [
 export default function MissionMatrixPage() {
   return (
     <div className="mm-page">
-      <nav className="mm-nav">
-        <div className="mm-nav-links">
-          <a href="/sms" className="mm-nav-pill mm-nav-pill--sms">28 Days of AI →</a>
-          <a href="/ai-with-friends" className="mm-nav-pill mm-nav-pill--ai">AI with Friends →</a>
-          <a href="https://hbr.org" target="_blank" rel="noopener noreferrer" className="mm-nav-link">
-            Read the HBR article →
-          </a>
-        </div>
-      </nav>
-
       <section className="mm-hero">
         <div>
           <span className="mm-eyebrow">a framework for Aligned AI</span>
@@ -212,6 +202,14 @@ export default function MissionMatrixPage() {
                 <div className="mm-step-num">{s.n}</div>
                 <h4>{s.title}</h4>
                 <p>{s.body}</p>
+                {s.n === 1 && (
+                  <a
+                    className="mm-step-cta"
+                    href="/mission-matrix/assessment"
+                  >
+                    Take the assessment →
+                  </a>
+                )}
               </div>
             ))}
           </div>
@@ -236,16 +234,13 @@ export default function MissionMatrixPage() {
       <section className="mm-cta-section">
         <div className="mm-cta-inner">
           <span className="mm-eyebrow">Ready to map your organization?</span>
-          <h2 className="mm-h2">Read the full research in <em>Harvard Business Review</em></h2>
+          <h2 className="mm-h2">Putting meaning and experience to work</h2>
           <p className="mm-cta-body">
-            The Mission Matrix is grounded in research on invisible work and organizational ambition.
-            Reach out to explore how it applies to your org.
+            Ready to take on your organization&rsquo;s most ambitious goals?
+            Reach out to explore how to apply this framework to your work.
           </p>
           <div className="mm-cta-buttons">
             <a className="mm-cta-btn" href="mailto:avni@thisbeautifulchaos.org">Go deeper with your org →</a>
-            <a className="mm-cta-secondary" href="https://hbr.org" target="_blank" rel="noopener noreferrer">
-              Read the HBR article →
-            </a>
           </div>
         </div>
       </section>

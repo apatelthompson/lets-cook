@@ -5,6 +5,11 @@ export const config = {
     messagesTable: process.env.AIRTABLE_MESSAGES_TABLE ?? "Messages",
     subscribersTable: process.env.AIRTABLE_SUBSCRIBERS_TABLE ?? "Subscribers",
     sendLogTable: process.env.AIRTABLE_SENDLOG_TABLE ?? "SendLog",
+    missionMatrixBaseId: process.env.AIRTABLE_MISSION_MATRIX_BASE_ID ?? "",
+    missionMatrixAssessmentsTable:
+      process.env.AIRTABLE_MM_ASSESSMENTS_TABLE ?? "Assessments",
+    missionMatrixItemsTable:
+      process.env.AIRTABLE_MM_ITEMS_TABLE ?? "AssessmentItems",
   },
   twilio: {
     accountSid: process.env.TWILIO_ACCOUNT_SID ?? "",

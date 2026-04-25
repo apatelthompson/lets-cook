@@ -339,26 +339,42 @@
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  padding: 14px;
-  background: #fcfaf5;
-  border: 1px solid #e5ddd3;
-  border-radius: 10px;
-  margin-bottom: 12px;
+  padding: 14px 16px;
+  background: #fffdf8;
+  border: 1px solid #ece4d4;
+  border-radius: 14px;
+  margin-bottom: 10px;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+.mm-consent-row:hover {
+  background: #fdf8ec;
+  border-color: #d8c9a8;
+}
+.mm-consent-row:has(input:checked) {
+  background: #f4eedc;
+  border-color: #c8b890;
 }
 .mm-consent-row input {
-  margin-top: 3px;
+  margin-top: 2px;
   accent-color: #435e35;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
 }
 .mm-consent-text {
-  font-size: 14px;
-  line-height: 1.45;
-  color: #101b0b;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #5a5347;
+  font-weight: 400;
 }
-.mm-consent-text strong { font-weight: 600; }
+.mm-consent-text strong {
+  font-weight: 600;
+  color: #2a2820;
+}
 
 /* ─── Footer actions ───────────────────────────────────── */
 .mm-assess-actions {

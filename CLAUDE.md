@@ -71,6 +71,9 @@ GitHub Actions secrets (for cron):
 
 ## Current status
 
+### 🛑 SMS project ON HOLD (as of 2026-04-24)
+Second A2P 10DLC campaign rejection. User paused work to stop spending money on resubmissions. Active focus is now Mission Matrix and AI with Friends (sibling routes in this same repo). Resume SMS when ready to invest in another resubmission attempt.
+
 ### ✅ Working
 - Signup → Airtable → Twilio pipeline works end-to-end
 - GitHub Actions hourly cron firing correctly (HTTP 200)
@@ -125,7 +128,8 @@ No detailed rejection email received. Real SMS delivery blocked by carriers (err
 ## User info
 - GitHub: `apatelthompson`
 - Repo: `apatelthompson/lets-cook`
-- Local path: `~/Projects/lets-cook`
+- Local path: `~/Projects/aligned-ai` (renamed from `lets-cook` — umbrella folder for Mission Matrix, AI with Friends, and 28 Days SMS)
+- GitHub repo still named `lets-cook` (not renamed)
 - User's phone: `+12069534230` (verified in NEW Twilio account)
 - Support email: `avni@thisbeautifulchaos.org`
 - Domain `thisbeautifulchaos.org` is owned, DNS via Netlify

@@ -49,28 +49,18 @@ const quadrants = [
 const steps = [
   {
     n: 1,
-    title: "Values mapping",
-    body: "Take your organization's values and translate them into the AI context — what should AI never do, and where should it always defer to humans?",
+    title: "Map the meaning",
+    body: "Start with your organization's values, expertise, and key workflows. Plot them against the quadrants to see where AI belongs — and where it should never go.",
   },
   {
     n: 2,
-    title: "Expertise mapping",
-    body: "Understand where your organization's deep expertise and competitive advantage truly lie. These areas belong in Bodyguard territory.",
-  },
-  {
-    n: 3,
-    title: "Work mapping",
-    body: "Map key workflows against the quadrants. Test steps 1 and 2. Results may vary by individual — work toward an org-level view.",
-  },
-  {
-    n: 4,
-    title: "Tool selection",
+    title: "Audition the tools",
     body: "For each quadrant, identify the right AI tools to invest in. Don't use one tool for everything — match tools to roles intentionally.",
   },
   {
-    n: 5,
-    title: "Rituals & boundaries",
-    body: "Design the processes, norms, and guardrails that will enable your organization to operate sustainably within the framework.",
+    n: 3,
+    title: "Lead with purpose",
+    body: "Design the rituals, norms, and guardrails that enable your organization to operate sustainably within the framework.",
   },
 ];
 
@@ -195,7 +185,7 @@ export default function MissionMatrixPage() {
       <section className="mm-impl-section">
         <div className="mm-inner">
           <span className="mm-eyebrow">How to implement it</span>
-          <h2 className="mm-h2">Five steps to putting the matrix to work</h2>
+          <h2 className="mm-h2">Three steps to putting the matrix to work</h2>
           <div className="mm-steps-grid">
             {steps.map((s) => (
               <div key={s.n} className="mm-step-card">
@@ -233,10 +223,9 @@ export default function MissionMatrixPage() {
 
       <section className="mm-cta-section">
         <div className="mm-cta-inner">
-          <span className="mm-eyebrow">Ready to map your organization?</span>
+          <span className="mm-eyebrow">Ready to take on your organization&rsquo;s most ambitious goals?</span>
           <h2 className="mm-h2">Putting meaning and experience to work</h2>
           <p className="mm-cta-body">
-            Ready to take on your organization&rsquo;s most ambitious goals?
             Reach out to explore how to apply this framework to your work.
           </p>
           <div className="mm-cta-buttons">

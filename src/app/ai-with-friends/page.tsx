@@ -280,12 +280,12 @@ export default function Page() {
                     <div className="awf-item-preview">Prompts, memory, tools, best practices...</div>
                   </div>
                   <div className="awf-note-item">
-                    <div className="awf-item-date">May 23</div>
+                    <div className="awf-item-date">May 22</div>
                     <div className="awf-item-title">Session 3: Going deeper 🌊 <span className="awf-item-lock">🔒</span></div>
                     <div className="awf-item-preview">How models work, agents and workflows...</div>
                   </div>
                   <div className="awf-note-item">
-                    <div className="awf-item-date">May 30</div>
+                    <div className="awf-item-date">May 29</div>
                     <div className="awf-item-title">Session 4: Build time 🛠 <span className="awf-item-lock">🔒</span></div>
                     <div className="awf-item-preview">Building your personal page or WhatsApp agent...</div>
                   </div>
@@ -321,7 +321,7 @@ export default function Page() {
                   <div className="awf-logistics">
                     <div className="awf-log-row">
                       <span className="awf-log-icon">📅</span>
-                      <div className="awf-log-text"><strong>May 8, 15, 23 &amp; 30</strong> — Fridays</div>
+                      <div className="awf-log-text"><strong>May 8, 15, 22 &amp; 29</strong> — Fridays</div>
                     </div>
                     <div className="awf-log-row">
                       <span className="awf-log-icon">🕘</span>
@@ -356,7 +356,7 @@ export default function Page() {
                     <div className="awf-card peach">
                       <div className="awf-card-head">
                         <span className="awf-tag">AI 201</span>
-                        <span className="awf-dates">May 23 &amp; 30</span>
+                        <span className="awf-dates">May 22 &amp; 29</span>
                       </div>
                       <h3>🌴 Go further</h3>
                       <div className="awf-who">Already using AI, ready to go deeper</div>
@@ -372,7 +372,7 @@ export default function Page() {
                   <div className="awf-label">Cost</div>
                   <ul className="awf-price-list">
                     <li><span className="awf-b">→</span> AI 101 only (May 8 &amp; 15) — <strong>$450</strong></li>
-                    <li><span className="awf-b">→</span> AI 201 only (May 23 &amp; 30) — <strong>$450</strong></li>
+                    <li><span className="awf-b">→</span> AI 201 only (May 22 &amp; 29) — <strong>$450</strong></li>
                     <li><span className="awf-b">→</span> Full series, all 4 sessions — <strong>$800</strong></li>
                   </ul>
                   <div className="awf-ld">

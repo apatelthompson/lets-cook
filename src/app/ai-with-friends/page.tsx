@@ -311,10 +311,11 @@ export default function Page() {
                 <div className="awf-inner">
                   <div className="awf-meta">Today at 9:41 AM</div>
                   <div className="awf-heading">👯‍♀️ AI with friends</div>
-                  <p className="awf-intro">I&apos;ve spent 4 years figuring out AI — what&apos;s real, what&apos;s noise, and how to actually use it well. I&apos;m distilling all of it into 4 sessions so you walk away feeling capable and confident, not overwhelmed.</p>
+                  <p className="awf-intro">I&apos;ve spent 4 years learning how to make AI useful and reliable in the trickiest setting — in our families. As a non-technical builder, I&apos;ve had to learn everything from the ground up to be able to build thoughtfully and effectively.</p>
+                  <p className="awf-intro">I know what&apos;s real, what&apos;s noise, and how to navigate this constant firehose of change. I&apos;m distilling those 4 years into 4 sessions so I can help friends also feel capable and confident in being not only savvy and engaged citizens, but also powerful builders and problem solvers.</p>
 
                   <div className="awf-tldr">
-                    <strong>The idea:</strong> small group, Fridays in May, over Zoom. You pick AI 101 (if you want the foundations), AI 201 (if you&apos;re ready to go deeper), or both. Either way, you&apos;ll leave knowing how to navigate this stuff as it keeps evolving.
+                    💡 <strong>The idea:</strong> small peer group learning over Zoom, Fridays in May. You pick 101 if you want a solid foundation, 201 if you want to put AI to work on your problems, or both. Either way, you&apos;ll leave knowing how to navigate this stuff, on your terms, as it keeps evolving.
                   </div>
 
                   <div className="awf-label">When</div>
@@ -344,7 +345,7 @@ export default function Page() {
                         <span className="awf-tag">AI 101</span>
                         <span className="awf-dates">May 8 &amp; 15</span>
                       </div>
-                      <h3>🌺 The foundations</h3>
+                      <h3>🌴 The foundations</h3>
                       <div className="awf-who">Newer to AI, or want to actually understand it</div>
                       <ul className="awf-bullets">
                         <li><span className="awf-b">→</span> Mental model that actually sticks</li>
@@ -358,7 +359,7 @@ export default function Page() {
                         <span className="awf-tag">AI 201</span>
                         <span className="awf-dates">May 22 &amp; 29</span>
                       </div>
-                      <h3>🌴 Go further</h3>
+                      <h3>🌺 Go further</h3>
                       <div className="awf-who">Already using AI, ready to go deeper</div>
                       <ul className="awf-bullets">
                         <li><span className="awf-b">→</span> How models actually work</li>
@@ -371,9 +372,9 @@ export default function Page() {
                   <hr className="awf-divider" />
                   <div className="awf-label">Cost</div>
                   <ul className="awf-price-list">
-                    <li><span className="awf-b">→</span> AI 101 only (May 8 &amp; 15) — <strong>$450</strong></li>
-                    <li><span className="awf-b">→</span> AI 201 only (May 22 &amp; 29) — <strong>$450</strong></li>
-                    <li><span className="awf-b">→</span> Full series, all 4 sessions — <strong>$800</strong></li>
+                    <li><span className="awf-b">→</span> 🌴 AI 101 only (May 8 &amp; 15) — <strong>$450</strong></li>
+                    <li><span className="awf-b">→</span> 🌺 AI 201 only (May 22 &amp; 29) — <strong>$450</strong></li>
+                    <li><span className="awf-b">→</span> 🍍 Full series, all 4 sessions — <strong>$800</strong></li>
                   </ul>
                   <div className="awf-ld">
                     💼 <strong>Expensing this?</strong> I can send a proper invoice and L&amp;D documentation — just mention it when you sign up.

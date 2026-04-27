@@ -385,7 +385,7 @@ export default function Page() {
                     <div className="awf-host-pic"><img src="/avni.jpg" alt="Avni Patel Thompson" /></div>
                     <div>
                       <div className="awf-host-name">Avni Patel Thompson</div>
-                      <div className="awf-host-bio">Founder, scientist, mama. 4 years of building thoughtful and responsible AI. <a href="#" target="_blank" rel="noopener noreferrer">Watch TED talk</a> to learn more about my POV.</div>
+                      <div className="awf-host-bio">Founder, scientist, mama. 4 years of building thoughtful and responsible AI. <a href="https://www.ted.com/talks/avni_patel_thompson_can_ai_help_with_the_chaos_of_family_life" target="_blank" rel="noopener noreferrer">Watch TED talk</a> to learn more about my POV.</div>
                     </div>
                   </div>
 

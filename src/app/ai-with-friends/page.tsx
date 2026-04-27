@@ -390,7 +390,7 @@ export default function Page() {
                   </div>
 
                   <hr className="awf-divider" />
-                  <a href="https://form.typeform.com/to/Fn6FDiGv" target="_blank" rel="noopener noreferrer" className="awf-cta">Sign me up →</a>
+                  <a href="https://form.typeform.com/to/Fn6FDiGv" target="_blank" rel="noopener noreferrer" className="awf-cta">✨ apply to join</a>
                   <p className="awf-cta-note">You&apos;ll pick your time group when you sign up. Questions? Just <a href="sms:+14153435537" style={{color: "inherit", textDecoration: "underline"}}>reach out to Avni directly</a>.</p>
                 </div>
               </div>

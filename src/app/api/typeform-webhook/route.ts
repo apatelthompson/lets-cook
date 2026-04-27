@@ -28,7 +28,11 @@ interface TypeformAnswer {
 }
 
 interface TypeformPayload {
-  form_response?: { answers?: TypeformAnswer[] };
+  form_response?: { token?: string; answers?: TypeformAnswer[] };
+}
+
+function eventIdFor(token: string, date: string): string {
+  return crypto.createHash("sha256").update(`${token}:${date}`).digest("hex");
 }
 
 function verifySignature(rawBody: string, header: string | null, secret: string | undefined): boolean {
@@ -172,18 +176,26 @@ async function handle(req: Request) {
     });
   }
 
+  const token = payload.form_response?.token;
+  if (!token) {
+    return NextResponse.json({ ok: false, error: "Missing form_response.token" }, { status: 400 });
+  }
+
   const calendar = calendarClient();
   const calendarId = process.env.GOOGLE_CALENDAR_ID || "primary";
   const description = buildDescription();
   const summary = `AI with Friends (${schedule.track})`;
 
   const created: string[] = [];
-  try {
-    for (const date of schedule.dates ?? []) {
+  const skipped: string[] = [];
+  for (const date of schedule.dates ?? []) {
+    const id = eventIdFor(token, date);
+    try {
       const ev = await calendar.events.insert({
         calendarId,
         sendUpdates: "all",
         requestBody: {
+          id,
           summary,
           description,
           start: { dateTime: `${date}T${schedule.time!.start}:00`, timeZone: TIMEZONE },
@@ -194,19 +206,24 @@ async function handle(req: Request) {
         },
       });
       if (ev.data.id) created.push(ev.data.id);
+    } catch (err: unknown) {
+      const e = err as { message?: string; code?: number; errors?: unknown };
+      if (e?.code === 409) {
+        skipped.push(id);
+        continue;
+      }
+      console.error("[typeform-webhook] calendar error", err);
+      return NextResponse.json({
+        ok: false,
+        stage: "calendar.events.insert",
+        message: e?.message ?? String(err),
+        code: e?.code,
+        errors: e?.errors,
+        calendarId,
+        created,
+        skipped,
+      }, { status: 500 });
     }
-  } catch (err: unknown) {
-    const e = err as { message?: string; code?: number; errors?: unknown };
-    console.error("[typeform-webhook] calendar error", err);
-    return NextResponse.json({
-      ok: false,
-      stage: "calendar.events.insert",
-      message: e?.message ?? String(err),
-      code: e?.code,
-      errors: e?.errors,
-      calendarId,
-      created,
-    }, { status: 500 });
   }
 
   return NextResponse.json({
@@ -215,5 +232,6 @@ async function handle(req: Request) {
     track: schedule.track,
     time: schedule.time?.label,
     eventsCreated: created.length,
+    eventsSkipped: skipped.length,
   });
 }

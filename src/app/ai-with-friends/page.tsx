@@ -369,7 +369,7 @@ export default function Page() {
                       <div className="awf-who">Already comfortable with basic AI, now wanting to go deeper with problem solving via agents/code in a safe, supported way</div>
                       <ul className="awf-bullets">
                         <li><span className="awf-b">→</span> Agents, code and workflow automations</li>
-                        <li><span className="awf-b">→</span> Use the mission matrix to identify what to build an agent for</li>
+                        <li><span className="awf-b">→</span> Use the mission matrix to design your AI for each quadrant</li>
                         <li><span className="awf-b">→</span> Learning how to learn + art and skill of debugging</li>
                         <li><span className="awf-b">→</span> Build your own: professional page, work agent or family agent</li>
                       </ul>

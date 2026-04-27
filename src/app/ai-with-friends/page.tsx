@@ -199,6 +199,8 @@ export default function Page() {
         .awf-host-pic img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         .awf-host-name { font-family: 'Recoleta', serif; font-size: 16px; font-weight: 600; color: var(--forest-dark); margin-bottom: 2px; }
         .awf-host-bio { font-size: 13px; color: var(--text-mid); line-height: 1.4; }
+        .awf-host-bio a { color: var(--forest); text-decoration: underline; text-underline-offset: 2px; }
+        .awf-host-bio a:hover { color: var(--forest-dark); }
 
         .awf-cta { display: block; text-align: center; background: var(--forest); color: #fff; font-size: 16px; font-weight: 700; padding: 14px; border-radius: 12px; text-decoration: none; margin-bottom: 8px; transition: background 0.15s; }
         .awf-cta:hover { background: var(--moss); }
@@ -378,7 +380,7 @@ export default function Page() {
                     <li><span className="awf-b">→</span> 🍍 Full series, all 4 sessions — <strong>$800</strong></li>
                   </ul>
                   <div className="awf-ld">
-                    🤓 <strong>Expensing this?</strong>{" "}This qualifies for Learning &amp; Development. Lmk if you need an invoice and documentation.
+                    💼 <strong>Expensing this?</strong>{" "}Lmk if you&apos;ll be submitting for Learning &amp; Development and I can send you an invoice and documentation.
                   </div>
 
                   <hr className="awf-divider" />
@@ -387,7 +389,7 @@ export default function Page() {
                     <div className="awf-host-pic"><img src="/avni.jpg" alt="Avni Patel Thompson" /></div>
                     <div>
                       <div className="awf-host-name">Avni Patel Thompson</div>
-                      <div className="awf-host-bio">Founder, scientist, mama. 4 years of building thoughtful and responsible AI. <a href="https://www.ted.com/talks/avni_patel_thompson_can_ai_help_with_the_chaos_of_family_life" target="_blank" rel="noopener noreferrer">Watch TED talk</a> to learn more about my POV.</div>
+                      <div className="awf-host-bio">Founder, scientist, mama. 4 years of building thoughtful and responsible AI. Learn about how I think about AI via my <a href="https://www.ted.com/talks/avni_patel_thompson_can_ai_help_with_the_chaos_of_family_life" target="_blank" rel="noopener noreferrer">8 min TED talk</a>.</div>
                     </div>
                   </div>
 

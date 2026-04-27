@@ -201,8 +201,8 @@ export default function Page() {
         .awf-host-pic img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         .awf-host-name { font-family: 'Recoleta', serif; font-size: 16px; font-weight: 600; color: var(--forest-dark); margin-bottom: 2px; }
         .awf-host-bio { font-size: 13px; color: var(--text-mid); line-height: 1.4; }
-        .awf-host-bio a { color: var(--forest); text-decoration: underline; text-underline-offset: 2px; }
-        .awf-host-bio a:hover { color: var(--forest-dark); }
+        .awf-host-bio a, .awf-intro a { color: var(--forest); text-decoration: underline; text-underline-offset: 2px; }
+        .awf-host-bio a:hover, .awf-intro a:hover { color: var(--forest-dark); }
 
         .awf-cta { display: block; text-align: center; background: var(--forest); color: #fff; font-size: 16px; font-weight: 700; padding: 14px; border-radius: 12px; text-decoration: none; margin-bottom: 8px; transition: background 0.15s; }
         .awf-cta:hover { background: var(--moss); }
@@ -316,7 +316,7 @@ export default function Page() {
                 <div className="awf-inner">
                   <div className="awf-meta">Today at 9:41 AM</div>
                   <div className="awf-heading">👯‍♀️ AI with friends</div>
-                  <p className="awf-intro">I&apos;ve spent 4 years figuring out how to make AI useful and reliable as a non-technical builder, learning everything from the ground up. I&apos;m distilling those 4 years into 4 sessions so you walk away feeling capable and confident — both as a savvy citizen and a capable builder.</p>
+                  <p className="awf-intro">I&apos;ve spent 4 years figuring out how to make AI useful and reliable as a non-technical builder, learning everything from the ground up. I&apos;m distilling those 4 years into 4 sessions so you walk away feeling capable and confident — both as a savvy citizen and a capable builder. It uses the <a href="https://mission-matrix.vercel.app/" target="_blank" rel="noopener noreferrer">Mission Matrix</a> so you can engage with AI on your terms and values.</p>
 
                   <div className="awf-tldr">
                     💡 <strong>The idea:</strong>{" "}small peer group learning over Zoom, Fridays in May. You pick 101 if you want a solid foundation, 201 if you want to put AI to work on your problems, or both. Either way, you&apos;ll leave knowing how to navigate this stuff, on your terms, as it keeps evolving.

@@ -68,9 +68,10 @@ function parseAnswers(payload: TypeformPayload) {
 function pickSessionChoice(answers: TypeformAnswer[]): string {
   for (const a of answers) {
     if (a.type !== "choice" && a.type !== "choices") continue;
-    const title = a.field?.title ?? "";
-    if (!/session/i.test(title)) continue;
-    return a.choice?.label ?? a.choices?.labels?.[0] ?? "";
+    const label = a.choice?.label ?? a.choices?.labels?.[0] ?? "";
+    if (/\b(101|201)\b/i.test(label) || /dates.*don.?t.*work/i.test(label)) {
+      return label;
+    }
   }
   return "";
 }

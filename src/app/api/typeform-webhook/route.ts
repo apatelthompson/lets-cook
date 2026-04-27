@@ -99,34 +99,19 @@ function resolveSchedule(label: string): Schedule {
   if (has101) dates.push(...DATES_101);
   if (has201) dates.push(...DATES_201);
   const time = isNoon ? GROUP_TIMES.noon : GROUP_TIMES.morning;
-  const track = has101 && has201 ? "AI 101 + 201" : has101 ? "AI 101" : "AI 201";
+  const track = has101 && has201 ? "🍍 AI 101 + 201" : has101 ? "🌴 AI 101" : "🌺 AI 201";
 
   return { skip: false, dates, time, track, label };
 }
 
-function buildDescription(args: {
-  name: string | null;
-  email: string;
-  schedule: Schedule;
-  answers: TypeformAnswer[];
-}) {
-  const { name, email, schedule, answers } = args;
-  const lines = [
-    "AI with Friends — registration via Typeform",
-    `Name: ${name ?? "(unknown)"}`,
-    `Email: ${email}`,
-    `Track: ${schedule.track}`,
-    `Time: ${schedule.time?.label}`,
-    `Selection: ${schedule.label}`,
+function buildDescription() {
+  return [
+    "You've signed up for AI with friends (https://mission-matrix.vercel.app/ai-with-friends)",
     "",
-    "Submission:",
-  ];
-  for (const a of answers) {
-    const q = a.field?.title ?? a.field?.ref ?? a.type;
-    const v = answerValue(a);
-    if (v) lines.push(`- ${q}: ${v}`);
-  }
-  return lines.join("\n");
+    "If you have any questions, please reach out to: avni@thisbeautifulchaos.org",
+    "",
+    "👯‍♀️ btw learning and experimenting is more fun with a buddy — refer a friend who signs up and you'll get $50 back.",
+  ].join("\n");
 }
 
 function calendarClient() {
@@ -189,8 +174,8 @@ async function handle(req: Request) {
 
   const calendar = calendarClient();
   const calendarId = process.env.GOOGLE_CALENDAR_ID || "primary";
-  const description = buildDescription({ name, email, schedule, answers });
-  const summary = `AI with Friends (${schedule.track}) — ${name ?? email}`;
+  const description = buildDescription();
+  const summary = `AI with Friends (${schedule.track})`;
 
   const created: string[] = [];
   try {

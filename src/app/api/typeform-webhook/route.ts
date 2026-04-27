@@ -141,6 +141,21 @@ function calendarClient() {
 }
 
 export async function POST(req: Request) {
+  try {
+    return await handle(req);
+  } catch (err: unknown) {
+    const e = err as { message?: string; stack?: string };
+    console.error("[typeform-webhook] top-level error", err);
+    return NextResponse.json({
+      ok: false,
+      stage: "top-level",
+      message: e?.message ?? String(err),
+      stack: e?.stack?.split("\n").slice(0, 6).join("\n"),
+    }, { status: 500 });
+  }
+}
+
+async function handle(req: Request) {
   const rawBody = await req.text();
 
   const sig = req.headers.get("typeform-signature");
@@ -178,21 +193,35 @@ export async function POST(req: Request) {
   const summary = `AI with Friends (${schedule.track}) — ${name ?? email}`;
 
   const created: string[] = [];
-  for (const date of schedule.dates ?? []) {
-    const ev = await calendar.events.insert({
+  try {
+    for (const date of schedule.dates ?? []) {
+      const ev = await calendar.events.insert({
+        calendarId,
+        sendUpdates: "all",
+        requestBody: {
+          summary,
+          description,
+          start: { dateTime: `${date}T${schedule.time!.start}:00`, timeZone: TIMEZONE },
+          end:   { dateTime: `${date}T${schedule.time!.end}:00`,   timeZone: TIMEZONE },
+          attendees: [{ email, displayName: name ?? undefined }],
+          guestsCanModify: false,
+          guestsCanInviteOthers: false,
+        },
+      });
+      if (ev.data.id) created.push(ev.data.id);
+    }
+  } catch (err: unknown) {
+    const e = err as { message?: string; code?: number; errors?: unknown };
+    console.error("[typeform-webhook] calendar error", err);
+    return NextResponse.json({
+      ok: false,
+      stage: "calendar.events.insert",
+      message: e?.message ?? String(err),
+      code: e?.code,
+      errors: e?.errors,
       calendarId,
-      sendUpdates: "all",
-      requestBody: {
-        summary,
-        description,
-        start: { dateTime: `${date}T${schedule.time!.start}:00`, timeZone: TIMEZONE },
-        end:   { dateTime: `${date}T${schedule.time!.end}:00`,   timeZone: TIMEZONE },
-        attendees: [{ email, displayName: name ?? undefined }],
-        guestsCanModify: false,
-        guestsCanInviteOthers: false,
-      },
-    });
-    if (ev.data.id) created.push(ev.data.id);
+      created,
+    }, { status: 500 });
   }
 
   return NextResponse.json({

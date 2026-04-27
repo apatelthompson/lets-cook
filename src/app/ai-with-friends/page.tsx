@@ -168,6 +168,7 @@ export default function Page() {
         .awf-log-text { color: var(--text-mid); line-height: 1.45; }
         .awf-log-text strong { color: var(--text-dark); font-weight: 700; }
 
+        .awf-tracks-hint { font-size: 13px; color: var(--text-mid); margin: -2px 0 12px; font-style: italic; }
         .awf-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 8px; }
         .awf-card { border-radius: 12px; padding: 16px; }
         .awf-card.warm  { background: #F7EECB; border: 1px solid rgba(235,201,89,0.45); }
@@ -337,6 +338,7 @@ export default function Page() {
 
                   <hr className="awf-divider" />
                   <div className="awf-label">Two tracks</div>
+                  <div className="awf-tracks-hint">choose one or choose both:</div>
 
                   <div className="awf-tracks">
                     <div className="awf-card warm">

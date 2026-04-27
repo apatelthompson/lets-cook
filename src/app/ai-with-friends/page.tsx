@@ -311,11 +311,10 @@ export default function Page() {
                 <div className="awf-inner">
                   <div className="awf-meta">Today at 9:41 AM</div>
                   <div className="awf-heading">👯‍♀️ AI with friends</div>
-                  <p className="awf-intro">I&apos;ve spent 4 years learning how to make AI useful and reliable in the trickiest setting — in our families. As a non-technical builder, I&apos;ve had to learn everything from the ground up to be able to build thoughtfully and effectively.</p>
-                  <p className="awf-intro">I know what&apos;s real, what&apos;s noise, and how to navigate this constant firehose of change. I&apos;m distilling those 4 years into 4 sessions so I can help friends also feel capable and confident in being not only savvy and engaged citizens, but also powerful builders and problem solvers.</p>
+                  <p className="awf-intro">I&apos;ve spent 4 years figuring out how to make AI useful and reliable as a non-technical builder, learning everything from the ground up. I&apos;m distilling those 4 years into 4 sessions so you walk away feeling capable and confident — both as a savvy citizen and a capable builder.</p>
 
                   <div className="awf-tldr">
-                    💡 <strong>The idea:</strong> small peer group learning over Zoom, Fridays in May. You pick 101 if you want a solid foundation, 201 if you want to put AI to work on your problems, or both. Either way, you&apos;ll leave knowing how to navigate this stuff, on your terms, as it keeps evolving.
+                    💡 <strong>The idea:</strong>{" "}small peer group learning over Zoom, Fridays in May. You pick 101 if you want a solid foundation, 201 if you want to put AI to work on your problems, or both. Either way, you&apos;ll leave knowing how to navigate this stuff, on your terms, as it keeps evolving.
                   </div>
 
                   <div className="awf-label">When</div>
@@ -342,29 +341,29 @@ export default function Page() {
                   <div className="awf-tracks">
                     <div className="awf-card warm">
                       <div className="awf-card-head">
-                        <span className="awf-tag">AI 101</span>
-                        <span className="awf-dates">May 8 &amp; 15</span>
+                        <span className="awf-tag">May 8 &amp; 15</span>
                       </div>
-                      <h3>🌴 The foundations</h3>
-                      <div className="awf-who">Newer to AI, or want to actually understand it</div>
+                      <h3>🌴 AI 101: The foundations</h3>
+                      <div className="awf-who">Newer to AI or want to build a solid foundation by understanding core concepts</div>
                       <ul className="awf-bullets">
-                        <li><span className="awf-b">→</span> Mental model that actually sticks</li>
-                        <li><span className="awf-b">→</span> Values assessment — find your AI fit</li>
-                        <li><span className="awf-b">→</span> Prompts, memory &amp; tools</li>
-                        <li><span className="awf-b">→</span> Responsible, thoughtful use</li>
+                        <li><span className="awf-b">→</span> What AI actually is and isn&apos;t</li>
+                        <li><span className="awf-b">→</span> Learn mental models to guide decision making</li>
+                        <li><span className="awf-b">→</span> Evaluate new developments/news to figure out what&apos;s important</li>
+                        <li><span className="awf-b">→</span> Learn base tools — prompts, memory, tools, skills</li>
+                        <li><span className="awf-b">→</span> Learn the mission matrix to know what kind of AI to use for what purpose</li>
                       </ul>
                     </div>
                     <div className="awf-card peach">
                       <div className="awf-card-head">
-                        <span className="awf-tag">AI 201</span>
-                        <span className="awf-dates">May 22 &amp; 29</span>
+                        <span className="awf-tag">May 22 &amp; 29</span>
                       </div>
-                      <h3>🌺 Go further</h3>
-                      <div className="awf-who">Already using AI, ready to go deeper</div>
+                      <h3>🌺 AI 201: Build to solve</h3>
+                      <div className="awf-who">Already comfortable with basic AI, now wanting to go deeper with problem solving via agents/code in a safe, supported way</div>
                       <ul className="awf-bullets">
-                        <li><span className="awf-b">→</span> How models actually work</li>
-                        <li><span className="awf-b">→</span> Agents &amp; workflows</li>
-                        <li><span className="awf-b">→</span> Build a page or WhatsApp agent</li>
+                        <li><span className="awf-b">→</span> Agents, code and workflow automations</li>
+                        <li><span className="awf-b">→</span> Use the mission matrix to identify what to build an agent for</li>
+                        <li><span className="awf-b">→</span> Learning how to learn + art and skill of debugging</li>
+                        <li><span className="awf-b">→</span> Build your own: professional page, work agent or family agent</li>
                       </ul>
                     </div>
                   </div>
@@ -377,16 +376,16 @@ export default function Page() {
                     <li><span className="awf-b">→</span> 🍍 Full series, all 4 sessions — <strong>$800</strong></li>
                   </ul>
                   <div className="awf-ld">
-                    💼 <strong>Expensing this?</strong> I can send a proper invoice and L&amp;D documentation — just mention it when you sign up.
+                    🤓 <strong>Expensing this?</strong>{" "}This qualifies for Learning &amp; Development. Lmk if you need an invoice and documentation.
                   </div>
 
                   <hr className="awf-divider" />
-                  <div className="awf-label">Your host</div>
+                  <div className="awf-label">Your guide</div>
                   <div className="awf-host">
                     <div className="awf-host-pic"><img src="/avni.jpg" alt="Avni Patel Thompson" /></div>
                     <div>
                       <div className="awf-host-name">Avni Patel Thompson</div>
-                      <div className="awf-host-bio">Founder, scientist, mama. 4 years deep in AI — the practical, human side of it.</div>
+                      <div className="awf-host-bio">Founder, scientist, mama. 4 years of building thoughtful and responsible AI. <a href="#" target="_blank" rel="noopener noreferrer">Watch TED talk</a> to learn more about my POV.</div>
                     </div>
                   </div>
 

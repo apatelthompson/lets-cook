@@ -1,7 +1,7 @@
 export const metadata = {
   title: "AI with Friends – AI Learning Labs",
   description:
-    "Small group AI learning sessions with Avni Patel Thompson. AI 101 and AI 201, Fridays in May over Zoom.",
+    "Small group AI learning sessions with Avni Patel Thompson. AI 101 and AI 201, in May over Zoom.",
 };
 
 export default function Page() {

@@ -4,12 +4,22 @@ import { google } from "googleapis";
 
 export const runtime = "nodejs";
 
-const DATES_101 = ["2026-05-08", "2026-05-15"];
-const DATES_201 = ["2026-05-22", "2026-05-29"];
-
 const GROUP_TIMES = {
   morning: { start: "09:00", end: "10:30", label: "9–10:30am PT" },
   noon:    { start: "12:00", end: "13:30", label: "noon–1:30pm PT" },
+} as const;
+
+const COHORTS = {
+  tues: {
+    dates_101: ["2026-05-05", "2026-05-12"],
+    dates_201: ["2026-05-19", "2026-05-26"],
+    time: GROUP_TIMES.noon,
+  },
+  fri: {
+    dates_101: ["2026-05-08", "2026-05-15"],
+    dates_201: ["2026-05-22", "2026-05-29"],
+    time: GROUP_TIMES.morning,
+  },
 } as const;
 
 const TIMEZONE = "America/Los_Angeles";
@@ -93,19 +103,24 @@ function resolveSchedule(label: string): Schedule {
   const s = label.toLowerCase();
   const has101 = s.includes("101");
   const has201 = s.includes("201");
-  const isNoon = s.includes("noon") || /\b12\b/.test(s) || /1[:.]30\s*pm/.test(s);
 
   if (!has101 && !has201) {
     return { skip: true, reason: "no track in choice", label };
   }
 
+  const isTues = /\btues/.test(s);
+  const isFri = /\bfri/.test(s);
+  if (!isTues && !isFri) {
+    return { skip: true, reason: "no cohort (Tuesday/Friday) detected in choice", label };
+  }
+  const cohort = isTues ? COHORTS.tues : COHORTS.fri;
+
   const dates: string[] = [];
-  if (has101) dates.push(...DATES_101);
-  if (has201) dates.push(...DATES_201);
-  const time = isNoon ? GROUP_TIMES.noon : GROUP_TIMES.morning;
+  if (has101) dates.push(...cohort.dates_101);
+  if (has201) dates.push(...cohort.dates_201);
   const track = has101 && has201 ? "🍍 AI 101 + 201" : has101 ? "🌴 AI 101" : "🌺 AI 201";
 
-  return { skip: false, dates, time, track, label };
+  return { skip: false, dates, time: cohort.time, track, label };
 }
 
 function buildDescription() {

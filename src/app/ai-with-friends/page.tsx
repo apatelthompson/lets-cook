@@ -319,20 +319,18 @@ export default function Page() {
                   <p className="awf-intro">I&apos;ve spent 4 years figuring out how to make AI useful and reliable as a non-technical builder, learning everything from the ground up. I&apos;m distilling those 4 years into 4 sessions so you walk away feeling capable and confident — both as a savvy citizen and a capable builder. It uses the <a href="https://mission-matrix.vercel.app/" target="_blank" rel="noopener noreferrer">Mission Matrix</a> so you can engage with AI on your terms and values.</p>
 
                   <div className="awf-tldr">
-                    💡 <strong>The idea:</strong>{" "}small peer group learning over Zoom, Fridays in May. You pick 101 if you want a solid foundation, 201 if you want to put AI to work on your problems, or both. Either way, you&apos;ll leave knowing how to navigate this stuff, on your terms, as it keeps evolving.
+                    💡 <strong>The idea:</strong>{" "}small peer group learning over Zoom, in May. You pick 101 if you want a solid foundation, 201 if you want to put AI to work on your problems, or both. Either way, you&apos;ll leave knowing how to navigate this stuff, on your terms, as it keeps evolving.
                   </div>
 
                   <div className="awf-label">When</div>
                   <div className="awf-logistics">
                     <div className="awf-log-row">
                       <span className="awf-log-icon">📅</span>
-                      <div className="awf-log-text"><strong>May 8, 15, 22 &amp; 29</strong> — Fridays</div>
+                      <div className="awf-log-text"><strong>Group 1:</strong> Tuesdays May 5, 12, 19 &amp; 26 — 12:00–1:30pm PT</div>
                     </div>
                     <div className="awf-log-row">
-                      <span className="awf-log-icon">🕘</span>
-                      <div className="awf-log-text">
-                        <strong>Group 1:</strong> 9:00–10:30am PT &nbsp;·&nbsp; <strong>Group 2:</strong> 12:00–1:30pm PT
-                      </div>
+                      <span className="awf-log-icon">📅</span>
+                      <div className="awf-log-text"><strong>Group 2:</strong> Fridays May 8, 15, 22 &amp; 29 — 9:00–10:30am PT</div>
                     </div>
                     <div className="awf-log-row">
                       <span className="awf-log-icon">💻</span>
@@ -349,7 +347,7 @@ export default function Page() {
                   <div className="awf-tracks">
                     <div className="awf-card warm">
                       <div className="awf-card-head">
-                        <span className="awf-tag">May 8 &amp; 15</span>
+                        <span className="awf-tag">Tues May 5 &amp; 12 · Fri May 8 &amp; 15</span>
                       </div>
                       <h3>🌴 AI 101: The foundations</h3>
                       <div className="awf-who">Newer to AI or want to build a solid foundation by understanding core concepts</div>
@@ -363,7 +361,7 @@ export default function Page() {
                     </div>
                     <div className="awf-card peach">
                       <div className="awf-card-head">
-                        <span className="awf-tag">May 22 &amp; 29</span>
+                        <span className="awf-tag">Tues May 19 &amp; 26 · Fri May 22 &amp; 29</span>
                       </div>
                       <h3>🌺 AI 201: Build to solve</h3>
                       <div className="awf-who">Already comfortable with basic AI, now wanting to go deeper with problem solving via agents/code in a safe, supported way</div>
@@ -379,8 +377,8 @@ export default function Page() {
                   <hr className="awf-divider" />
                   <div className="awf-label">Cost</div>
                   <ul className="awf-price-list">
-                    <li><span className="awf-b">→</span> 🌴 AI 101 only (May 8 &amp; 15) — <strong>$450</strong></li>
-                    <li><span className="awf-b">→</span> 🌺 AI 201 only (May 22 &amp; 29) — <strong>$450</strong></li>
+                    <li><span className="awf-b">→</span> 🌴 AI 101 only — <strong>$450</strong></li>
+                    <li><span className="awf-b">→</span> 🌺 AI 201 only — <strong>$450</strong></li>
                     <li><span className="awf-b">→</span> 🍍 Full series, all 4 sessions — <strong>$800</strong></li>
                   </ul>
                   <div className="awf-ld">

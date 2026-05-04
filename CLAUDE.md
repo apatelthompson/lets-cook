@@ -16,10 +16,6 @@ Umbrella Next.js 14 app (App Router, TypeScript) on Vercel hosting three workstr
 | `/ai-with-friends` | Small group AI learning sessions, May 2026 cohorts, Typeform-driven signup | live, taking signups |
 | `/sms`, `/terms`, `/privacy` | 28 Days of AI SMS drip program | **on hold** since 2026-04-24 (A2P 10DLC rejection, see SMS section below) |
 
-## Deprecated parallel codebase — do NOT edit
-
-`~/Archive/letscook-vite-awf/` (formerly `~/letscook/`) contains an earlier Vite/HTML version of the AI with Friends landing page. It was the original implementation before AWF was reimplemented as a Next.js page in this repo on 2026-04-22. **It is dead.** The Tuesday cohort drift on 2026-04-30 happened because edits to that version were never reflected in the canonical Next.js version here. Do not edit anything in `~/Archive/letscook-vite-awf/`. The canonical AWF lives in `src/app/ai-with-friends/page.tsx`.
-
 ## Architecture (current, live workstreams)
 
 ### `/` and `/ai-with-friends` (live)

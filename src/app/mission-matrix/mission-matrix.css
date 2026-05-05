@@ -598,6 +598,317 @@
   color: rgba(255, 255, 255, 0.45);
 }
 
+/* ─── Work together page (single-viewport, expandable cards) ─── */
+.mm-wt-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.mm-wt-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+}
+.mm-wt-hero {
+  flex: 0 0 auto;
+  padding: 56px 0 24px;
+}
+.mm-wt-h1 {
+  font-family: "Recoleta", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.1;
+  color: #101b0b;
+  margin: 8px 0 12px;
+  letter-spacing: -0.5px;
+}
+.mm-wt-lede {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #464d4b;
+  max-width: 760px;
+}
+.mm-wt-hero-link {
+  color: #435e35;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid #699963;
+  padding-bottom: 1px;
+  margin-left: 4px;
+  transition: color 0.18s, border-color 0.18s;
+}
+.mm-wt-hero-link:hover {
+  color: #101b0b;
+  border-bottom-color: #101b0b;
+}
+
+.mm-wt-deck {
+  flex: 1 1 0;
+  display: flex;
+  gap: 16px;
+  padding: 8px 48px 48px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 0;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.mm-wt-card {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  max-height: 100%;
+  background: #fff;
+  border: 1px solid #e5ddd3;
+  border-radius: 18px;
+  padding: 28px 28px 24px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    padding 0.3s ease;
+  outline: none;
+}
+.mm-wt-card:hover:not(.is-expanded) {
+  border-color: #c8beb1;
+  background: #fdfbf7;
+  box-shadow: 0 6px 24px -16px rgba(16, 27, 11, 0.18);
+}
+.mm-wt-card:focus-visible {
+  border-color: #699963;
+  box-shadow: 0 0 0 3px rgba(105, 153, 99, 0.25);
+}
+.mm-wt-card.is-expanded {
+  flex: 4.5 1 0;
+  cursor: default;
+  background: #fff;
+  border-color: #c8beb1;
+  box-shadow: 0 12px 40px -20px rgba(16, 27, 11, 0.22);
+  padding: 32px 32px 28px;
+}
+.mm-wt-card.is-collapsed {
+  flex: 0.45 1 0;
+  background: #f5efe5;
+  border-color: #e5ddd3;
+}
+.mm-wt-card.is-collapsed .mm-wt-card-pitch,
+.mm-wt-card.is-collapsed .mm-wt-card-foot {
+  opacity: 0;
+  pointer-events: none;
+}
+.mm-wt-card.is-collapsed .mm-wt-card-name {
+  font-size: 20px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  margin: 8px auto 0;
+  align-self: center;
+}
+
+.mm-wt-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.mm-wt-card-num {
+  font-family: "Airbnb Cereal App", -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #99948d;
+}
+.mm-wt-card-emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+.mm-wt-card.is-expanded .mm-wt-card-emoji {
+  font-size: 36px;
+}
+.mm-wt-card-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e5ddd3;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  color: #665b54;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.18s, color 0.18s, border-color 0.18s;
+}
+.mm-wt-card-close:hover {
+  background: #f5efe5;
+  color: #101b0b;
+  border-color: #c8beb1;
+}
+
+.mm-wt-card-name {
+  font-family: "Recoleta", Georgia, serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #101b0b;
+  margin: 0 0 10px;
+  letter-spacing: -0.2px;
+  transition: font-size 0.3s ease;
+}
+.mm-wt-card.is-expanded .mm-wt-card-name {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+.mm-wt-card-pitch {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #464d4b;
+  margin: 0 0 20px;
+  transition: opacity 0.2s ease;
+}
+.mm-wt-card.is-expanded .mm-wt-card-pitch {
+  font-size: 16px;
+  margin-bottom: 24px;
+  max-width: 680px;
+}
+
+.mm-wt-card-foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #f0e9dd;
+  transition: opacity 0.2s ease;
+}
+.mm-wt-card-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: #101b0b;
+  letter-spacing: 0.1px;
+}
+.mm-wt-card-more {
+  font-size: 13px;
+  font-weight: 700;
+  color: #435e35;
+  letter-spacing: 0.2px;
+}
+
+.mm-wt-card-details {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-wt-bestfor {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #665b54;
+  margin: 0 0 24px;
+  max-width: 720px;
+}
+.mm-wt-bestfor-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #101b0b;
+  margin-right: 8px;
+}
+.mm-wt-options {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-bottom: 24px;
+}
+.mm-wt-option + .mm-wt-option {
+  border-top: 1px solid #e5ddd3;
+  padding-top: 22px;
+}
+.mm-wt-option-num {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #99948d;
+  margin-bottom: 6px;
+}
+.mm-wt-option-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+.mm-wt-format {
+  font-weight: 700;
+  color: #101b0b;
+  letter-spacing: 0.1px;
+}
+.mm-wt-dot {
+  color: #c8beb1;
+}
+.mm-wt-price {
+  color: #99948d;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+}
+.mm-wt-days {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+}
+.mm-wt-days li {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #464d4b;
+}
+.mm-wt-day-label {
+  font-weight: 700;
+  color: #101b0b;
+}
+.mm-wt-row-cta {
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 700;
+  color: #435e35;
+  text-decoration: none;
+  border-bottom: 1px solid #699963;
+  padding-bottom: 3px;
+  margin-top: auto;
+  transition: color 0.18s, border-color 0.18s;
+}
+.mm-wt-row-cta:hover {
+  color: #101b0b;
+  border-bottom-color: #101b0b;
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
   .mm-nav { padding: 0 24px; }
@@ -616,6 +927,29 @@
   .mm-steps-grid { grid-template-columns: repeat(2, 1fr); }
   .mm-q-grid { grid-template-columns: 1fr; }
   .mm-cta-inner { padding: 64px 24px; }
+  .mm-wt-inner { padding: 0 24px; }
+  .mm-wt-page { height: auto; overflow: visible; }
+  .mm-wt-hero { padding: 40px 0 16px; }
+  .mm-wt-deck {
+    flex-direction: column;
+    padding: 8px 24px 32px;
+    gap: 12px;
+    overflow: visible;
+  }
+  .mm-wt-card,
+  .mm-wt-card.is-expanded,
+  .mm-wt-card.is-collapsed {
+    flex: 0 0 auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .mm-wt-card-details { overflow-y: visible; }
+  .mm-wt-card.is-collapsed .mm-wt-card-pitch,
+  .mm-wt-card.is-collapsed .mm-wt-card-foot { opacity: 1; pointer-events: auto; }
+  .mm-wt-card.is-collapsed .mm-wt-card-name {
+    font-size: 22px;
+    white-space: normal;
+  }
 }
 @media (max-width: 600px) {
   .mm-steps-grid { grid-template-columns: 1fr; }

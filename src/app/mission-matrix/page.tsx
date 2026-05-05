@@ -33,7 +33,7 @@ const quadrants = [
     pill: "Automate with transparency",
     tagline: "Automate & remove",
     question: "What routine work could I fully hand off if I trusted the output?",
-    chips: ["Performance review drafts", "Sprint retro summaries", "Meeting notes"],
+    chips: ["Weekly metrics pulls", "Sprint retro summaries", "Meeting notes"],
   },
   {
     cls: "mm-partner",
@@ -42,20 +42,20 @@ const quadrants = [
     pill: "Assist and learn",
     tagline: "Lighten the load",
     question: "What do I have deep expertise in, but not meaning — and would be happy to teach and hand off?",
-    chips: ["Weekly metrics pulls", "Research synthesis", "Draft generation"],
+    chips: ["Performance review drafts", "Research synthesis", "Draft generation"],
   },
 ];
 
 const steps = [
   {
     n: 1,
-    title: "Map the meaning",
-    body: "Start with your organization's values, expertise, and key workflows. Plot them against the quadrants to see where AI belongs — and where it should never go.",
+    title: "Map the work",
+    body: "Start with your organization's mission, expertise, and the jobs to be done. Plot them across the matrix — your map stays stable even as the AI tools keep changing.",
   },
   {
     n: 2,
-    title: "Audition the tools",
-    body: "For each quadrant, identify the right AI tools to invest in. Don't use one tool for everything — match tools to roles intentionally.",
+    title: "Audition AI for the role",
+    body: "For each job to be done, audition AI candidates for the right role: Coach, Bodyguard, Intern, or Partner. Pick the model that fits the moment — don't use one AI for everything.",
   },
   {
     n: 3,
@@ -89,11 +89,10 @@ export default function MissionMatrixPage() {
             The Mission <em>Matrix</em>
           </h1>
           <p className="mm-hero-body">
-            How audacious leaders can leverage four different AI roles to achieve
-            their organization&rsquo;s ambitious goals. Stop asking{" "}
-            <em>&ldquo;How should we use AI?&rdquo;</em> &mdash; start asking{" "}
-            <em>&ldquo;What can we finally become?&rdquo;</em>{" "}
-            Shifting the conversation from how to why.
+            How audacious leaders root AI in their organization&rsquo;s mission &mdash;
+            and audition AI for one of four roles, by job to be done. Stop asking{" "}
+            <em>&ldquo;How should we use AI?&rdquo;</em> Start asking{" "}
+            <em>&ldquo;What can we finally become?&rdquo;</em>
           </p>
           <a className="mm-cta-btn" href="#matrix">Explore the framework →</a>
         </div>
@@ -224,12 +223,14 @@ export default function MissionMatrixPage() {
       <section className="mm-cta-section">
         <div className="mm-cta-inner">
           <span className="mm-eyebrow">Ready to take on your organization&rsquo;s most ambitious goals?</span>
-          <h2 className="mm-h2">Putting meaning and experience to work</h2>
+          <h2 className="mm-h2">Putting meaning and expertise to work</h2>
           <p className="mm-cta-body">
-            Reach out to explore how to apply this framework to your work.
+            Three ways to bring the Mission Matrix into your work &mdash; sized to
+            the moment you&rsquo;re in.
           </p>
           <div className="mm-cta-buttons">
-            <a className="mm-cta-btn" href="mailto:avni@thisbeautifulchaos.org">Go deeper with your org →</a>
+            <a className="mm-cta-btn" href="/work-together">See how we work together →</a>
+            <a className="mm-cta-secondary" href="mailto:avni@thisbeautifulchaos.org">Email Avni</a>
           </div>
         </div>
       </section>

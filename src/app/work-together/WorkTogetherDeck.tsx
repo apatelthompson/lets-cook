@@ -2,7 +2,7 @@
 
 import { useState, type CSSProperties } from "react";
 
-type Day = { label: string; text: string };
+type Day = { label: string; text: string; href?: string };
 type Option = {
   label: string;
   title: string;
@@ -149,22 +149,36 @@ export default function WorkTogetherDeck({
                           </span>
                           <div className="mm-wt-option-title">{opt.title}</div>
                         </div>
-                        <div className="mm-wt-option-price-wrap">
-                          <span className="mm-wt-option-price">
-                            {opt.price}
-                          </span>
-                          {opt.priceUnit && (
-                            <span className="mm-wt-option-price-unit">
-                              {" "}
-                              {opt.priceUnit}
+                        {opt.price && (
+                          <div className="mm-wt-option-price-wrap">
+                            <span className="mm-wt-option-price">
+                              {opt.price}
                             </span>
-                          )}
-                        </div>
+                            {opt.priceUnit && (
+                              <span className="mm-wt-option-price-unit">
+                                {" "}
+                                {opt.priceUnit}
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </header>
                       <div className="mm-wt-days">
                         {opt.days.map((d, j) => (
                           <p key={j} className="mm-wt-day">
-                            <strong>{d.label}.</strong> {d.text}
+                            <strong>{d.label}.</strong>{" "}
+                            {d.href ? (
+                              <a
+                                className="mm-wt-day-link"
+                                href={d.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {d.text}
+                              </a>
+                            ) : (
+                              d.text
+                            )}
                           </p>
                         ))}
                       </div>

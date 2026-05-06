@@ -985,6 +985,39 @@
   color: #101b0b;
   font-weight: 700;
 }
+.mm-wt-day-link {
+  color: var(--mm-wt-accent-ink, #435e35);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: color 0.18s;
+}
+.mm-wt-day-link:hover {
+  color: #101b0b;
+}
+
+.mm-wt-closer {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid #e5ddd3;
+  text-align: center;
+}
+.mm-wt-closer-body {
+  font-family: "Recoleta", Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.4;
+  color: #524a41;
+  max-width: 720px;
+  margin: 0 auto 28px;
+}
+.mm-wt-closer-body strong {
+  font-family: "AirbnbCereal", -apple-system, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  color: #101b0b;
+}
 
 .mm-wt-foot-row {
   display: flex;

@@ -64,21 +64,6 @@ const steps = [
   },
 ];
 
-const questions = [
-  {
-    icon: "⚖️",
-    text: "Who owns decisions — and what does accountability look like when AI is involved?",
-  },
-  {
-    icon: "💰",
-    text: "How are costs managed? What's the budget model for AI tools across quadrants?",
-  },
-  {
-    icon: "🎯",
-    text: "What does good look like? Are your goals clearly defined before AI enters the picture?",
-  },
-];
-
 export default function MissionMatrixPage() {
   return (
     <div className="mm-page">
@@ -201,36 +186,6 @@ export default function MissionMatrixPage() {
                 )}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mm-questions-section">
-        <div className="mm-inner">
-          <span className="mm-eyebrow">Before you begin</span>
-          <h2 className="mm-h2">Three questions every leader must answer</h2>
-          <div className="mm-q-grid">
-            {questions.map((q) => (
-              <div key={q.icon} className="mm-q-card">
-                <span className="mm-q-icon">{q.icon}</span>
-                <p>{q.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mm-cta-section">
-        <div className="mm-cta-inner">
-          <span className="mm-eyebrow">Ready to take on your organization&rsquo;s most ambitious goals?</span>
-          <h2 className="mm-h2">Putting meaning and expertise to work</h2>
-          <p className="mm-cta-body">
-            Three ways to bring the Mission Matrix into your work &mdash; sized to
-            the moment you&rsquo;re in.
-          </p>
-          <div className="mm-cta-buttons">
-            <a className="mm-cta-btn" href="/work-together">See how we work together →</a>
-            <a className="mm-cta-secondary" href="mailto:avni@thisbeautifulchaos.org">Email Avni</a>
           </div>
         </div>
       </section>

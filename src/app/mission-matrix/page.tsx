@@ -191,7 +191,7 @@ export default function MissionMatrixPage() {
       </section>
 
       <footer className="mm-footer">
-        © 2024 This Beautiful Chaos · avni@thisbeautifulchaos.org
+        © 2026 This Beautiful Chaos · avni@thisbeautifulchaos.org
       </footer>
     </div>
   );

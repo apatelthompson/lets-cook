@@ -10,17 +10,23 @@ export const metadata = {
 const offerings: Offering[] = [
   {
     id: "company-reset",
+    num: "01",
+    accent: "peach",
     emoji: "👩🏻‍🎨",
     name: "Company-wide AI reset",
+    audienceShort: "Whole orgs, 50–300",
     pitch:
       "Get the full company to AI native — through the lens of your goals and priorities.",
-    priceSummary: "$7.5K/mo or $10K",
+    summaryPrice: "$7.5K",
+    summaryPriceUnit: "/ mo",
     bestFor:
       "Organizations of 50–300 people, needing an unfair advantage to accomplish their audacious goals with urgency. An aligned AI strategy that lets everyone row together, faster.",
     options: [
       {
-        format: "3 half-day sessions over 3 months",
-        price: "$7.5K / mo",
+        label: "Option A",
+        title: "3 half-day sessions over 3 months",
+        price: "$7.5K",
+        priceUnit: "/ mo",
         days: [
           {
             label: "Day 1",
@@ -37,8 +43,10 @@ const offerings: Offering[] = [
         ],
       },
       {
-        format: "One-day full company onsite",
+        label: "Option B",
+        title: "One-day full company onsite",
         price: "$10K",
+        priceUnit: "",
         days: [
           {
             label: "AM",
@@ -55,17 +63,23 @@ const offerings: Offering[] = [
   },
   {
     id: "function-deep-dive",
+    num: "02",
+    accent: "sun",
     emoji: "🧑‍🎤",
     name: "Function / Division deep dive",
+    audienceShort: "One team, one day",
     pitch:
       "Unlock the capabilities of a smaller team — through their priorities and long-term goals.",
-    priceSummary: "$3K – $5K",
+    summaryPrice: "$3K",
+    summaryPriceUnit: "/ $5K",
     bestFor:
       "Functional leaders in larger organizations who want to uplevel their team quickly and strategically.",
     options: [
       {
-        format: "Half day or full day",
-        price: "$3K / $5K",
+        label: "Format",
+        title: "Half day or full day",
+        price: "$3K",
+        priceUnit: "/ $5K",
         days: [
           {
             label: "Audit",
@@ -86,17 +100,23 @@ const offerings: Offering[] = [
   },
   {
     id: "tech-tutor",
+    num: "03",
+    accent: "coral",
     emoji: "👩🏻‍🏫",
     name: "1:1 Tech Tutor",
+    audienceShort: "Solo execs",
     pitch:
       "Unlock the capabilities of non-technical leaders — efficiently and effectively.",
-    priceSummary: "$5K",
+    summaryPrice: "$5K",
+    summaryPriceUnit: "",
     bestFor:
       "Senior leaders who want capability uplift without sitting through a course they don't need.",
     options: [
       {
-        format: "4 weeks · 30 min live / week + async SMS support",
+        label: "Format",
+        title: "4 weeks · 30 min live / week + async SMS support",
         price: "$5K",
+        priceUnit: "",
         days: [
           {
             label: "Week 1",
@@ -122,7 +142,7 @@ export default function WorkTogetherPage() {
     <div className="mm-page mm-wt-page">
       <section className="mm-wt-hero">
         <div className="mm-wt-inner">
-          <span className="mm-eyebrow">Aligned AI in practice</span>
+          <span className="mm-wt-eyebrow">Aligned AI in practice</span>
           <h1 className="mm-wt-h1">Work together</h1>
           <p className="mm-wt-lede">
             Three ways to bring the Mission Matrix into your organization, scaled
@@ -137,7 +157,7 @@ export default function WorkTogetherPage() {
         </div>
       </section>
 
-      <WorkTogetherDeck offerings={offerings} />
+      <WorkTogetherDeck offerings={offerings} defaultId="function-deep-dive" />
     </div>
   );
 }

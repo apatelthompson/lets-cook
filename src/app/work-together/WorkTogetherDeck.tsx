@@ -1,137 +1,200 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 
 type Day = { label: string; text: string };
-type Option = { format: string; price: string; days: Day[] };
+type Option = {
+  label: string;
+  title: string;
+  price: string;
+  priceUnit: string;
+  days: Day[];
+};
+
 export type Offering = {
   id: string;
+  num: string;
+  accent: "peach" | "sun" | "coral";
   emoji: string;
   name: string;
+  audienceShort: string;
   pitch: string;
-  priceSummary: string;
+  summaryPrice: string;
+  summaryPriceUnit: string;
   bestFor: string;
   options: Option[];
   subjectLine: string;
 };
 
-export default function WorkTogetherDeck({ offerings }: { offerings: Offering[] }) {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+const ACCENTS: Record<
+  Offering["accent"],
+  { solid: string; light: string; ink: string }
+> = {
+  peach: { solid: "#FAA55A", light: "#FFE3CC", ink: "#7A4A1F" },
+  sun: { solid: "#EBC959", light: "#F7EECB", ink: "#6B5418" },
+  coral: { solid: "#EE7B6E", light: "#FADCD7", ink: "#7C2A22" },
+};
+
+function accentVars(accent: Offering["accent"]): CSSProperties {
+  const a = ACCENTS[accent];
+  return {
+    ["--mm-wt-accent-solid" as string]: a.solid,
+    ["--mm-wt-accent-light" as string]: a.light,
+    ["--mm-wt-accent-ink" as string]: a.ink,
+  };
+}
+
+export default function WorkTogetherDeck({
+  offerings,
+  defaultId,
+}: {
+  offerings: Offering[];
+  defaultId: string;
+}) {
+  const [activeId, setActiveId] = useState<string>(
+    offerings.some((o) => o.id === defaultId) ? defaultId : offerings[0]?.id,
+  );
+
+  const active = offerings.find((o) => o.id === activeId) ?? offerings[0];
+  const detailPanelId = "mm-wt-detail";
 
   return (
-    <section className="mm-wt-deck" data-state={expandedId ? "open" : "closed"}>
-      {offerings.map((o, idx) => {
-        const expanded = expandedId === o.id;
-        const collapsed = expandedId !== null && !expanded;
-        const cls = [
-          "mm-wt-card",
-          expanded ? "is-expanded" : "",
-          collapsed ? "is-collapsed" : "",
-        ]
-          .filter(Boolean)
-          .join(" ");
-
-        return (
-          <article
-            key={o.id}
-            className={cls}
-            onClick={() => {
-              if (!expanded) setExpandedId(o.id);
-            }}
-            role="button"
-            tabIndex={0}
-            aria-expanded={expanded}
-            onKeyDown={(e) => {
-              if ((e.key === "Enter" || e.key === " ") && !expanded) {
-                e.preventDefault();
-                setExpandedId(o.id);
-              }
-              if (e.key === "Escape" && expanded) {
-                setExpandedId(null);
-              }
-            }}
-          >
-            <header className="mm-wt-card-head">
-              <span className="mm-wt-card-num">{String(idx + 1).padStart(2, "0")}</span>
-              <span className="mm-wt-card-emoji" aria-hidden>
-                {o.emoji}
-              </span>
-              {expanded && (
-                <button
-                  type="button"
-                  className="mm-wt-card-close"
-                  aria-label="Close details"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setExpandedId(null);
-                  }}
-                >
-                  ×
-                </button>
-              )}
-            </header>
-
-            <h2 className="mm-wt-card-name">{o.name}</h2>
-            <p className="mm-wt-card-pitch">{o.pitch}</p>
-
-            {!expanded && (
-              <footer className="mm-wt-card-foot">
-                <span className="mm-wt-card-price">{o.priceSummary}</span>
-                <span className="mm-wt-card-more">View details →</span>
-              </footer>
-            )}
-
-            {expanded && (
-              <div
-                className="mm-wt-card-details"
-                onClick={(e) => e.stopPropagation()}
+    <section className="mm-wt-deck">
+      <div className="mm-wt-inner">
+        <div className="mm-wt-row">
+          {offerings.map((o) => {
+            const isActive = o.id === activeId;
+            const mailto = `mailto:avni@thisbeautifulchaos.org?subject=${encodeURIComponent(
+              o.subjectLine,
+            )}`;
+            return (
+              <button
+                key={o.id}
+                type="button"
+                className="mm-wt-mini"
+                data-active={isActive}
+                style={accentVars(o.accent)}
+                onClick={() => setActiveId(o.id)}
+                aria-expanded={isActive}
+                aria-controls={detailPanelId}
               >
-                <p className="mm-wt-bestfor">
-                  <span className="mm-wt-bestfor-label">Best for</span>
-                  {o.bestFor}
-                </p>
+                <div className="mm-wt-mini-head">
+                  <div>
+                    <div className="mm-wt-mini-num">{o.num}</div>
+                    <div className="mm-wt-mini-pill">{o.audienceShort}</div>
+                  </div>
+                  <div className="mm-wt-mini-avatar" aria-hidden>
+                    {o.emoji}
+                  </div>
+                </div>
+                <div className="mm-wt-mini-name">{o.name}</div>
+                <p className="mm-wt-mini-tag">{o.pitch}</p>
+                <div className="mm-wt-mini-foot">
+                  <div>
+                    <span className="mm-wt-mini-price">{o.summaryPrice}</span>
+                    {o.summaryPriceUnit && (
+                      <span className="mm-wt-mini-price-unit">
+                        {" "}
+                        {o.summaryPriceUnit}
+                      </span>
+                    )}
+                  </div>
+                  <span className="mm-wt-mini-cue">
+                    {isActive ? "Viewing ↓" : "See details →"}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {active && (
+          <section
+            id={detailPanelId}
+            key={active.id}
+            className="mm-wt-detail"
+            style={accentVars(active.accent)}
+            role="region"
+            aria-labelledby={`mm-wt-detail-name-${active.id}`}
+          >
+            <div className="mm-wt-detail-rule" />
+            <div className="mm-wt-detail-grid">
+              <aside className="mm-wt-detail-side">
+                <div className="mm-wt-detail-numeral">{active.num}</div>
+                <div className="mm-wt-detail-avatar" aria-hidden>
+                  {active.emoji}
+                </div>
+                <div className="mm-wt-detail-quickfacts">
+                  <div className="mm-wt-quickfact-label">Best for</div>
+                  <p className="mm-wt-quickfact-body">{active.bestFor}</p>
+                </div>
+              </aside>
+
+              <div className="mm-wt-detail-body">
+                <h2
+                  id={`mm-wt-detail-name-${active.id}`}
+                  className="mm-wt-detail-name"
+                >
+                  {active.name}
+                </h2>
+                <p className="mm-wt-detail-tagline">{active.pitch}</p>
 
                 <div className="mm-wt-options">
-                  {o.options.map((opt, i) => (
-                    <div key={i} className="mm-wt-option">
-                      {o.options.length > 1 && (
-                        <span className="mm-wt-option-num">
-                          Option {String.fromCharCode(65 + i)}
-                        </span>
-                      )}
-                      <div className="mm-wt-option-head">
-                        <span className="mm-wt-format">{opt.format}</span>
-                        <span className="mm-wt-dot" aria-hidden>
-                          ·
-                        </span>
-                        <span className="mm-wt-price">{opt.price}</span>
-                      </div>
-                      <ul className="mm-wt-days">
+                  {active.options.map((opt, i) => (
+                    <article className="mm-wt-option" key={i}>
+                      <header className="mm-wt-option-head">
+                        <div>
+                          <span className="mm-wt-option-label">
+                            {opt.label}
+                          </span>
+                          <div className="mm-wt-option-title">{opt.title}</div>
+                        </div>
+                        <div className="mm-wt-option-price-wrap">
+                          <span className="mm-wt-option-price">
+                            {opt.price}
+                          </span>
+                          {opt.priceUnit && (
+                            <span className="mm-wt-option-price-unit">
+                              {" "}
+                              {opt.priceUnit}
+                            </span>
+                          )}
+                        </div>
+                      </header>
+                      <div className="mm-wt-days">
                         {opt.days.map((d, j) => (
-                          <li key={j}>
-                            <span className="mm-wt-day-label">{d.label}.</span>{" "}
-                            {d.text}
-                          </li>
+                          <p key={j} className="mm-wt-day">
+                            <strong>{d.label}.</strong> {d.text}
+                          </p>
                         ))}
-                      </ul>
-                    </div>
+                      </div>
+                    </article>
                   ))}
                 </div>
 
-                <a
-                  className="mm-wt-row-cta"
-                  href={`mailto:avni@thisbeautifulchaos.org?subject=${encodeURIComponent(
-                    o.subjectLine,
-                  )}`}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Start a conversation →
-                </a>
+                <div className="mm-wt-foot-row">
+                  <a
+                    className="mm-wt-btn mm-wt-btn-primary"
+                    href={`mailto:avni@thisbeautifulchaos.org?subject=${encodeURIComponent(
+                      `Book a call — ${active.name}`,
+                    )}`}
+                  >
+                    Book a call about {active.name} →
+                  </a>
+                  <a
+                    className="mm-wt-btn mm-wt-btn-ghost"
+                    href={`mailto:avni@thisbeautifulchaos.org?subject=${encodeURIComponent(
+                      `Question — ${active.name}`,
+                    )}`}
+                  >
+                    Or ask a question
+                  </a>
+                </div>
               </div>
-            )}
-          </article>
-        );
-      })}
+            </div>
+          </section>
+        )}
+      </div>
     </section>
   );
 }

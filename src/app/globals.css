@@ -418,7 +418,7 @@ input[type="tel"]:focus {
   background: #FFFFFF;
 }
 
-button {
+form button {
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 900;
   font-size: 18px;
@@ -434,18 +434,18 @@ button {
   transition: transform 0.12s, box-shadow 0.12s, background 0.15s;
 }
 
-button:hover:not(:disabled) {
+form button:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
   background: #2A2A2A;
 }
 
-button:active:not(:disabled) {
+form button:active:not(:disabled) {
   transform: translateY(1px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-button:disabled {
+form button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   background: #AAAAAA;

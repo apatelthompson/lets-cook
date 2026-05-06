@@ -277,6 +277,81 @@ export default function Dashboard101() {
           white-space: nowrap;
         }
 
+        /* Best practices section */
+        .bp-section { margin-top: 24px; }
+
+        .bp-label {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.4);
+          margin-bottom: 12px;
+        }
+
+        .bp-card {
+          background: #FCFAF5;
+          border-radius: 16px;
+          padding: 24px 28px;
+          display: flex;
+          align-items: flex-start;
+          gap: 24px;
+        }
+
+        .bp-card-icon {
+          font-size: 28px;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        .bp-card-body { flex: 1; min-width: 0; }
+
+        .bp-card-title {
+          font-family: 'Recoleta', Georgia, serif;
+          font-size: 20px;
+          font-weight: 600;
+          color: #435E35;
+          letter-spacing: -0.01em;
+          margin-bottom: 4px;
+        }
+
+        .bp-card-desc {
+          font-size: 14px;
+          color: #99948D;
+          line-height: 1.5;
+          margin-bottom: 16px;
+        }
+
+        .bp-card-actions {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .bp-card-cta {
+          font-size: 13px;
+          font-weight: 600;
+          color: #fff;
+          background: linear-gradient(135deg, #FF699D 0%, #FAA55A 100%);
+          padding: 10px 18px;
+          border-radius: 100px;
+          white-space: nowrap;
+          text-decoration: none;
+          transition: opacity 140ms;
+        }
+        .bp-card-cta:hover { opacity: 0.9; }
+
+        .bp-card-secondary {
+          font-size: 13px;
+          font-weight: 500;
+          color: #99948D;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: color 140ms;
+        }
+        .bp-card-secondary:hover { color: #524A41; }
+
         .coming-card {
           margin-top: 24px;
           background: rgba(255,255,255,0.04);
@@ -375,6 +450,34 @@ export default function Dashboard101() {
                   </div>
                 </section>
               ))}
+            </div>
+          </div>
+
+          {/* Best Practices */}
+          <div className="bp-section">
+            <div className="bp-label">Best Practices</div>
+            <div className="bp-card">
+              <div className="bp-card-icon">📋</div>
+              <div className="bp-card-body">
+                <div className="bp-card-title">How to build an operating manual for your AI</div>
+                <div className="bp-card-desc">Tell any AI agent how to work with you — working contract, glossary, good vs bad examples. Works across Claude, ChatGPT, Cursor, and more.</div>
+                <div className="bp-card-actions">
+                  <a
+                    className="bp-card-cta"
+                    href="/ai-with-friends/cohort/101/operating-manual"
+                  >
+                    build yours →
+                  </a>
+                  <a
+                    className="bp-card-secondary"
+                    href="/resources/ai-operating-manual-template.md"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    download blank template ↓
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -9,6 +9,22 @@ type State =
   | { kind: "ok"; message: string }
   | { kind: "err"; message: string };
 
+function formatPhone(input: string): string {
+  // International numbers (other than +1): light passthrough, strip junk
+  if (input.startsWith("+") && !input.startsWith("+1")) {
+    return input.replace(/[^\d+\s()-]/g, "").slice(0, 20);
+  }
+  const digits = input.replace(/\D/g, "");
+  const ten = (digits.startsWith("1") ? digits.slice(1) : digits).slice(0, 10);
+  if (!ten) return "";
+  const a = ten.slice(0, 3);
+  const b = ten.slice(3, 6);
+  const c = ten.slice(6, 10);
+  if (ten.length <= 3) return `+1 (${a}`;
+  if (ten.length <= 6) return `+1 (${a}) ${b}`;
+  return `+1 (${a}) ${b}-${c}`;
+}
+
 const DAYS = [
   {
     photo: "/img/28-days/sunrise-water.jpg",
@@ -54,6 +70,7 @@ Go deeper → tap to read more`,
 export default function Page() {
   const [idx, setIdx] = useState(0);
   const [agreed, setAgreed] = useState(false);
+  const [phone, setPhone] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
 
   useEffect(() => {
@@ -83,6 +100,7 @@ export default function Page() {
       }
       form.reset();
       setAgreed(false);
+      setPhone("");
       setState({ kind: "ok", message: "You're in. Your first message arrives tomorrow at 10am." });
     } catch {
       setState({ kind: "err", message: "Network error. Try again." });
@@ -183,8 +201,8 @@ export default function Page() {
                 id="td5-name"
                 name="name"
                 className="td5-input"
-                placeholder="Your first name"
-                autoComplete="given-name"
+                placeholder="Your full name"
+                autoComplete="name"
               />
             </div>
             <div className="td5-field">
@@ -197,9 +215,11 @@ export default function Page() {
                 type="tel"
                 required
                 className="td5-input"
-                placeholder="+1 (415) 555 0134"
+                placeholder="+1 (415) 555-0134"
                 autoComplete="tel"
                 inputMode="tel"
+                value={phone}
+                onChange={(e) => setPhone(formatPhone(e.target.value))}
               />
             </div>
 

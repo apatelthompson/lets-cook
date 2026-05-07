@@ -234,9 +234,9 @@
 .td5-form-side {
   background: var(--td5-pebble-50);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 56px;
+  padding: 72px 56px 56px;
   font-family: var(--td5-sans);
 }
 .td5-card {

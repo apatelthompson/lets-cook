@@ -123,13 +123,21 @@ function resolveSchedule(label: string): Schedule {
   return { skip: false, dates, time: cohort.time, track, label };
 }
 
+const ZOOM_URL = "https://us05web.zoom.us/j/84296928459?pwd=qVY8vOOzGi25bifFgK1bIWGvFAzVnB.1&jst=2";
+
 function buildDescription() {
   return [
-    "You've signed up for AI with friends (https://mission-matrix.vercel.app/ai-with-friends)",
+    "Join Zoom Meeting",
+    ZOOM_URL,
+    "",
+    "Meeting ID: 842 9692 8459",
+    "Passcode: 961865",
+    "",
+    "—",
+    "",
+    "You've signed up for AI with friends (https://themissionmatrix.com/ai-with-friends)",
     "",
     "If you have any questions, please reach out to: avni@thisbeautifulchaos.org",
-    "",
-    "👯‍♀️ btw learning and experimenting is more fun with a buddy — refer a friend who signs up and you'll get $50 back.",
   ].join("\n");
 }
 
@@ -213,6 +221,7 @@ async function handle(req: Request) {
           id,
           summary,
           description,
+          location: ZOOM_URL,
           start: { dateTime: `${date}T${schedule.time!.start}:00`, timeZone: TIMEZONE },
           end:   { dateTime: `${date}T${schedule.time!.end}:00`,   timeZone: TIMEZONE },
           attendees: [{ email, displayName: name ?? undefined }],

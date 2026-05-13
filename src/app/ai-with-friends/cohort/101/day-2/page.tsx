@@ -1,5 +1,6 @@
 import LogoutButton from '../../LogoutButton';
 import CopyButton from './CopyButton';
+import { FLUENCY_PROMPT } from './fluencyPrompt';
 
 export const metadata = { title: 'AI 101 · Day 2 · Cohort Dashboard' };
 
@@ -353,6 +354,48 @@ export default function Day2Dashboard() {
         .acc-body p, .acc-body li { font-family: inherit; }
         .acc-body a { color: #435E35; }
 
+        /* Try-it-out follow-up card */
+        .tryout {
+          margin-top: 28px;
+          background: #101B0B;
+          color: #F2EEE5;
+          border-radius: 18px;
+          padding: 36px 40px;
+          position: relative;
+          overflow: hidden;
+        }
+        .tryout-eyebrow {
+          font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+          color: rgba(242, 238, 229, 0.4); margin-bottom: 36px;
+        }
+        .tryout-title {
+          font-family: 'Recoleta', Georgia, serif;
+          font-size: 32px; line-height: 1.1; letter-spacing: -0.02em;
+          color: #F2EEE5; margin-bottom: 14px; font-weight: 600;
+        }
+        .tryout-desc {
+          font-size: 15px; line-height: 1.6; color: rgba(242, 238, 229, 0.72);
+          max-width: 62ch; margin-bottom: 24px;
+        }
+        .tryout-desc a { color: #FAA55A; text-decoration: underline; text-underline-offset: 2px; }
+        .tryout-desc a:hover { color: #FFC089; }
+
+        .copy-pill {
+          appearance: none; border: none; background: #F2EEE5; color: #101B0B;
+          font-family: inherit; font-size: 14px; font-weight: 700;
+          padding: 12px 22px 12px 18px; border-radius: 100px;
+          display: inline-flex; align-items: center; gap: 10px;
+          cursor: pointer; transition: background 140ms, transform 140ms;
+        }
+        .copy-pill:hover { background: #fff; transform: translateY(-1px); }
+        .copy-pill svg { color: #101B0B; }
+
+        .tryout-foot {
+          margin-top: 18px; font-size: 13px; color: rgba(242, 238, 229, 0.5); line-height: 1.55;
+        }
+        .tryout-foot a { color: rgba(242, 238, 229, 0.85); text-decoration: underline; text-underline-offset: 2px; }
+        .tryout-foot a:hover { color: #fff; }
+
         .source-note { margin-top: 22px; font-size: 12px; color: #99948D; font-style: italic; line-height: 1.5; }
         .source-note a { color: #435E35; text-decoration: none; }
         .source-note a:hover { text-decoration: underline; }
@@ -455,8 +498,20 @@ export default function Day2Dashboard() {
                 </details>
               ))}
 
+              <div className="tryout">
+                <div className="tryout-eyebrow">TRY IT OUT</div>
+                <div className="tryout-title">Explore your own AI fluency patterns</div>
+                <p className="tryout-desc">
+                  Use this prompt to analyze your recent Claude conversations through the lens of <a href="https://claude.com/resources/tutorials/the-4-ds-of-ai-fluency-behavioral-indicators#explore-your-own-ai-fluency-patterns" target="_blank" rel="noopener noreferrer">the 4 Ds of AI fluency</a>. You'll get a personalized scorecard. Treat it as exploratory, not a formal assessment.
+                </p>
+                <CopyButton text={FLUENCY_PROMPT} variant="pill" label="Copy the prompt" />
+                <div className="tryout-foot">
+                  Paste it into a new Claude conversation. Works best with Claude's <a href="https://www.anthropic.com/news/memory-and-context-management" target="_blank" rel="noopener noreferrer">memory tools</a> enabled.
+                </div>
+              </div>
+
               <div className="source-note">
-                Adapted from <a href="https://couchto5k.ai/" target="_blank" rel="noopener noreferrer">couchto5k.ai</a> — Hilary Gridley's free 30-day program (Days 7–12). Used with attribution.
+                Exercises adapted from <a href="https://couchto5k.ai/" target="_blank" rel="noopener noreferrer">couchto5k.ai</a> — Hilary Gridley's free 30-day program (Days 7–12). Fluency prompt adapted from Anthropic's <a href="https://claude.com/resources/tutorials/the-4-ds-of-ai-fluency-behavioral-indicators" target="_blank" rel="noopener noreferrer">4 Ds of AI Fluency</a> tutorial.
               </div>
             </div>
           </div>

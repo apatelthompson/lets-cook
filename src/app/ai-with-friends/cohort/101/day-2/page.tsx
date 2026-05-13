@@ -506,7 +506,7 @@ export default function Day2Dashboard() {
                 </p>
                 <CopyButton text={FLUENCY_PROMPT} variant="pill" label="Copy the prompt" />
                 <div className="tryout-foot">
-                  Paste it into a new Claude conversation. Works best with Claude's <a href="https://www.anthropic.com/news/memory-and-context-management" target="_blank" rel="noopener noreferrer">memory tools</a> enabled.
+                  Paste it into a new Claude conversation. Works best with Claude's <a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context" target="_blank" rel="noopener noreferrer">memory tools</a> enabled.
                 </div>
               </div>
 

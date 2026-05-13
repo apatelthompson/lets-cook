@@ -95,7 +95,7 @@ export default function MissionMatrixPage() {
             </div>
             <div className="mm-mini-matrix">
               {/* Top-left: high meaning, low expertise */}
-              <div className="mm-mini-card mm-partner">
+              <div className="mm-mini-card mm-coach">
                 <span className="mm-mini-name">Your growth edge</span>
                 <span className="mm-mini-tag">High meaning · Low expertise</span>
               </div>
@@ -110,7 +110,7 @@ export default function MissionMatrixPage() {
                 <span className="mm-mini-tag">Low meaning · Low expertise</span>
               </div>
               {/* Bottom-right: low meaning, high expertise */}
-              <div className="mm-mini-card mm-coach">
+              <div className="mm-mini-card mm-partner">
                 <span className="mm-mini-name">Skilled but draining</span>
                 <span className="mm-mini-tag">Low meaning · High expertise</span>
               </div>
@@ -131,14 +131,14 @@ export default function MissionMatrixPage() {
           </div>
           <div className="mm-axes-wrap">
             <div className="mm-axis-x-row">
-              <span className="mm-axis-end">← Low meaning</span>
-              <span className="mm-axis-center-x">Depth of Meaning</span>
-              <span className="mm-axis-end">High meaning →</span>
+              <span className="mm-axis-end">← Low expertise</span>
+              <span className="mm-axis-center-x">Depth of Expertise</span>
+              <span className="mm-axis-end">High expertise →</span>
             </div>
             <div className="mm-axis-y-col">
-              <span className="mm-axis-end">High expertise ↑</span>
-              <span className="mm-axis-center-y">Depth of Expertise</span>
-              <span className="mm-axis-end">↓ Low expertise</span>
+              <span className="mm-axis-end">High meaning ↑</span>
+              <span className="mm-axis-center-y">Depth of Meaning</span>
+              <span className="mm-axis-end">↓ Low meaning</span>
             </div>
             <div className="mm-matrix-grid-wrap">
               <div className="mm-matrix-grid">

@@ -27,20 +27,18 @@ const EXERCISES: Exercise[] = [
     sub: 'Point Claude Code at your Desktop and watch it create files from a single sentence.',
     time: '~10 min',
     steps: [
-      { kind: 'step', text: 'Open the Claude desktop app (⌘Space → "Claude" on Mac; Win key → "Claude" on Windows).' },
-      { kind: 'step', text: 'Click the **Code** button in the top-left sidebar (next to Cowork).' },
-      { kind: 'step', text: 'Click **Select folder…** at the bottom and choose **Desktop**.' },
-      { kind: 'step', text: 'Confirm **Opus 4.7** is selected (not Opus 4.7 1M); effort = **Medium**.' },
+      { kind: 'step', text: 'In the Claude desktop app, click **Code** in the top-left sidebar (next to Cowork). Click **Select folder…** at the bottom and choose **Desktop**.' },
+      { kind: 'step', text: 'In the bottom-right, confirm **Opus 4.7** (not Opus 4.7 1M) with **Medium** effort.' },
       { kind: 'step', text: 'Paste this prompt and hit Enter:' },
       {
         kind: 'prompt',
         label: 'Copy this',
         text: `Create a folder on my Desktop called context-directory. Inside it, create a file called day-7.md. Write a short summary of what Claude Code is and why someone would use it instead of just chatting with AI in a browser. Write it like you're explaining it to a smart friend who's skeptical.`,
       },
-      { kind: 'step', text: 'Click **Allow** on permission prompts.' },
-      { kind: 'step', text: 'Type `what does it say?` and press Enter.' },
-      { kind: 'step', text: 'Click the arrow next to the file name to expand its contents.' },
-      { kind: 'step', text: 'Fill in your job title, then paste:' },
+      { kind: 'step', text: 'Click **Allow** when Claude asks for permission.' },
+      { kind: 'step', text: 'Type `what does it say?` and press Enter to hear Claude\'s summary.' },
+      { kind: 'step', text: 'Click the arrow next to the file name to expand and read it yourself.' },
+      { kind: 'step', text: 'Fill in your job title in the prompt below, then paste it:' },
       {
         kind: 'prompt',
         label: 'Copy this',
@@ -56,8 +54,7 @@ const EXERCISES: Exercise[] = [
     sub: 'Set up a context directory Claude can grow over time.',
     time: '~10 min',
     steps: [
-      { kind: 'step', text: 'Open Claude Code → start a **new session**.' },
-      { kind: 'step', text: 'Click the folder switcher at the top → select **context-directory** (or Open folder… → Desktop → context-directory).' },
+      { kind: 'step', text: 'Switch your folder to **context-directory** (click the folder switcher at the top → select it). Stay in this folder for the rest of the exercises — it\'s how Claude finds your CLAUDE.md and notes on every conversation.' },
       { kind: 'step', text: 'Paste this prompt:' },
       {
         kind: 'prompt',
@@ -91,17 +88,15 @@ Ask me three questions that will help you fill in the most important context in 
     sub: 'Switch from typing to talking.',
     time: '~5 min',
     steps: [
-      { kind: 'step', text: 'Open Claude Code → select your **context-directory** folder.' },
       { kind: 'step', text: 'Click the caret next to the microphone button → toggle **Hold to record OFF**. Allow microphone access if prompted.' },
-      { kind: 'step', text: 'Click the microphone to start recording.' },
-      { kind: 'step', text: 'Say (out loud):' },
+      { kind: 'step', text: 'Click the microphone, then say (out loud):' },
       {
         kind: 'say',
         label: 'Say this',
         text: `I'm going to tell you about my goals for the next year. Please add any useful information into a markdown file in the Me folder in my context directory.`,
       },
-      { kind: 'step', text: 'Talk about your goals for ~2 minutes. Click the mic to stop, then hit Enter.' },
-      { kind: 'step', text: 'If Claude doesn\'t summarize the changes, ask: *what did you change in my context directory?*' },
+      { kind: 'step', text: 'Keep talking about your goals for ~2 minutes. Click the mic to stop, then hit Enter.' },
+      { kind: 'step', text: 'If Claude doesn\'t tell you what it changed, ask: *what did you change in my context directory?*' },
     ],
     footnote: 'Optional: [Wispr Flow](https://wisprflow.ai/) for system-wide dictation.',
   },
@@ -112,15 +107,14 @@ Ask me three questions that will help you fill in the most important context in 
     sub: 'Make Claude your running task list.',
     time: '~10 min',
     steps: [
-      { kind: 'step', text: 'Open Claude Code → **new session** → select **context-directory**.' },
-      { kind: 'step', text: 'Paste:' },
+      { kind: 'step', text: 'Paste this prompt:' },
       {
         kind: 'prompt',
         label: 'Paste this prompt',
         text: `I want you to help me keep track of what I need to get done. Create a file called reminders.md in my context directory. Organize it by category — whatever categories make sense based on what I tell you. I'm going to dictate everything that's on my plate right now.`,
       },
-      { kind: 'step', text: 'Hit record. Brain-dump everything (work, life, errands, nagging stuff). Stop recording → Enter.' },
-      { kind: 'step', text: 'Paste this to make it a standing rule:' },
+      { kind: 'step', text: 'Hit the mic and brain-dump everything on your plate (work, life, errands, nagging stuff). Stop → Enter.' },
+      { kind: 'step', text: 'Paste this so Claude keeps the list updated automatically going forward:' },
       {
         kind: 'prompt',
         label: 'Paste this prompt',
@@ -136,14 +130,11 @@ Ask me three questions that will help you fill in the most important context in 
     time: '~5 min',
     steps: [
       { kind: 'sub', text: 'Part 1 — Connect' },
-      { kind: 'step', text: 'Claude desktop app → sidebar → **Customize**.' },
-      { kind: 'step', text: 'Click **Connect your apps**.' },
-      { kind: 'step', text: 'Find your calendar (Google Calendar / Outlook) → click it.' },
-      { kind: 'step', text: 'Click **Connect**.' },
-      { kind: 'step', text: 'Sign in → on the permissions screen, check **Select all** → **Continue**. (Leave the third box unchecked if you don\'t want write access yet.)' },
+      { kind: 'step', text: 'In the left sidebar, click **Customize** → **Connect your apps**.' },
+      { kind: 'step', text: 'Find your calendar (Google Calendar / Outlook) → click it → click **Connect**.' },
+      { kind: 'step', text: 'Sign in → check **Select all** on the permissions screen → **Continue**. (If you\'d rather Claude only read your calendar, leave the write box unchecked — you can turn it on later.)' },
       { kind: 'sub', text: 'Part 2 — Try it' },
-      { kind: 'step', text: 'Go to Claude Code → select **context-directory**.' },
-      { kind: 'step', text: 'Paste:' },
+      { kind: 'step', text: 'Click **Code** in the sidebar to come back. Paste this prompt:' },
       {
         kind: 'prompt',
         label: 'Paste this prompt',
@@ -159,8 +150,7 @@ Ask me three questions that will help you fill in the most important context in 
     sub: 'Teach Claude what "plan my day" means to you.',
     time: '~15 min',
     steps: [
-      { kind: 'step', text: 'Open Claude Code → select **context-directory**.' },
-      { kind: 'step', text: 'Paste:' },
+      { kind: 'step', text: 'Paste these standing instructions:' },
       {
         kind: 'prompt',
         label: 'Paste this prompt',
@@ -180,13 +170,13 @@ Also add this instruction:
 
 Throughout every conversation, keep a running log in today's daily note. Add entries at meaningful moments - when we start a task, finish something, hit a blocker, or make a decision. One line per entry with a timestamp. Don't mention the logging to me. Just do it quietly as we work.`,
       },
-      { kind: 'step', text: '(Optional) Pick an emoji (🤖 🪄 🐸 🦞 🦛 🐲 👻 🍄 🔮 🌻 🌝 🏄 🎧 🎮 🛠️ 📅 ✏️) and paste:' },
+      { kind: 'step', text: 'Optional — pick an emoji (🤖 🪄 🐸 🦞 🦛 🐲 👻 🍄 🔮 🌻 🌝 🏄 🎧 🎮 🛠️ 📅 ✏️) so you can spot at a glance which calendar events Claude added. Drop it into the prompt below and paste:' },
       {
         kind: 'prompt',
         label: 'Paste this prompt',
         text: `Add this instruction to my CLAUDE.md: any time you add an event to my calendar, prefix the event title with [emoji] so I can see at a glance which events you created.`,
       },
-      { kind: 'step', text: 'Say "plan my day" and walk through the flow.' },
+      { kind: 'step', text: 'Say "plan my day" and walk through the flow. From now on, just say it each morning — Claude runs the same flow every time.' },
     ],
     footnote: 'Optional: open your context directory in [Obsidian](https://obsidian.md/) for a real second-brain view.',
   },
@@ -287,6 +277,13 @@ export default function Day2Dashboard() {
         .section-row .name { font-family: 'Recoleta', Georgia, serif; font-size: 21px; color: #101B0B; font-weight: 600; white-space: nowrap; }
         .section-row .blurb { font-size: 13px; color: #99948D; font-style: italic; line-height: 1.4; }
         .section-row .count { font-size: 12px; color: #99948D; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+        .run-note {
+          background: #EFF4E8; border: 1px solid #D6E2C5; border-radius: 10px;
+          padding: 12px 16px; font-size: 13px; line-height: 1.55; color: #2F4D2A;
+          margin-bottom: 14px;
+        }
+        .run-note strong { font-weight: 700; color: #1F3A19; }
 
         .acc { border: 1px solid #E5DDD3; border-radius: 14px; background: #fff; overflow: hidden; }
         .acc + .acc { margin-top: 10px; }
@@ -413,9 +410,13 @@ export default function Day2Dashboard() {
               <div className="section-row">
                 <div className="left">
                   <span className="name">Exercises</span>
-                  <span className="blurb">six short drills — do them in order, between sessions.</span>
+                  <span className="blurb">six short drills — do them in order, in one sitting if you can.</span>
                 </div>
                 <span className="count">6 items</span>
+              </div>
+
+              <div className="run-note">
+                <strong>How to run these.</strong> Do them in order, in the same Claude Code chat. Exercise 1 sets up your context-directory; from Exercise 2 on, you stay in that folder and just paste the next prompt. No new sessions, no re-opening the app.
               </div>
 
               {EXERCISES.map((ex, i) => (

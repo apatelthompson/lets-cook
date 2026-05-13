@@ -379,6 +379,20 @@ export default function Dashboard101() {
           font-size: 14px;
           color: rgba(255,255,255,0.3);
         }
+
+        .day-tabs {
+          display: flex; gap: 6px; margin-bottom: 18px;
+          background: rgba(0,0,0,0.18); padding: 6px; border-radius: 100px; width: fit-content;
+        }
+        .day-tab {
+          background: transparent; border: none; color: rgba(255,255,255,0.55);
+          font-family: inherit; font-size: 13px; font-weight: 600;
+          padding: 9px 18px; border-radius: 100px; cursor: pointer;
+          transition: background 160ms, color 160ms; letter-spacing: 0.02em;
+          text-decoration: none; display: inline-block;
+        }
+        .day-tab:hover { color: rgba(255,255,255,0.9); }
+        .day-tab.is-active { background: #FCFAF5; color: #435E35; }
       `}</style>
 
       <div className="db-shell">
@@ -392,6 +406,11 @@ export default function Dashboard101() {
               </div>
             </div>
             <LogoutButton className="db-logout" />
+          </div>
+
+          <div className="day-tabs">
+            <a className="day-tab is-active" href="/ai-with-friends/cohort/101">Day 1 · Foundations</a>
+            <a className="day-tab" href="/ai-with-friends/cohort/101/day-2">Day 2 · Capability</a>
           </div>
 
           <div className="db-card">
@@ -481,11 +500,11 @@ export default function Dashboard101() {
             </div>
           </div>
 
-          {/* Day 2 placeholder */}
-          <div className="coming-card">
-            <span className="coming-pill">101 · day 2</span>
-            <span className="coming-text">Capability — prompts, memory, and skills. Coming this week.</span>
-          </div>
+          {/* Day 2 link */}
+          <a className="coming-card" href="/ai-with-friends/cohort/101/day-2" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+            <span className="coming-pill" style={{ color: '#FAA55A' }}>101 · day 2</span>
+            <span className="coming-text" style={{ color: 'rgba(255,255,255,0.7)' }}>Capability — six Claude Code drills. Open Day 2 →</span>
+          </a>
         </div>
       </div>
     </>

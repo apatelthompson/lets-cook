@@ -7,9 +7,26 @@ import type { AssessmentState } from "@/lib/mission-matrix-types";
 interface Props {
   onBack: () => void;
   onDone: (assessmentId: string) => void;
+  /** Skip the real submit — used by the playground sandbox so test
+   *  walkthroughs don't fill Airtable. Returns a fake id immediately. */
+  dryRun?: boolean;
+  /** Override the submit button label (e.g. "Continue to Part II →"). */
+  submitLabel?: string;
+  /** Loading state label (default: "Preparing your PDF…"). */
+  submitLoadingLabel?: string;
+  /** Show the "email me when Step 2 launches" opt-in (default: true).
+   *  Hidden in v2 since Part II is now part of the flow itself. */
+  showMarketingOptIn?: boolean;
 }
 
-export default function StepConsent({ onBack, onDone }: Props) {
+export default function StepConsent({
+  onBack,
+  onDone,
+  dryRun = false,
+  submitLabel = "Get my PDF",
+  submitLoadingLabel = "Preparing your PDF…",
+  showMarketingOptIn = true,
+}: Props) {
   const { state, update } = useAssessment();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,6 +36,14 @@ export default function StepConsent({ onBack, onDone }: Props) {
   async function submit() {
     setSubmitting(true);
     setError(null);
+    if (dryRun) {
+      // Fake a short delay so the button state reads naturally, then
+      // hand back a sentinel id the caller can ignore.
+      await new Promise((r) => setTimeout(r, 400));
+      onDone("sandbox-dry-run");
+      setSubmitting(false);
+      return;
+    }
     try {
       const res = await fetch("/api/assessment", {
         method: "POST",
@@ -93,17 +118,19 @@ export default function StepConsent({ onBack, onDone }: Props) {
           </span>
         </label>
 
-        <label className="mm-consent-row">
-          <input
-            type="checkbox"
-            checked={state.consent_marketing}
-            onChange={(e) => update({ consent_marketing: e.target.checked })}
-          />
-          <span className="mm-consent-text">
-            Email me when Step 2 (<em>Audition the tools</em>) launches — no
-            other email, ever.
-          </span>
-        </label>
+        {showMarketingOptIn && (
+          <label className="mm-consent-row">
+            <input
+              type="checkbox"
+              checked={state.consent_marketing}
+              onChange={(e) => update({ consent_marketing: e.target.checked })}
+            />
+            <span className="mm-consent-text">
+              Email me when Step 2 (<em>Audition the tools</em>) launches — no
+              other email, ever.
+            </span>
+          </label>
+        )}
 
         {error && <div className="mm-error">{error}</div>}
       </main>
@@ -121,7 +148,7 @@ export default function StepConsent({ onBack, onDone }: Props) {
           onClick={submit}
           disabled={!ready || submitting}
         >
-          {submitting ? "Preparing your PDF…" : "Get my PDF"}
+          {submitting ? submitLoadingLabel : submitLabel}
         </button>
       </div>
     </>

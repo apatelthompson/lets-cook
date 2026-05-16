@@ -11,9 +11,15 @@ import {
 export default function StepPlot({
   onNext,
   onBack,
+  onAddMore,
+  nextLabel = "Reflect →",
 }: {
   onNext: () => void;
   onBack: () => void;
+  /** Optional — when provided, renders an "Add more tasks" button that
+   *  loops the user back to the brain-dump step with scores preserved. */
+  onAddMore?: () => void;
+  nextLabel?: string;
 }) {
   const { state } = useAssessment();
 
@@ -47,8 +53,8 @@ export default function StepPlot({
 
         <div className="mm-plot-wrap">
           <div className="mm-plot-axis-top">
-            <span>Low expertise</span>
-            <span>High expertise</span>
+            <span>Low unique expertise</span>
+            <span>High unique expertise</span>
           </div>
           <div className="mm-plot-grid">
             {layout.map((q) => {
@@ -86,9 +92,16 @@ export default function StepPlot({
         <button className="mm-btn mm-btn-ghost" onClick={onBack}>
           ← Back
         </button>
-        <button className="mm-btn mm-btn-primary" onClick={onNext}>
-          Reflect →
-        </button>
+        <div style={{ display: "flex", gap: 8 }}>
+          {onAddMore && (
+            <button className="mm-btn mm-btn-ghost" onClick={onAddMore}>
+              + Add more tasks
+            </button>
+          )}
+          <button className="mm-btn mm-btn-primary" onClick={onNext}>
+            {nextLabel}
+          </button>
+        </div>
       </div>
     </>
   );

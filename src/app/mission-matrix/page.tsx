@@ -41,7 +41,7 @@ const quadrants = [
     role: "Partner",
     pill: "Assist and learn",
     tagline: "Lighten the load",
-    question: "What do I have deep expertise in, but not meaning — and would be happy to teach and hand off?",
+    question: "What do I have unique expertise in, but not meaning — and would be happy to teach and hand off?",
     chips: ["Performance review drafts", "Research synthesis", "Draft generation"],
   },
 ];
@@ -89,30 +89,30 @@ export default function MissionMatrixPage() {
           </div>
           <div>
             <div className="mm-mini-axis-x">
-              <span className="mm-mini-axis-label">Low expertise</span>
-              <span className="mm-mini-axis-label mm-mini-axis-center">Expertise</span>
-              <span className="mm-mini-axis-label">High expertise</span>
+              <span className="mm-mini-axis-label">Low unique expertise</span>
+              <span className="mm-mini-axis-label mm-mini-axis-center">Unique expertise</span>
+              <span className="mm-mini-axis-label">High unique expertise</span>
             </div>
             <div className="mm-mini-matrix">
               {/* Top-left: high meaning, low expertise */}
               <div className="mm-mini-card mm-coach">
                 <span className="mm-mini-name">Your growth edge</span>
-                <span className="mm-mini-tag">High meaning · Low expertise</span>
+                <span className="mm-mini-tag">High meaning · Low unique expertise</span>
               </div>
               {/* Top-right: high meaning, high expertise */}
               <div className="mm-mini-card mm-bodyguard">
                 <span className="mm-mini-name">Your core craft</span>
-                <span className="mm-mini-tag">High meaning · High expertise</span>
+                <span className="mm-mini-tag">High meaning · High unique expertise</span>
               </div>
               {/* Bottom-left: low meaning, low expertise */}
               <div className="mm-mini-card mm-intern">
                 <span className="mm-mini-name">Routine tasks</span>
-                <span className="mm-mini-tag">Low meaning · Low expertise</span>
+                <span className="mm-mini-tag">Low meaning · Low unique expertise</span>
               </div>
               {/* Bottom-right: low meaning, high expertise */}
               <div className="mm-mini-card mm-partner">
                 <span className="mm-mini-name">Skilled but draining</span>
-                <span className="mm-mini-tag">Low meaning · High expertise</span>
+                <span className="mm-mini-tag">Low meaning · High unique expertise</span>
               </div>
             </div>
           </div>
@@ -126,14 +126,14 @@ export default function MissionMatrixPage() {
             <h2 className="mm-h2">Four roles. One clear map.</h2>
             <p className="mm-section-body">
               Plot any activity across two axes — the depth of meaning required in the work,
-              and the depth of expertise you bring to it. The quadrant tells you which AI role belongs there.
+              and how uniquely your expertise is needed to do it. The quadrant tells you which AI role belongs there.
             </p>
           </div>
           <div className="mm-axes-wrap">
             <div className="mm-axis-x-row">
-              <span className="mm-axis-end">← Low expertise</span>
-              <span className="mm-axis-center-x">Depth of Expertise</span>
-              <span className="mm-axis-end">High expertise →</span>
+              <span className="mm-axis-end">← Low unique expertise</span>
+              <span className="mm-axis-center-x">Unique Expertise</span>
+              <span className="mm-axis-end">High unique expertise →</span>
             </div>
             <div className="mm-axis-y-col">
               <span className="mm-axis-end">High meaning ↑</span>

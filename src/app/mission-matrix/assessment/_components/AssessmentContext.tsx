@@ -11,24 +11,42 @@ import {
 import type { AssessmentState } from "@/lib/mission-matrix-types";
 import { emptyState } from "@/lib/mission-matrix-types";
 
-const STORAGE_KEY = "mm-assessment-v1";
+const DEFAULT_STORAGE_KEY = "mm-assessment-v1";
 
 interface Ctx {
   state: AssessmentState;
   update: (patch: Partial<AssessmentState>) => void;
   reset: () => void;
+  /** True after the first read from storage finishes (or no-op on SSR). */
+  hydrated: boolean;
 }
 
 const AssessmentContext = createContext<Ctx | null>(null);
 
-export function AssessmentProvider({ children }: { children: ReactNode }) {
+export function AssessmentProvider({
+  children,
+  storageKey = DEFAULT_STORAGE_KEY,
+}: {
+  children: ReactNode;
+  storageKey?: string;
+}) {
   const [state, setState] = useState<AssessmentState>(() => emptyState());
   const [hydrated, setHydrated] = useState(false);
 
-  // rehydrate from sessionStorage on mount
+  // Pick the storage backend per provider instance. localStorage persists
+  // across tab close (for /playground-v2 + /audition deep-link); the live
+  // /assessment flow keeps sessionStorage (single-sitting completion).
+  const storage =
+    typeof window === "undefined"
+      ? null
+      : storageKey.includes("playground")
+        ? window.localStorage
+        : window.sessionStorage;
+
+  // rehydrate from storage on mount
   useEffect(() => {
     try {
-      const raw = sessionStorage.getItem(STORAGE_KEY);
+      const raw = storage?.getItem(storageKey);
       if (raw) {
         const parsed = JSON.parse(raw) as AssessmentState;
         // basic shape check — items array must exist
@@ -46,7 +64,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!hydrated) return;
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      storage?.setItem(storageKey, JSON.stringify(state));
     } catch {
       // ignore (quota / private mode)
     }
@@ -55,15 +73,16 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Ctx>(
     () => ({
       state,
+      hydrated,
       update: (patch) => setState((s) => ({ ...s, ...patch })),
       reset: () => {
         try {
-          sessionStorage.removeItem(STORAGE_KEY);
+          storage?.removeItem(storageKey);
         } catch {}
         setState(emptyState());
       },
     }),
-    [state],
+    [state, hydrated],
   );
 
   return (

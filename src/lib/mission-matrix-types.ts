@@ -33,6 +33,53 @@ export const YEARS_EXPERIENCE = [
 ] as const;
 export type YearsExperience = (typeof YEARS_EXPERIENCE)[number];
 
+/**
+ * Career stage = how the person fits in the org structure, independent
+ * of what function they work in. Kept clean (no mixed industries).
+ */
+export const CAREER_STAGES = [
+  "Founder",
+  "Executive / Senior leader",
+  "People manager",
+  "Individual contributor",
+  "Creative lead",
+  "Consultant / Advisor",
+  "Educator / Coach",
+  "Researcher",
+  "Other",
+] as const;
+export type CareerStage = (typeof CAREER_STAGES)[number];
+
+/**
+ * Function = which discipline the work sits in.
+ * Ids mirror SEED_ROLES ids in mission-matrix-seeds.ts so the starter-task
+ * picker can key off a single value. Keep in sync if you add roles there.
+ */
+export const FUNCTION_AREAS = [
+  { id: "ceo-founder", label: "Leadership / Executive" },
+  { id: "operations", label: "Operations" },
+  { id: "hr-people", label: "People / HR" },
+  { id: "finance", label: "Finance" },
+  { id: "marketing", label: "Marketing" },
+  { id: "sales", label: "Sales" },
+  { id: "customer-success", label: "Customer Success" },
+  { id: "designer", label: "Design" },
+  { id: "product-manager", label: "Product" },
+  { id: "software-engineer", label: "Engineering" },
+  { id: "other", label: "Other / Not listed" },
+] as const;
+export type FunctionAreaId = (typeof FUNCTION_AREAS)[number]["id"];
+
+export const TEAM_SIZES = [
+  "None (IC)",
+  "1-3",
+  "4-9",
+  "10-25",
+  "26-100",
+  "100+",
+] as const;
+export type TeamSize = (typeof TEAM_SIZES)[number];
+
 export type Quadrant = "growth" | "craft" | "routine" | "drain";
 
 export const QUADRANT_META: Record<
@@ -41,25 +88,25 @@ export const QUADRANT_META: Record<
 > = {
   growth: {
     title: "Your growth edge",
-    subtitle: "High meaning · Low expertise",
+    subtitle: "High meaning · Low unique expertise",
     bg: "#e9e4f7",
     ink: "#2e1f5e",
   },
   craft: {
     title: "Your core craft",
-    subtitle: "High meaning · High expertise",
+    subtitle: "High meaning · High unique expertise",
     bg: "#d9ebd8",
     ink: "#1e3d1a",
   },
   routine: {
     title: "Routine tasks",
-    subtitle: "Low meaning · Low expertise",
+    subtitle: "Low meaning · Low unique expertise",
     bg: "#ffe3cc",
     ink: "#6b3a10",
   },
   drain: {
     title: "Skilled but draining",
-    subtitle: "Low meaning · High expertise",
+    subtitle: "Low meaning · High unique expertise",
     bg: "#d7ebf5",
     ink: "#1a3a52",
   },
@@ -82,6 +129,18 @@ export interface AssessmentState {
   years_experience: YearsExperience | "";
   company_name: string;
   location: string;
+  // playground (optional — set by /playground and /playground-v2 only)
+  role_id?: string;
+  career_stage?: CareerStage | "";
+  function_area?: FunctionAreaId | "";
+  team_size_managed?: TeamSize | "";
+  // Part II / Audition (playground-v2)
+  brainstorm_craft?: string;
+  brainstorm_growth?: string;
+  brainstorm_routine?: string;
+  brainstorm_drain?: string;
+  /** Cached AI suggestions per item text — avoids re-billing the LLM */
+  suggestions_by_item?: Record<string, string[]>;
   // items
   items: AssessmentItem[];
   // reflections

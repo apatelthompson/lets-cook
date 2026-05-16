@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
     "airtable": "^0.12.2",
     "googleapis": "^144.0.0",
     "libphonenumber-js": "^1.11.12",

@@ -2,6 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { useAssessment } from "./AssessmentContext";
+import RateSlider from "./RateSlider";
+
+const MEANING_ACCENT = "#7c5cd1"; // purple-leaning, growth/craft pop
+const EXPERTISE_ACCENT = "#3d8a5e"; // green-leaning, craft pop
 
 const MEANING_HINT: Record<number, string> = {
   1: "drains me / feels empty",
@@ -11,11 +15,11 @@ const MEANING_HINT: Record<number, string> = {
   5: "lights me up / deeply matters",
 };
 const EXPERTISE_HINT: Record<number, string> = {
-  1: "easily teachable",
-  2: "learnable in a month",
-  3: "takes some context",
-  4: "takes years to get right",
-  5: "deep invisible context and skill",
+  1: "anyone could do this",
+  2: "easy to hand off — a few weeks to ramp",
+  3: "takes context to do well",
+  4: "takes years to do at my level",
+  5: "one of the only people in my org with the context to do this",
 };
 
 export default function StepRate({
@@ -100,47 +104,23 @@ export default function StepRate({
           <div className="mm-rate-item-text">{current.text}</div>
 
           <div className="mm-rate-axis">
-            <div className="mm-rate-axis-label">Meaning · 1–5</div>
-            <div className="mm-rate-axis-hint">
-              {current.meaning != null
-                ? MEANING_HINT[current.meaning]
-                : "1 = drains me · 5 = lights me up"}
-            </div>
-            <div className="mm-rate-buttons">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <button
-                  key={n}
-                  className={
-                    "mm-rate-btn" + (current.meaning === n ? " selected" : "")
-                  }
-                  onClick={() => setScore("meaning", n)}
-                >
-                  {n}
-                </button>
-              ))}
-            </div>
+            <div className="mm-rate-axis-label">Meaning</div>
+            <RateSlider
+              value={current.meaning}
+              onChange={(n) => setScore("meaning", n)}
+              hints={MEANING_HINT}
+              accent={MEANING_ACCENT}
+            />
           </div>
 
           <div className="mm-rate-axis">
-            <div className="mm-rate-axis-label">Expertise · 1–5</div>
-            <div className="mm-rate-axis-hint">
-              {current.expertise != null
-                ? EXPERTISE_HINT[current.expertise]
-                : "1 = easily teachable · 5 = deep invisible context and skill"}
-            </div>
-            <div className="mm-rate-buttons">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <button
-                  key={n}
-                  className={
-                    "mm-rate-btn" + (current.expertise === n ? " selected" : "")
-                  }
-                  onClick={() => setScore("expertise", n)}
-                >
-                  {n}
-                </button>
-              ))}
-            </div>
+            <div className="mm-rate-axis-label">Unique expertise</div>
+            <RateSlider
+              value={current.expertise}
+              onChange={(n) => setScore("expertise", n)}
+              hints={EXPERTISE_HINT}
+              accent={EXPERTISE_ACCENT}
+            />
           </div>
         </div>
 

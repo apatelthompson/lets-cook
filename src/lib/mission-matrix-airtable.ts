@@ -33,7 +33,18 @@ export async function saveAssessment(state: AssessmentState) {
   const assessmentsTable = base()(config.airtable.missionMatrixAssessmentsTable);
   const itemsTable = base()(config.airtable.missionMatrixItemsTable);
 
-  // Create the parent assessment record.
+  // Create the parent assessment record. v2 fields are spread in
+  // conditionally so the live /assessment flow (which doesn't set them)
+  // doesn't try to write columns that may not exist in the table.
+  const v2Fields: Record<string, unknown> = {};
+  if (state.career_stage) v2Fields.career_stage = state.career_stage;
+  if (state.function_area) v2Fields.function_area = state.function_area;
+  if (state.team_size_managed) v2Fields.team_size_managed = state.team_size_managed;
+  if (state.brainstorm_craft) v2Fields.brainstorm_craft = state.brainstorm_craft;
+  if (state.brainstorm_growth) v2Fields.brainstorm_growth = state.brainstorm_growth;
+  if (state.brainstorm_routine) v2Fields.brainstorm_routine = state.brainstorm_routine;
+  if (state.brainstorm_drain) v2Fields.brainstorm_drain = state.brainstorm_drain;
+
   const createdAssessment = await assessmentsTable.create([
     {
       fields: {
@@ -56,6 +67,7 @@ export async function saveAssessment(state: AssessmentState) {
         quadrant_count_craft: counts.craft,
         quadrant_count_routine: counts.routine,
         quadrant_count_drain: counts.drain,
+        ...v2Fields,
       },
     },
   ]);
